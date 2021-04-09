@@ -7,7 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<<<<<<< HEAD
 Hello Amar
 get out
 </body>
