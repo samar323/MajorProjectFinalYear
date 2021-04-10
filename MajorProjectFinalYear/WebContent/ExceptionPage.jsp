@@ -4,9 +4,11 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Exception Page</title>
 </head>
 <body>
-dsdsdasfkjwqelfhawkjfkuhfgqhef
+
+
+Something Went Wrong!!
 </body>
 </html>
