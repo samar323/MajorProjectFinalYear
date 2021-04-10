@@ -74,4 +74,28 @@ public class DAO {
 		}	
 	}
 	
+	public byte[] getPhoto(String email,String type) throws Exception{
+		
+		PreparedStatement pr = null;
+		if(type.equalsIgnoreCase("student")) {
+			pr=con.prepareStatement(
+				"select (photo) from students where email=?");
+		}
+		else{
+			
+		}
+		pr.setString(1, email);
+		ResultSet rs=pr.executeQuery();
+		if(rs.next()) {
+			byte[] photo=rs.getBytes("photo");
+			if(photo.length!=0) {
+				return photo;
+			}else {
+				return null;
+			}
+		}
+		else {
+			return null;
+		}
+	}
 }

@@ -36,6 +36,7 @@ response.setDateHeader("Expires",-1);
 	<a href='Logout'>Logout</a>,
 	<a href='StudentResult.jsp'>Your Result</a>
 	<hr>
+	<img src='GetPhoto?email=<%=studentDetails.get("email") %>&type=student' height="100px" width="100px"/>
 	<div>
 		Email: <b><%=studentDetails.get("email") %></b> <br>
 		Phone: <b><%=studentDetails.get("phone") %></b> <br>
