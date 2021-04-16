@@ -16,25 +16,25 @@ import dao.DAO;
 /**
  * Servlet implementation class GetPhoto
  */
-@WebServlet("/GetPhoto")
-public class GetPhoto extends HttpServlet {
+@WebServlet("/GetId")
+public class GetId extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			String email=request.getParameter("email");
-			String type=request.getParameter("type");
+			//String type=request.getParameter("type");
 			DAO dao=new DAO();
-			byte [] photo=dao.getPhoto(email,type);
+			byte [] id=dao.getId(email);
 			
 			
-			if(photo==null) {
-				photo=new byte[3500];
+			if(id==null) {
+				id=new byte[3500];
 				ServletContext ctx=getServletContext();
 				InputStream i=ctx.getResourceAsStream("pictures/defaultUser.png");
-				i.read(photo);
+				i.read(id);
 			}
-			response.getOutputStream().write(photo);
+			response.getOutputStream().write(id);
 		}catch(Exception ex) {
 			ex.printStackTrace();
 			response.sendRedirect("ExceptionPage.jsp");

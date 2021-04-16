@@ -87,15 +87,97 @@ public class DAO {
 		pr.setString(1, email);
 		ResultSet rs=pr.executeQuery();
 		if(rs.next()) {
+		
 			byte[] photo=rs.getBytes("photo");
 			if(photo.length!=0) {
 				return photo;
 			}else {
 				return null;
 			}
+			
+			
 		}
 		else {
 			return null;
 		}
+	}
+	
+public byte[] getId(String email) throws Exception{
+		
+	
+			PreparedStatement pr=con.prepareStatement(
+				"select (id) from students where email=?");
+		
+		pr.setString(1, email);
+		ResultSet rs=pr.executeQuery();
+		if(rs.next()) {
+		
+			byte[] id=rs.getBytes("id");
+			if(id.length!=0) {
+				return id;
+			}else {
+				return null;
+			}
+			
+			
+		}
+		else {
+			return null;
+		}
+	}
+	
+	public ArrayList<HashMap> getAllStudents(String status) throws Exception {
+		PreparedStatement p=con.prepareStatement("select * from students where status=?");
+		p.setString(1, status);
+		ResultSet rs=p.executeQuery();
+		ArrayList<HashMap> allStudents=new ArrayList();
+		while(rs.next()) {
+			HashMap student=new HashMap();
+			student.put("name", rs.getString("name"));
+			student.put("email", rs.getString("email"));
+			student.put("phone", rs.getString("phone"));
+			student.put("school", rs.getString("school"));
+			student.put("branch", rs.getString("branch"));
+			student.put("gender", rs.getString("gender"));
+			student.put("roll", rs.getString("roll"));
+
+			student.put("status", rs.getString("status"));
+			//student.put("id", rs.getString("id"));
+			
+			allStudents.add(student);
+		}
+		return allStudents;
+	
+}
+
+	public boolean changeStudentStatus(String email, String status) throws Exception {
+		PreparedStatement p=con.prepareStatement("update students set status=? where email=?");
+		p.setString(1,status);
+		p.setString(2,email);
+		
+		p.executeUpdate();
+		return true;
+}
+
+	public byte[] getFile(String email) throws SQLException {
+	
+	
+		 PreparedStatement p=con.prepareStatement("select id from students where email=?");
+		
+		p.setString(1, email);
+		ResultSet rs=p.executeQuery();
+		if(rs.next()) {
+			byte[] file=rs.getBytes(1);
+			if(file.length!=0) {
+				return file;
+			}
+			else {
+				return null;
+			}
+		}
+		else {
+			return null;
+		}
+		
 	}
 }
