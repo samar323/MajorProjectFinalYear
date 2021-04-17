@@ -6,6 +6,7 @@
 <meta charset="ISO-8859-1">
 <title>Student Register</title>
 </head>
+
 <body>
 <%
 		String m=(String)session.getAttribute("message");
@@ -35,5 +36,7 @@
 		<button type="submit">Register</button>
 		<button type="reset">Reset</button>
 	</form>	
+
+
 </body>
 </html>

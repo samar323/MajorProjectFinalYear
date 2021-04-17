@@ -19,7 +19,6 @@ response.setDateHeader("Expires",-1);
 <title>Student Profile</title>
 </head>
 <body>
-hjjjj
 <h1>Your Profile</h1>
 	<%
 		String m=(String)session.getAttribute("message");
