@@ -29,7 +29,6 @@ public class DAO {
 			return null;
 		}
 	}
-<<<<<<< HEAD
 
 	public boolean insertStudent(HashMap student) throws Exception {
 		try {
