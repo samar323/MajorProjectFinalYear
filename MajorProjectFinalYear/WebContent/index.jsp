@@ -10,9 +10,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<<<<<<< HEAD
-<a href="StudentLogin">Student Login Here</a>
-=======
+<a href="StudentLogin.jsp">Student Login Here</a>
 <%
 	String searchQues=request.getParameter("searchQues");
 	%>
@@ -48,7 +46,6 @@
 		}
 	%>
 
->>>>>>> branch 'main' of https://github.com/samar323/MajorProjectFinalYear.git
 
 </body>
 </html>

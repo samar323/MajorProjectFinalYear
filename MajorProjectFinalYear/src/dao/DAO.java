@@ -8,11 +8,11 @@ public class DAO {
 	private Connection con;
 
 	public DAO() throws Exception {
-//		Class.forName("com.mysql.cj.jdbc.Driver");
-//		con = DriverManager.getConnection("jdbc:mysql://localhost:3306/major_project?allowPublicKeyRetrieval=true", "root",
-//				"Samar323@");
-		Class.forName("com.mysql.jdbc.Driver");
-		con=DriverManager.getConnection("jdbc:mysql://localhost:3306/major_project","root","aniket");
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		con = DriverManager.getConnection("jdbc:mysql://localhost:3306/major_project?allowPublicKeyRetrieval=true", "root",
+				"Samar323@");
+//		Class.forName("com.mysql.jdbc.Driver");
+//		con=DriverManager.getConnection("jdbc:mysql://localhost:3306/major_project","root","aniket");
 
 	}
 	
@@ -221,6 +221,20 @@ public byte[] getId(String email) throws Exception{
 			return rs.getString("question");
 		} else {
 			return null;
+		}
+
+	}
+	public boolean insertAnswer(HashMap answerDetails) throws Exception {
+		try {
+			PreparedStatement p = con.prepareStatement(
+					"insert into answers (qid,answers,studentId,dateTime) values(?,?,?,CURRENT_TIMESTAMP)");
+			p.setInt(1, (Integer) answerDetails.get("qid"));
+			p.setString(2, (String) answerDetails.get("answer"));
+			p.setString(3, (String) answerDetails.get("studentId"));
+			p.executeUpdate();
+			return true;
+		} catch (Exception ex) {
+			return false;
 		}
 
 	}
