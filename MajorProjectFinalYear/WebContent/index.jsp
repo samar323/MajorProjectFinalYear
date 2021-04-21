@@ -30,6 +30,7 @@
 		DAO dao=new DAO();
 		ArrayList<HashMap> questions=dao.getQuestion(searchQues);
 		try{
+		if(searchQues!=null){
 		if(questions.size()!=0){
 		for(HashMap question:questions){
 	%>
@@ -44,6 +45,7 @@
 			%>
 				<p>No data Found..</p>
 			<%
+		}
 		}
 		}catch(Exception e){
 			%>
