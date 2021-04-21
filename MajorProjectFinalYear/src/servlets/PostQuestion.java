@@ -22,7 +22,7 @@ public class PostQuestion extends HttpServlet {
 	
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session=request.getSession();
-		
+		//
 		HashMap studentDetails=(HashMap)session.getAttribute("studentDetails");
 		String studentId=(String)studentDetails.get("roll");
 		try {
