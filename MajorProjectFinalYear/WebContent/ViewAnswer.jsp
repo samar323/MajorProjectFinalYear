@@ -30,7 +30,6 @@
 	ArrayList<HashMap> answers=dao.getAnswer(quesId);
 	String question=dao.getQuestionById(quesId);
 	try{
-	if(answers.size()!=0){
 	%>
 	Question: <%=question %><br>
 	<%
@@ -54,6 +53,7 @@
 	<%} %>
 	
 	<%
+	if(answers.size()!=0){
 	for(HashMap answer:answers){
 %>
 	
