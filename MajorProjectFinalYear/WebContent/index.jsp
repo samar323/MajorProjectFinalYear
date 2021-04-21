@@ -12,7 +12,7 @@
 
 <body>
 
-<a href="StudentLogin">Student Login Here</a>
+
 
 
 <a href="StudentLogin.jsp">Student Login Here</a>
@@ -34,7 +34,7 @@
 		if(questions.size()!=0){
 		for(HashMap question:questions){
 	%>
-		qid: <%=question.get("quesId") %>,
+		<b>Q: <%=question.get("quesId") %>,</b>
 		<a href="ViewAnswer.jsp?quesId=<%=question.get("quesId") %>">question: <%=question.get("question") %> </a>,
 		studentId: <%=question.get("studentId") %>,
 		dateTime: <%=question.get("dateTime") %><br>

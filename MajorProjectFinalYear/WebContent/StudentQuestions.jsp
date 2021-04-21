@@ -20,10 +20,9 @@ ArrayList<HashMap> questions=dao.getQuestionByStudent(studentId);
 
 for(HashMap student:questions){
 %>
-//
 
-<b>Q.<%=student.get("quesId")%></b> 
- <b><%=student.get("question")%></b> Date:<%=student.get("dateTime")%>
+<a href="ViewAnswer.jsp?quesId=<%=student.get("quesId") %>"><b>Q.<%=student.get("quesId")%></b> 
+ <b><%=student.get("question")%> </a></b> Date:<%=student.get("dateTime")%>
  <hr>
 	<%	
 	}
