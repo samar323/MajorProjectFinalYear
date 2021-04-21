@@ -35,7 +35,8 @@ response.setDateHeader("Expires",-1);
 	   
 	<h2>[Status: <%=studentDetails.get("status") %>]</h2> 
 	<a href='Logout'>Logout</a>,
-	<a href='StudentResult.jsp'>Your Result</a>
+	<a href='StudentResult.jsp'>Your Result</a>,
+	<a href='StudentQuestions.jsp'>Your Question</a>
 	<hr>
 	<img src='GetPhoto?email=<%=studentDetails.get("email") %>&type=student' height="100px" width="100px"/>
 	<div>
@@ -47,7 +48,18 @@ response.setDateHeader("Expires",-1);
 		ID:<br> <img src='GetId?email=<%=studentDetails.get("email") %>' height="100px" width="100px"/> <br>
 	</div>
 	<hr>
+	<% String status=(String)studentDetails.get("status") ;
+	if(status.equalsIgnoreCase("accept")){
+		%>
 	
+	Ask any question?
+	<form action="PostQuestion" method="post">
+	
+	<textarea name="question" rows="5" cols="100" required></textarea>
+	<input type="submit" value="Post Your Question"/>
+	
+	</form>
+	<%} %>
 </body>
 </html>
 <%
