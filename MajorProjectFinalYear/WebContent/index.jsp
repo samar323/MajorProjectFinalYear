@@ -9,9 +9,14 @@
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 </head>
+
 <body>
 
 <a href="StudentLogin">Student Login Here</a>
+
+
+<a href="StudentLogin.jsp">Student Login Here</a>
+
 <%
 	String searchQues=request.getParameter("searchQues");
 	%>

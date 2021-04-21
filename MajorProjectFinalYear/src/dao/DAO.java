@@ -224,6 +224,7 @@ public byte[] getId(String email) throws Exception{
 		}
 
 	}
+
 	public ArrayList<HashMap> getQuestionByStudent(String studentId) throws Exception{
 	PreparedStatement p=con.prepareStatement("select * from questions where studentId=?");
 	p.setString(1, studentId);
@@ -252,5 +253,20 @@ public byte[] getId(String email) throws Exception{
 		}catch(java.sql.SQLIntegrityConstraintViolationException ex) {
 			return false;
 		}
+	}
+	public boolean insertAnswer(HashMap answerDetails) throws Exception {
+		try {
+			PreparedStatement p = con.prepareStatement(
+					"insert into answers (qid,answers,studentId,dateTime) values(?,?,?,CURRENT_TIMESTAMP)");
+			p.setInt(1, (Integer) answerDetails.get("qid"));
+			p.setString(2, (String) answerDetails.get("answer"));
+			p.setString(3, (String) answerDetails.get("studentId"));
+			p.executeUpdate();
+			return true;
+		} catch (Exception ex) {
+			return false;
+		}
+
+
 	}
 }
