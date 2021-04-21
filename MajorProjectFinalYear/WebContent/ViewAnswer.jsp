@@ -53,7 +53,7 @@
 	<%} %>
 	
 	<%
-	if(answers.size()!=0){
+	if(answers.size()!=0 ){
 	for(HashMap answer:answers){
 %>
 	
