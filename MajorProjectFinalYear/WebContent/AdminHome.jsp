@@ -26,6 +26,9 @@
 	<form action="AddSubject.jsp" method="post">
 <button type="submit">Add Subject</button>
 	</form>
+	<form action="AddBranch.jsp" method="post">
+<button type="submit">Add Branch</button>
+	</form>
 	
 	<hr>
 	<%

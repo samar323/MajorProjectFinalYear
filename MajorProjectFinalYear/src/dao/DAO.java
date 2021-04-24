@@ -320,5 +320,58 @@ public byte[] getId(String email) throws Exception{
 			return false;
 		}
 	}
+
+	public boolean deleteSubject(int subjectId) throws Exception {
+		try {
+			PreparedStatement p = con.prepareStatement(
+					"delete from subjects where subjectId=?");
+			p.setInt(1, subjectId);
+			p.executeUpdate();
+			return true;
+		} catch (java.sql.SQLIntegrityConstraintViolationException ex) {
+			return false;
+		}
+	}
+
+	public boolean insertBranch(HashMap branch) throws Exception {
+		try {
+			PreparedStatement p=con.prepareStatement("insert into branch"
+	+ "(branchName,school,semester,dateTime)values(?,?,?,CURRENT_TIMESTAMP)");
+			p.setString(1, (String)branch.get("branch"));
+			p.setString(2, (String)branch.get("school"));
+			p.setInt(3, (int) branch.get("semester"));
+			p.executeUpdate();
+			return true;
+		}catch(java.sql.SQLIntegrityConstraintViolationException ex) {
+			return false;
+		}
+	}
+	public ArrayList<HashMap> getAllBranches() throws Exception {
+		PreparedStatement p = con.prepareStatement("select * from branch");
+		ResultSet rs = p.executeQuery();
+		ArrayList<HashMap> branches = new ArrayList();
+		while (rs.next()) {
+			HashMap bran = new HashMap();
+			bran.put("branchId", rs.getInt("branchId"));
+			bran.put("school", rs.getString("school"));
+			bran.put("branchName", rs.getString("branchName"));
+			bran.put("semester", rs.getInt("semester"));
+			bran.put("dateTime", rs.getDate("dateTime"));
+			branches.add(bran);
+		}
+		return branches;
+	}
+
+	public boolean deleteBranch(int branchId) throws Exception {
+		try {
+			PreparedStatement p = con.prepareStatement(
+					"delete from branch where branchId=?");
+			p.setInt(1, branchId);
+			p.executeUpdate();
+			return true;
+		} catch (java.sql.SQLIntegrityConstraintViolationException ex) {
+			return false;
+		}
+	}
 	
 }
