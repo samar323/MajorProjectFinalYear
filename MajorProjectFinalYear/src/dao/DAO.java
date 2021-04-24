@@ -274,8 +274,8 @@ public byte[] getId(String email) throws Exception{
 		try {
 			PreparedStatement p=con.prepareStatement("insert into subjects"
 	+ "(subjectName,subjectCode,dateTime)values(?,?,CURRENT_TIMESTAMP)");
-			p.setString(1, (String)subject.get("subName"));
-			p.setString(2, (String)subject.get("subCode"));
+			p.setString(1, (String)subject.get("subjectName"));
+			p.setString(2, (String)subject.get("subjectCode"));
 			
 			p.executeUpdate();
 			return true;
@@ -283,9 +283,8 @@ public byte[] getId(String email) throws Exception{
 			return false;
 		}
 	}
-	public ArrayList<HashMap> getAllSubjects(int subjectId) throws Exception {
-		PreparedStatement p = con.prepareStatement("select * from subjects where subjectId= ?");
-		p.setInt(1, subjectId);
+	public ArrayList<HashMap> getAllSubjects() throws Exception {
+		PreparedStatement p = con.prepareStatement("select * from subjects");
 		ResultSet rs = p.executeQuery();
 		ArrayList<HashMap> subjects = new ArrayList();
 		while (rs.next()) {

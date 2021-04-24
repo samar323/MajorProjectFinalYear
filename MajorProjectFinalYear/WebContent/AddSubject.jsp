@@ -27,23 +27,22 @@ Subject Code: <input type="text" name="subjectCode" placeholder="CS 205" require
 		}
 	%>
 	<%
-	HashMap adminDetails=(HashMap)session.getAttribute("adminDetails");
-	if(adminDetails!=null){
-		int subjectId=Integer.parseInt(request.getParameter("subjectId"));
-		DAO dao=new DAO();
-		ArrayList<HashMap> allSubjects=dao.getAllSubjects(subjectId);
+	DAO dao=new DAO();
+	ArrayList<HashMap> allSubjects=dao.getAllSubjects();
+	if(allSubjects!=null){
 		for(HashMap subject:allSubjects){
 		%>
-Subject Name: <%=subject.get("subjectName") %>
-Subject Code: <%=subject.get("subjectCode") %>,
+			Subject Name: <%=subject.get("subjectName") %>
+			Subject Code: <%=subject.get("subjectCode") %>,
 <hr>
-	<%	
-	}
-	%>		
+		<%	
+		}
+		%>		
 </body>
 </html>
 <%
-	}else{
+		}
+		else{
 		session.setAttribute("message","Plz LOGIN First!");
 		response.sendRedirect("AdminLogin.jsp");
 	}
