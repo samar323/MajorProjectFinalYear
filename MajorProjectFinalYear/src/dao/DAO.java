@@ -297,4 +297,28 @@ public byte[] getId(String email) throws Exception{
 		}
 		return subjects;
 	}
+	public boolean deleteQuestion(int quesId) throws Exception {
+		try {
+			PreparedStatement p = con.prepareStatement(
+					"delete from questions where quesId=?");
+			p.setInt(1, quesId);
+			p.executeUpdate();
+			return true;
+		} catch (java.sql.SQLIntegrityConstraintViolationException ex) {
+			return false;
+		}
+	}
+	
+	public boolean deleteAnswer(int quesId) throws Exception {
+		try {
+			PreparedStatement p = con.prepareStatement(
+					"delete from answers where qid=?");
+			p.setInt(1, quesId);
+			p.executeUpdate();
+			return true;
+		} catch (java.sql.SQLIntegrityConstraintViolationException ex) {
+			return false;
+		}
+	}
+	
 }

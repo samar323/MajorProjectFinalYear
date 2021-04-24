@@ -12,6 +12,15 @@
 <body>
 <h2>Your Questions </h2>
 <%
+		String m=(String)session.getAttribute("message");
+		if(m!=null){
+	%>
+			<p style="background-color: yellow;width:max-content;"><%=m %></p>
+	<%		
+			session.setAttribute("message",null);
+		}
+	%>
+<%
 HashMap studentDetails=(HashMap)session.getAttribute("studentDetails");
 String studentId=(String)studentDetails.get("roll");
 
@@ -23,6 +32,9 @@ for(HashMap student:questions){
 
 <a href="ViewAnswer.jsp?quesId=<%=student.get("quesId") %>"><b>Q.<%=student.get("quesId")%></b> 
  <b><%=student.get("question")%> </a></b> Date:<%=student.get("dateTime")%>
+ <form action="DeleteQuestion">
+ <input type="hidden" name="id" value="<%=student.get("quesId")%>"/>
+ <button type="submit">Delete</button></form>
  <hr>
 	<%	
 	}
