@@ -23,9 +23,10 @@
 	<a href="AdminHome.jsp?status=accept">Accepted Students</a>
 	<a href="AdminHome.jsp?status=reject">Rejected Students</a>
 	<br>
-	<form action="AddSubject" method="post">
+	<form action="AddSubject.jsp" method="post">
 <button type="submit">Add Subject</button>
 	</form>
+	
 	<hr>
 	<%
 		String m=(String)session.getAttribute("message");

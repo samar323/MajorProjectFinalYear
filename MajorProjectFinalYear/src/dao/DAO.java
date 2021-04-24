@@ -269,4 +269,33 @@ public byte[] getId(String email) throws Exception{
 
 
 	}
+
+	public boolean insertSubject(HashMap subject) throws Exception {
+		try {
+			PreparedStatement p=con.prepareStatement("insert into subjects"
+	+ "(subjectName,subjectCode,dateTime)values(?,?,CURRENT_TIMESTAMP)");
+			p.setString(1, (String)subject.get("subName"));
+			p.setString(2, (String)subject.get("subCode"));
+			
+			p.executeUpdate();
+			return true;
+		}catch(java.sql.SQLIntegrityConstraintViolationException ex) {
+			return false;
+		}
+	}
+	public ArrayList<HashMap> getAllSubjects(int subjectId) throws Exception {
+		PreparedStatement p = con.prepareStatement("select * from subjects where subjectId= ?");
+		p.setInt(1, subjectId);
+		ResultSet rs = p.executeQuery();
+		ArrayList<HashMap> subjects = new ArrayList();
+		while (rs.next()) {
+			HashMap sub = new HashMap();
+			sub.put("subjectId", rs.getInt("subjectId"));
+			sub.put("subjectName", rs.getString("subjectName"));
+			sub.put("subjectCode", rs.getString("subjectCode"));
+			sub.put("dateTime", rs.getDate("dateTime"));
+			subjects.add(sub);
+		}
+		return subjects;
+	}
 }
