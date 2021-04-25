@@ -12,9 +12,9 @@
 </head>
 <body>
 <form action="AddBranch" method="post"> 
-Semester : <input type="number" name="sem" placeholder="1" required/><br><br>
 School : <input type="text" name="school" placeholder="ICT" required/><br><br>
 Branch : <input type="text" name="branch" placeholder="IT" required/><br><br>
+Total No. of Semester : <input type="number" name="sem" placeholder="1" required/><br><br>
 <button type="submit">Add</button>
 </form>
 

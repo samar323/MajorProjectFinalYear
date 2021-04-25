@@ -24,24 +24,35 @@ public class AddBranch extends HttpServlet {
 		int semester=(Integer.parseInt(request.getParameter("sem")));
 		String school=request.getParameter("school");
 		String branchName=request.getParameter("branch");
-		
+		int status=0;
+		for(int sem=1;sem<=semester;sem++) {
 		HashMap branch=new HashMap();
-		branch.put("semester", semester);
+		branch.put("semester", sem);
 		branch.put("school", school);
 		branch.put("branch", branchName);
 		
 		DAO dao=new DAO();
-		boolean result=dao.insertBranch(branch);
-		if(result==true) {
+		dao.insertBranch(branch);
+		status++;
+//		if(result==true) {
+//			
+//			session.setAttribute("message","Branch Added Successfully!");
+//			response.sendRedirect("AddBranch.jsp");
+//		}else {
+//			
+//			session.setAttribute("message","Branch Already Added!");
+//			response.sendRedirect("AddBranch.jsp");
+//		}
+		}
+		if(status==semester) {
 			
 			session.setAttribute("message","Branch Added Successfully!");
 			response.sendRedirect("AddBranch.jsp");
 		}else {
 			
-			session.setAttribute("message","Branch Already Added!");
+			session.setAttribute("message","Something went wrong!");
 			response.sendRedirect("AddBranch.jsp");
 		}
-		
 	
 	}catch(Exception ex) {
 		ex.printStackTrace();
