@@ -212,16 +212,17 @@ public byte[] getId(String email) throws Exception{
 		}
 		return answers;
 	}
-	
 	public ArrayList<HashMap> getAnswerByStudent(String studentId) throws Exception {
-PreparedStatement p = con.prepareStatement("select * from answers where studentId= ? ");
+		PreparedStatement p = con.prepareStatement("select  question, answers "
+				+ "from questions q join answers a on q.studentId=a.studentId"
+				+ " where q.studentId=?");
 		p.setString(1, studentId);
-	
 		ResultSet rs = p.executeQuery();
 		ArrayList<HashMap> answers = new ArrayList();
 		while (rs.next()) {
 			HashMap ans = new HashMap();
-			ans.put("qid", rs.getString("qid"));
+			ans.put("question", rs.getString("question"));
+			ans.put("qid", rs.getInt("quesId"));
 			ans.put("answers", rs.getString("answers"));
 			ans.put("studentId", rs.getString("studentId"));
 			ans.put("dateTime", rs.getDate("dateTime"));
@@ -230,6 +231,18 @@ PreparedStatement p = con.prepareStatement("select * from answers where studentI
 		return answers;
 	}
 	
+	/*
+	 * public ArrayList<HashMap> getAnswerByStudent(String studentId) throws
+	 * Exception { PreparedStatement p =
+	 * con.prepareStatement("select * from answers where studentId= ? ");
+	 * p.setString(1, studentId);
+	 * 
+	 * ResultSet rs = p.executeQuery(); ArrayList<HashMap> answers = new
+	 * ArrayList(); while (rs.next()) { HashMap ans = new HashMap(); ans.put("qid",
+	 * rs.getString("qid")); ans.put("answers", rs.getString("answers"));
+	 * ans.put("studentId", rs.getString("studentId")); ans.put("dateTime",
+	 * rs.getDate("dateTime")); answers.add(ans); } return answers; }
+	 */
 	public String getQuestionById(int qid) throws Exception {
 		PreparedStatement p = con.prepareStatement("select * from questions where quesId=?");
 		p.setInt(1, qid);

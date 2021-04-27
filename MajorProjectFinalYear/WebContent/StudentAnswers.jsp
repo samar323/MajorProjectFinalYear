@@ -38,10 +38,10 @@
 	<h2>Your Answers</h2>
 	<% 
 	for(HashMap student:answers){
-		String question=dao.getQuestionByStudentId(studentId);
+		
 	%>
 
-  <b>Q.<%=question %></b><br>
+  <b>Q.<%=student.get("question") %></b><br>
 <b>Ans:<%=student.get("answers")%></b>
 <hr>
 	<%	
