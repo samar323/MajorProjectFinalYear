@@ -36,7 +36,7 @@ if(status.equalsIgnoreCase("accept")){%>
 <% 
 for(HashMap student:questions){
 %>
-//push
+
 <a href="ViewAnswer.jsp?quesId=<%=student.get("quesId") %>"><b>Q.<%=student.get("quesId")%></b> 
  <b><%=student.get("question")%> </a></b> Date:<%=student.get("dateTime")%>
  <form action="DeleteQuestion">

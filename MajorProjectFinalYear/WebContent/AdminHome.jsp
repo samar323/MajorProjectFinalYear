@@ -40,7 +40,7 @@
 			session.setAttribute("message",null);
 		}
 	%>
-		<%//pu
+		<%
 	DAO dao=new DAO();
 	ArrayList<HashMap> allStudents=dao.getAllStudents(status);
 	for(HashMap student:allStudents){
