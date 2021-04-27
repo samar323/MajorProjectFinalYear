@@ -11,6 +11,11 @@
 <title>Add Subject</title>
 </head>
 <body>
+<%
+	HashMap adminDetails=(HashMap)session.getAttribute("adminDetails");
+	if(adminDetails!=null){
+		String status=request.getParameter("status");
+%> 
 <form action="AddBranch" method="post"> 
 School : <input type="text" name="school" placeholder="ICT" required/><br><br>
 Branch : <input type="text" name="branch" placeholder="IT" required/><br><br>
@@ -54,4 +59,9 @@ Total No. of Semester : <input type="number" name="sem" placeholder="1" required
 		response.sendRedirect("AdminLogin.jsp");
 	}
 %>
- 
+ <%
+	}else{
+		session.setAttribute("message","Plz LOGIN First!");
+		response.sendRedirect("AdminLogin.jsp");
+	}
+%>
