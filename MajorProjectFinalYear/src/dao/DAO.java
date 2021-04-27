@@ -416,5 +416,28 @@ public byte[] getId(String email) throws Exception{
 			return false;
 		}
 	}
+	public ArrayList<HashMap> getAllSchools() throws Exception {
+		PreparedStatement p = con.prepareStatement("SELECT distinct school FROM branch");
+		ResultSet rs = p.executeQuery();
+		ArrayList<HashMap> schools = new ArrayList();
+		while (rs.next()) {
+			HashMap school = new HashMap();
+			school.put("school", rs.getString("school"));
+			schools.add(school);
+		}
+		return schools;
+	}
+	public ArrayList<HashMap> getAllBranchesBySchool(String school) throws Exception {
+		PreparedStatement p = con.prepareStatement("SELECT distinct branchName FROM branch where school=?");
+		p.setString(1, school);
+		ResultSet rs = p.executeQuery();
+		ArrayList<HashMap> branches = new ArrayList();
+		while (rs.next()) {
+			HashMap branch = new HashMap();
+			branch.put("branchName", rs.getString("branchName"));
+			branches.add(branch);
+		}
+		return branches;
+	}
 	
 }

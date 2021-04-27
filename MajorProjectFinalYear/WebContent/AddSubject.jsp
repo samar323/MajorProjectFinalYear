@@ -11,6 +11,11 @@
 <title>Add Subject</title>
 </head>
 <body>
+<%
+	HashMap adminDetails=(HashMap)session.getAttribute("adminDetails");
+	if(adminDetails!=null){
+		String status=request.getParameter("status");
+%> 
 <form action="AddSubject" method="post"> 
 Subject Name: <input type="text" name="subjectName" placeholder="Data Structure" required/><br><br>
 Subject Code: <input type="text" name="subjectCode" placeholder="CS 205" required/><br><br>
@@ -48,6 +53,12 @@ Subject Code: <input type="text" name="subjectCode" placeholder="CS 205" require
 <%
 		}
 		else{
+		session.setAttribute("message","Plz LOGIN First!");
+		response.sendRedirect("AdminLogin.jsp");
+	}
+%>
+<%
+	}else{
 		session.setAttribute("message","Plz LOGIN First!");
 		response.sendRedirect("AdminLogin.jsp");
 	}
