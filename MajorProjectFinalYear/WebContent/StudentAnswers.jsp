@@ -1,3 +1,4 @@
+
 <%@page import="java.util.HashMap"%>
 <%@page import="dao.DAO"%>
 <%@page import="java.util.ArrayList"%>
@@ -11,7 +12,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Your Questions</title>
+<title>Your Answers</title>
 </head>
 <body>
 
@@ -24,34 +25,38 @@
 			session.setAttribute("message",null);
 		}
 	%>
-<%
+	
+	<%
+	String studentId=(String)studentDetails.get("roll");
+	String status=(String)studentDetails.get("status");
+	DAO dao=new DAO();
+	
+	
+	ArrayList<HashMap> answers=dao.getAnswerByStudent(studentId);
 
-String studentId=(String)studentDetails.get("roll");
-String status=(String)studentDetails.get("status");
-DAO dao=new DAO();
-ArrayList<HashMap> questions=dao.getQuestionByStudent(studentId);
+	if(status.equalsIgnoreCase("accept")){%>
+	<h2>Your Answers</h2>
+	<% 
+	for(HashMap student:answers){
+		String question=dao.getQuestionByStudentId(studentId);
+	%>
 
-if(status.equalsIgnoreCase("accept")){%>
-<h2>Your Questions </h2>
-<% 
-for(HashMap student:questions){
-%>
-
-<a href="ViewAnswer.jsp?quesId=<%=student.get("quesId") %>"><b>Q.<%=student.get("quesId")%></b> 
- <b><%=student.get("question")%> </a></b> Date:<%=student.get("dateTime")%>
- <form action="DeleteQuestion">
- <input type="hidden" name="id" value="<%=student.get("quesId")%>"/>
- <button type="submit">Delete</button></form>
- <hr>
+  <b>Q.<%=question %></b><br>
+<b>Ans:<%=student.get("answers")%></b>
+<hr>
 	<%	
 	}
 	%>
+	
+	
 	<%
 }else{%>
 	<h2>You have not verified yet!!</h2>
 	<%	
 }
 %>
+	
+	
 </body>
 </html>
 <%

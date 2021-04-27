@@ -46,7 +46,7 @@
 	for(HashMap student:allStudents){
 	%>
 		<img src='GetPhoto?email=<%=student.get("email") %>&type=student' height="100px" width="100px"/> <br>
-		Name: <%=student.get("name") %>, 
+		Name: <b><%=student.get("name") %>, </b>
 		Phone: <%=student.get("phone") %>,
 		Email: <%=student.get("email") %>,
 		School: <%=student.get("school") %>,

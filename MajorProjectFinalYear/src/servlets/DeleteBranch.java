@@ -18,7 +18,7 @@ public class DeleteBranch extends HttpServlet {
 		try {
 			HttpSession session=request.getSession();
 		int branchId=Integer.parseInt(request.getParameter("id"));
-		//push
+	
 		DAO dao=new DAO();
 			boolean quesDeleteStatus=dao.deleteBranch(branchId);
 			if(quesDeleteStatus==true) {
