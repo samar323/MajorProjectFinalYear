@@ -36,7 +36,7 @@ School: <select name="school">
 			if(schoolName!=null){
 		%>
 		
-		School: <select name="branch">
+		Branch: <select name="branch">
 		
 		<%
 		if(allSchools!=null){
