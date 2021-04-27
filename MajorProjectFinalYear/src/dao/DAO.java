@@ -213,7 +213,7 @@ public byte[] getId(String email) throws Exception{
 		return answers;
 	}
 	public ArrayList<HashMap> getAnswerByStudent(String studentId) throws Exception {
-		PreparedStatement p = con.prepareStatement("select  question, answers "
+		PreparedStatement p = con.prepareStatement("select  q.question, q.quesId, a.studentId, a.dateTime, a.answers "
 				+ "from questions q join answers a on q.studentId=a.studentId"
 				+ " where q.studentId=?");
 		p.setString(1, studentId);
