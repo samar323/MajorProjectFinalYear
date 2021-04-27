@@ -45,7 +45,7 @@
 <b>Ans:<%=student.get("answers")%></b>
 <hr>
 	<%	
-	}
+	}//push
 	%>
 	
 	
