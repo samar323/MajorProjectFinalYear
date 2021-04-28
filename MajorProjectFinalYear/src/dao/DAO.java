@@ -229,22 +229,11 @@ public byte[] getId(String email) throws Exception{
 			answers.add(ans);
 		}
 		return answers;
-		
+		//pplk;l
 		 
 	}
 	
-	/*
-	 * public ArrayList<HashMap> getAnswerByStudent(String studentId) throws
-	 * Exception { PreparedStatement p =
-	 * con.prepareStatement("select * from answers where studentId= ? ");
-	 * p.setString(1, studentId);
-	 * 
-	 * ResultSet rs = p.executeQuery(); ArrayList<HashMap> answers = new
-	 * ArrayList(); while (rs.next()) { HashMap ans = new HashMap(); ans.put("qid",
-	 * rs.getString("qid")); ans.put("answers", rs.getString("answers"));
-	 * ans.put("studentId", rs.getString("studentId")); ans.put("dateTime",
-	 * rs.getDate("dateTime")); answers.add(ans); } return answers; }
-	 */
+	
 	public String getQuestionById(int qid) throws Exception {
 		PreparedStatement p = con.prepareStatement("select * from questions where quesId=?");
 		p.setInt(1, qid);
