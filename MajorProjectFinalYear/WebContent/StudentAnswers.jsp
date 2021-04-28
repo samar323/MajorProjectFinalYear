@@ -42,7 +42,7 @@
 	%>
 
   <b>Q.<%=student.get("question") %></b><br>
-<b>Ans:<%=student.get("answers")%></b>
+<b><p>Ans:<%=student.get("answers")%></p></b>
 <hr>
 	<%	
 	}
