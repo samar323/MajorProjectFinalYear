@@ -34,7 +34,10 @@
 	Question: <%=question %><br>
 	<%
 	HashMap studentDetails=(HashMap)session.getAttribute("studentDetails");
+	String studentId=(String)studentDetails.get("roll");
 	if(studentDetails!=null){
+		
+		if(dao.checkAnswer(quesId, studentId)){
 %>
 	<p>
   <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
@@ -50,6 +53,7 @@
 			</form>
 		</div>
 </div>
+  <%} %>
 	<%} %>
 	
 	<%
@@ -60,6 +64,9 @@
 	answer: <%=answer.get("answers") %>,
 	studentId: <%=answer.get("studentId") %>,
 	dateTime: <%=answer.get("dateTime") %><br>
+	<form action="DeleteAnswer">
+ <input type="hidden" name="id" value="<%=quesId%>"/>
+ <button type="submit">Delete</button></form>
 	<hr>
 <%
 	}
@@ -87,6 +94,6 @@
   </script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
 
-    
+  
 </body>
 </html>

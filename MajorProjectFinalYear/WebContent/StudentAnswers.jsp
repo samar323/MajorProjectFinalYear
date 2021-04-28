@@ -42,7 +42,11 @@
 	%>
 
   <b>Q.<%=student.get("question") %></b><br>
-<b><p>Ans:<%=student.get("answers")%></p></b>
+<b><p>Ans:</b><%=student.get("answers")%></p>
+StudentId:</b><%=student.get("studentId")%>
+<form action="DeleteAnswer">
+ <input type="hidden" name="id" value="<%=student.get("qid")%>"/>
+ <button type="submit">Delete</button></form>
 <hr>
 	<%	
 	}

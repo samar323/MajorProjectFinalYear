@@ -35,7 +35,7 @@ response.setDateHeader("Expires",-1);
 	   
 	<h2>[Status: <%=studentDetails.get("status") %>]</h2> 
 	<a href='Logout'>Logout</a>,
-	<a href='StudentResult.jsp'>Your Result</a>,
+	<a href='index.jsp'>Search Questions</a>,
 	<a href='StudentQuestions.jsp'>Your Questions</a>
 		<a href='StudentAnswers.jsp'>Your Answers</a>
 	<hr>

@@ -428,5 +428,18 @@ public byte[] getId(String email) throws Exception{
 		}
 		return branches;
 	}
-	
+	public boolean checkAnswer(int qid,String studentId) throws Exception{
+		PreparedStatement p=con.prepareStatement("select * from answers where qid=? and studentId=?");
+		p.setInt(1, qid);
+		p.setString(2, studentId);
+		ResultSet rs=p.executeQuery();
+		if(rs.next()) {
+			return false;
+		}else {
+			
+			return true;
+		}
+		
+		
+	}
 }
