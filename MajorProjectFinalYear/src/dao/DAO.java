@@ -8,11 +8,11 @@ public class DAO {
 	private Connection con;
 
 	public DAO() throws Exception {
-//		Class.forName("com.mysql.cj.jdbc.Driver");
-//		con = DriverManager.getConnection("jdbc:mysql://localhost:3306/major_project?allowPublicKeyRetrieval=true", "root",
-//				"Samar323@");
-		Class.forName("com.mysql.jdbc.Driver");
-		con=DriverManager.getConnection("jdbc:mysql://localhost:3306/major_project","root","aniket");
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		con = DriverManager.getConnection("jdbc:mysql://localhost:3306/major_project?allowPublicKeyRetrieval=true", "root",
+				"Samar323@");
+//		Class.forName("com.mysql.jdbc.Driver");
+//		con=DriverManager.getConnection("jdbc:mysql://localhost:3306/major_project","root","aniket");
 
 	}
 	
