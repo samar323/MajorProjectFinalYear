@@ -316,19 +316,31 @@ public byte[] getId(String email) throws Exception{
 			return false;
 		}
 	}
-	public ArrayList<HashMap> getAllSubjects() throws Exception {
-		PreparedStatement p = con.prepareStatement("select * from subjects");
+	public List<Subject> getAllSubjects() throws Exception {
+		PreparedStatement p = con.prepareStatement("SELECT * FROM subjects");
 		ResultSet rs = p.executeQuery();
-		ArrayList<HashMap> subjects = new ArrayList();
+		List<Subject> subjects = new ArrayList();
 		while (rs.next()) {
-			HashMap sub = new HashMap();
-			sub.put("subjectId", rs.getInt("subjectId"));
-			sub.put("subjectName", rs.getString("subjectName"));
-			sub.put("subjectCode", rs.getString("subjectCode"));
-			sub.put("dateTime", rs.getDate("dateTime"));
-			subjects.add(sub);
+			Subject subject=new Subject();
+			subject.setId(Integer.parseInt(rs.getString("subjectId")));
+			subject.setSubjectName(rs.getString("subjectName"));
+			subject.setSubjectCode(rs.getString("subjectCode"));
+			subjects.add(subject);
 		}
 		return subjects;
+	}
+	public List<Semester> getAllSemesters(String branch) throws Exception {
+		PreparedStatement p = con.prepareStatement("SELECT branchId, semester FROM branch where branchName=?");
+		p.setString(1, branch);
+		ResultSet rs = p.executeQuery();
+		List<Semester> semesters = new ArrayList();
+		while (rs.next()) {
+			Semester semester=new Semester();
+			semester.setId(Integer.parseInt(rs.getString("branchId")));
+			semester.setSemester(Integer.parseInt(rs.getString("semester")));
+			semesters.add(semester);
+		}
+		return semesters;
 	}
 	public boolean deleteQuestion(int quesId) throws Exception {
 		try {

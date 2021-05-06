@@ -1,4 +1,4 @@
-    
+ 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -25,24 +25,29 @@
                     <h5>Dependent Select Item</h5>
                 </div>
                 <div class="divider"></div>
-                <form>
+                <form action="SubjectCombination">
                     <div class="input-field">
-                        <select id="school">
-                            <option>Select Country</option>
+                        <select id="school" name="school" required>
+                            <option disabled selected>Select School</option>
                         </select>
                     </div>
                     <div class="input-field">
-                        <select id="branch">
-                            <option>Select State</option>
+                        <select id="branch" name="branch" required>
+                            <option disabled selected>Select Branch</option>
                         </select>
                     </div>
                     <div class="input-field">
-                        <select id="subject">
-                            <option>Select City</option>
+                        <select id="subject" name="subject" multiple required>
+                            <option disabled selected>Select Subject</option>
+                        </select>
+                    </div>
+                    <div class="input-field">
+                        <select id="semester" name="semester" required>
+                            <option disabled selected>Select Semester</option>
                         </select>
                     </div>
                     <div class="center">
-                        <button class="btn">Submit</button>
+                        <button class="btn" type="submit">Submit</button>
                     </div>
                 </form>
             </div>
@@ -73,9 +78,7 @@
 
                 $('#school').change(function () {
                     $('#branch').find('option').remove();
-                    $('#branch').append('<option>Select State</option>'); 
-                    $('#city').find('option').remove();
-                    $('#city').append('<option>Select City</option>');
+                    $('#branch').append('<option disabled selected>Select Branch</option>'); 
 
                     let schoolName = $('#school').val();
                     let data = {
@@ -102,25 +105,44 @@
                     });
                 });
                 
-                $('#state').change(function () {
-                    $('#city').find('option').remove();
-                    $('#city').append('<option>Select City</option>');
+                $.ajax({
+                    url: "GetSchoolBranchSubject",
+                    method: "GET",
+                    data: {operation: 'subject'},
+                    success: function (data, textStatus, jqXHR) {
+                    	
+                        console.log(data);
+                        let obj = $.parseJSON(data);
+                        $.each(obj, function (key, value) {
+                            $('#subject').append('<option value="' + value.id + '">' + value.subjectName+' ('+value.subjectCode + ')</option>')
+                        });
+                        $('select').formSelect();
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        $('#school').append('<option>Country Unavailable</option>');
+                    },
+                    cache: false
+                });
+                
+                $('#branch').change(function () {
+                    $('#semester').find('option').remove();
+                    $('#semester').append('<option disabled selected>Select Semester</option>');
 
-                    let sid = $('#state').val();
+                    let id = $('#branch').val();
                     let data = {
-                        operation: "city",
-                        id: sid
+                        operation: "semester",
+                        sid: id
                     };
 
                     $.ajax({
-                        url: "GetCountryStateservlet",
+                        url: "GetSchoolBranchSubject",
                         method: "GET",
                         data: data,
                         success: function (data, textStatus, jqXHR) {
                             console.log(data);
                             let obj = $.parseJSON(data);
                             $.each(obj, function (key, value) {
-                                $('#city').append('<option value="' + value.id + '">' + value.name + '</option>')
+                                $('#semester').append('<option value="' + value.id + '"> Semester' + value.semester + '</option>')
                             });
                             $('select').formSelect();
                         },

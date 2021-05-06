@@ -42,6 +42,24 @@ public class GetSchoolBranchSubject extends HttpServlet {
                 response.setContentType("text/html");
                 response.getWriter().write(branchList);
             }
+            
+            if (op.equals("subject")) {
+                String subject = request.getParameter("subject");
+                List<Subject> slist = dao.getAllSubjects();
+                Gson json = new Gson();
+                String subjectList = json.toJson(slist);
+                response.setContentType("text/html");
+                response.getWriter().write(subjectList);
+            }
+            
+            if (op.equals("semester")) {
+                String semester = request.getParameter("sid");
+                List<Semester> slist = dao.getAllSemesters(semester);
+                Gson json = new Gson();
+                String semesterList = json.toJson(slist);
+                response.setContentType("text/html");
+                response.getWriter().write(semesterList);
+            }
 
             
         } catch (Exception e) {
