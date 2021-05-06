@@ -1,4 +1,4 @@
-package java;
+package javaFiles;
 
 public class ExtractNumber {
 	

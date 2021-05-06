@@ -1,5 +1,6 @@
 package dao;
 
+import javaFiles.*;
 import java.io.InputStream;
 import java.sql.*;
 import java.util.*;
@@ -8,11 +9,11 @@ public class DAO {
 	private Connection con;
 
 	public DAO() throws Exception {
-		Class.forName("com.mysql.cj.jdbc.Driver");
-		con = DriverManager.getConnection("jdbc:mysql://localhost:3306/major_project?allowPublicKeyRetrieval=true", "root",
-				"Samar323@");
-//		Class.forName("com.mysql.jdbc.Driver");
-//		con=DriverManager.getConnection("jdbc:mysql://localhost:3306/major_project","root","aniket");
+//		Class.forName("com.mysql.cj.jdbc.Driver");
+//		con = DriverManager.getConnection("jdbc:mysql://localhost:3306/major_project?allowPublicKeyRetrieval=true", "root",
+//				"Samar323@");
+		Class.forName("com.mysql.jdbc.Driver");
+		con=DriverManager.getConnection("jdbc:mysql://localhost:3306/major_project","root","aniket");
 
 	}
 	
@@ -405,28 +406,28 @@ public byte[] getId(String email) throws Exception{
 			return false;
 		}
 	}
-	public ArrayList<HashMap> getAllSchools() throws Exception {
+	public List<School> getAllSchools() throws Exception {
 		PreparedStatement p = con.prepareStatement("SELECT distinct school FROM branch");
 		ResultSet rs = p.executeQuery();
-		ArrayList<HashMap> schools = new ArrayList();
+		List<School> schools = new ArrayList();
 		while (rs.next()) {
-			HashMap school = new HashMap();
-			school.put("school", rs.getString("school"));
-			schools.add(school);
+			School sch=new School();
+			sch.setName(rs.getString("school"));
+			schools.add(sch);
 		}
 		return schools;
 	}
-	public ArrayList<HashMap> getAllBranchesBySchool(String school) throws Exception {
+	public List<Branch> getAllBranchesBySchool(String school) throws Exception {
 		PreparedStatement p = con.prepareStatement("SELECT distinct branchName FROM branch where school=?");
 		p.setString(1, school);
 		ResultSet rs = p.executeQuery();
-		ArrayList<HashMap> branches = new ArrayList();
+		List<Branch> list  = new ArrayList<>();
 		while (rs.next()) {
-			HashMap branch = new HashMap();
-			branch.put("branchName", rs.getString("branchName"));
-			branches.add(branch);
+			Branch br=new Branch();
+			br.setName(rs.getString("branchName"));
+			list.add(br);
 		}
-		return branches;
+		return list;
 	}
 	public boolean checkAnswer(int qid,String studentId) throws Exception{
 		PreparedStatement p=con.prepareStatement("select * from answers where qid=? and studentId=?");
