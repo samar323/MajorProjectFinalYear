@@ -329,6 +329,23 @@ public byte[] getId(String email) throws Exception{
 		}
 		return subjects;
 	}
+	
+	public ArrayList<HashMap> getAllSubject() throws Exception {
+		PreparedStatement p = con.prepareStatement("SELECT * FROM subjects");
+		ResultSet rs = p.executeQuery();
+		ArrayList<HashMap> subjects=new ArrayList();
+		while(rs.next()) {
+			HashMap subject=new HashMap();
+			subject.put("subjectId", rs.getString("subjectId"));
+			subject.put("subjectName", rs.getString("subjectName"));
+			subject.put("subjectCode", rs.getString("subjectCode"));
+			subject.put("dateTime", rs.getDate("dateTime"));
+			
+			subjects.add(subject);
+		}
+		return subjects;
+	}
+	
 	public List<Semester> getAllSemesters(String branch) throws Exception {
 		PreparedStatement p = con.prepareStatement("SELECT branchId, semester FROM branch where branchName=?");
 		p.setString(1, branch);
@@ -461,7 +478,7 @@ public byte[] getId(String email) throws Exception{
 		p.setInt(3, semester);
 		ResultSet rs = p.executeQuery();
 		if (rs.next()) {
-			return rs.getInt("branchId");
+			return Integer.parseInt(rs.getString("branchId"));
 		} else {
 			return 0;
 		}

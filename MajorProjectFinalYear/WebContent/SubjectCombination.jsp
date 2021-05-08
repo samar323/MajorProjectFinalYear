@@ -155,7 +155,7 @@
                             console.log(data);
                             let obj = $.parseJSON(data);
                             $.each(obj, function (key, value) {
-                                $('#semester').append('<option value="' + value.id + '"> Semester' + value.semester + '</option>')
+                                $('#semester').append('<option value="' + value.semester + '"> Semester' + value.semester + '</option>')
                             });
                             $('select').formSelect();
                         },

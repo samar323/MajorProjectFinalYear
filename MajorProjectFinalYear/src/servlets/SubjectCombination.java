@@ -28,6 +28,7 @@ public class SubjectCombination extends HttpServlet {
 			if (school != null && branch != null && semester != null) {
 				int sem=Integer.parseInt(semester);
 				int branchId = dao.getBranchId(school, branch, sem);
+				if(branchId!=0) {
 				int flag=0;
 				for(String sub:subject) {
 					flag++;
@@ -43,7 +44,12 @@ public class SubjectCombination extends HttpServlet {
 					response.sendRedirect("SubjectCombination.jsp");
 				}
 				
-			}else {
+				}else{
+					HttpSession session=request.getSession();
+					session.setAttribute("message","galat h");
+					response.sendRedirect("SubjectCombination.jsp");
+				}
+				}else {
 				HttpSession session=request.getSession();
 				session.setAttribute("message","Please select all options");
 				response.sendRedirect("SubjectCombination.jsp");

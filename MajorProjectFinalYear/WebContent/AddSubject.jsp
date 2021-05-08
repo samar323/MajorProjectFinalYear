@@ -34,7 +34,7 @@ Subject Code: <input type="text" name="subjectCode" placeholder="CS 205" require
 	<hr>
 	<%
 	DAO dao=new DAO();
-	ArrayList<HashMap> allSubjects=dao.getAllSubjects();
+	ArrayList<HashMap> allSubjects=dao.getAllSubject();
 	if(allSubjects!=null){
 		for(HashMap subject:allSubjects){
 		%>
