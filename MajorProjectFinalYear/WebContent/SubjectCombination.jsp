@@ -1,4 +1,8 @@
- 
+ <%@page import="java.util.HashMap"%>
+<%
+	HashMap adminDetails=(HashMap)session.getAttribute("adminDetails");
+	if(adminDetails!=null){
+%> 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -22,9 +26,18 @@
         <div class="container">
             <div class="drop-down-list card">
                 <div class="center">
-                    <h5>Dependent Select Item</h5>
+                    <h5>Add Subject Combinations</h5>
                 </div>
                 <div class="divider"></div>
+                <%
+		String m=(String)session.getAttribute("message");
+		if(m!=null){
+	%>
+			<p style="background-color: yellow;width:max-content;"><%=m %></p>
+	<%		
+			session.setAttribute("message",null);
+		}
+	%>
                 <form action="SubjectCombination">
                     <div class="input-field">
                         <select id="school" name="school" required>
@@ -157,5 +170,10 @@
         </script>
     </body>
 </html>
-
+<%
+	}else{
+		session.setAttribute("message","Plz LOGIN First!");
+		response.sendRedirect("AdminLogin.jsp");
+	}
+%>
   

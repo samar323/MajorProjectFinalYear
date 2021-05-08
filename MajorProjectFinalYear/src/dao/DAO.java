@@ -452,7 +452,31 @@ public byte[] getId(String email) throws Exception{
 			
 			return true;
 		}
-		
-		
+	}
+	
+	public int getBranchId(String school, String branch, int semester ) throws Exception {
+		PreparedStatement p=con.prepareStatement("select branchId from branch where branchName=? and school=? and semester=?");
+		p.setString(1, branch);
+		p.setString(2, school);
+		p.setInt(3, semester);
+		ResultSet rs = p.executeQuery();
+		if (rs.next()) {
+			return rs.getInt("branchId");
+		} else {
+			return 0;
+		}
+	}
+	
+	public boolean insertSubjectCombination(int branchId, int subject) throws Exception {
+		try {
+			PreparedStatement p=con.prepareStatement("insert into subjectcombination"
+	+ "(classId,subjectId,dateTime)values(?,?,CURRENT_TIMESTAMP)");
+			p.setInt(1, branchId);
+			p.setInt(2, subject);
+			p.executeUpdate();
+			return true;
+		}catch(java.sql.SQLIntegrityConstraintViolationException ex) {
+			return false;
+		}
 	}
 }
