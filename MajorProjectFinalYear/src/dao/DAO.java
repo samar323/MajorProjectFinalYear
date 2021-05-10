@@ -496,4 +496,20 @@ public byte[] getId(String email) throws Exception{
 			return false;
 		}
 	}
+	
+	public List<Subject> getSubjectCombination(String branch, int sem) throws Exception {
+		PreparedStatement p = con.prepareStatement("select s.subjectName, s.subjectId, s.subjectCode from subjects s join branch b join subjectcombination sb on sb.classId=b.branchId and s.subjectId=sb.subjectId where branchName=? and semester=?");
+		p.setString(1, branch);
+		p.setInt(2, sem);
+		ResultSet rs = p.executeQuery();
+		List<Subject> subjects = new ArrayList();
+		while (rs.next()) {
+			Subject subject=new Subject();
+			subject.setId(Integer.parseInt(rs.getString("subjectId")));
+			subject.setSubjectName(rs.getString("subjectName"));
+			subject.setSubjectCode(rs.getString("subjectCode"));
+			subjects.add(subject);
+		}
+		return subjects;
+	}
 }
