@@ -517,9 +517,9 @@ public byte[] getId(String email) throws Exception{
 		try {
 			PreparedStatement p=con.prepareStatement("insert into result (studentId,classId,subjectId, marks, dateTime)values(?,?,?,?,CURRENT_TIMESTAMP)");
 			p.setString(1, (String)result.get("roll"));
-			p.setString(2, (String)result.get("classId"));
-			p.setString(3, (String)result.get("subjectId"));
-			p.setString(4, (String)result.get("marks"));
+			p.setInt(2, (Integer)result.get("classId"));
+			p.setInt(3, (Integer)result.get("subjectId"));
+			p.setInt(4, (Integer)result.get("mark"));
 			
 			p.executeUpdate();
 			return true;

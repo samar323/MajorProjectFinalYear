@@ -166,6 +166,7 @@
                 $('#semester').change(function () {
                     $('#subjectName').find('input').remove();
                     $('#subjectName').find('label').remove();
+                    $('#subjectName').find('br').remove();
 
                     let id = $('#branch').val();
                     let sem= $('#semester').val();
