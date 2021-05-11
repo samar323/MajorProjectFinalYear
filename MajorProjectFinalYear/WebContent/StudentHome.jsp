@@ -30,7 +30,7 @@ response.setDateHeader("Expires",-1);
 			session.setAttribute("message",null);
 		}
 	%>
-	//
+	
 	<hr>
 	Welcome: <b> <%=studentDetails.get("name") %> </b> ,<br>
 	   

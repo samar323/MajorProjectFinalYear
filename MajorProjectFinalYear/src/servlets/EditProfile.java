@@ -21,7 +21,7 @@ import dao.DAO;
 public class EditProfile extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-	//
+	
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			HttpSession session=request.getSession();

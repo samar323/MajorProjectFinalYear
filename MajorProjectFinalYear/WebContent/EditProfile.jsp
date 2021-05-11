@@ -23,7 +23,7 @@
 			session.setAttribute("message",null);
 		}
 	%>
-	//
+	
 	<h1>Profile Updation Form</h1>
 	
 	<form action="EditProfile" method="post" enctype="multipart/form-data">

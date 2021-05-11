@@ -483,7 +483,7 @@ public byte[] getId(String email) throws Exception{
 			return 0;
 		}
 	}
-	//
+	
 	public boolean insertSubjectCombination(int branchId, int subject) throws Exception {
 		try {
 			PreparedStatement p=con.prepareStatement("insert into subjectcombination"
