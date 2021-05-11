@@ -28,6 +28,7 @@ public class EditProfile extends HttpServlet {
 			HashMap studentDetails=(HashMap)session.getAttribute("studentDetails");
 			String email=request.getParameter("email");
 			String oldEmail=(String) studentDetails.get("email");
+			String password=(String) studentDetails.get("password");
 			
 			String name=request.getParameter("name");
 			String phone=request.getParameter("phone");
@@ -50,9 +51,11 @@ public class EditProfile extends HttpServlet {
 			DAO dao=new DAO();
 			boolean result=dao.updateStudent(student,oldEmail);
 			if(result==true) {
-				 session=request.getSession();
+				session=request.getSession();
+				HashMap students=dao.getStudent(email,password);
+				session.setAttribute("studentDetails", students);
 				session.setAttribute("message","Profile Updated Successfully!");
-				response.sendRedirect("StudentLogin.jsp");
+				response.sendRedirect("StudentHome.jsp");
 			}else {
 				 session=request.getSession();
 				session.setAttribute("message","Something went wrong!");
