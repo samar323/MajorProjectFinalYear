@@ -21,10 +21,10 @@
                 padding: 30px;
             }
             label, .input-field>label {
-    font-size: 1rem;
-    color: #000000;
-    font-weight: bold;
-}
+			    font-size: 1rem;
+			    color: #000000;
+			    font-weight: bold;
+			}
         </style>
     </head>
     <body class="cyan">
@@ -43,7 +43,7 @@
 			session.setAttribute("message",null);
 		}
 	%>
-                <form action="SubjectCombination">
+                <form action="AddResult">
                     <div class="input-field">
                         <select id="school" name="school" required>
                             <option disabled selected>Select School</option>
@@ -165,6 +165,7 @@
                 
                 $('#semester').change(function () {
                     $('#subjectName').find('input').remove();
+                    $('#subjectName').find('label').remove();
 
                     let id = $('#branch').val();
                     let sem= $('#semester').val();

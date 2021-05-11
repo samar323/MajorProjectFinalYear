@@ -33,7 +33,7 @@ public class StudentRegister extends HttpServlet {
 	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
 		try {
 			String email=request.getParameter("email");
 			String password=request.getParameter("password");

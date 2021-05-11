@@ -32,6 +32,9 @@
 	<form action="SubjectCombination.jsp" method="post">
 <button type="submit">Subject Combination</button>
 	</form>
+	<form action="AddResult.jsp" method="post">
+<button type="submit">Add Result</button>
+	</form>
 	
 	<hr>
 	<%
