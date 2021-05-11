@@ -48,8 +48,13 @@ response.setDateHeader("Expires",-1);
 		Roll No. : <b><%=studentDetails.get("roll") %></b> <br>
 		ID:<br> <img src='GetId?email=<%=studentDetails.get("email") %>' height="100px" width="100px"/> <br>
 	</div>
-	<hr>
+	
+		<br>
+	<form action="EditProfile.jsp" method="post">
+<button type="submit">Edit Profile</button>
+	</form>
 	<% String status=(String)studentDetails.get("status") ;
+	
 	if(status.equalsIgnoreCase("accept")){
 		%>
 	

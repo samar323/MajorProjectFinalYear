@@ -527,4 +527,25 @@ public byte[] getId(String email) throws Exception{
 			return false;
 		}
 	}
+
+	public boolean updateStudent(HashMap student,String oldEmail) throws Exception {
+		try {
+			PreparedStatement p=con.prepareStatement("UPDATE students SET email=?,name=?,"
+					+ "phone=?,school=?,branch=?,roll=?,aadhar=? WHERE email=?");
+			p.setString(1, (String)student.get("email"));
+			
+			p.setString(2, (String)student.get("name"));
+			p.setString(3, (String)student.get("phone"));
+			
+			p.setString(4, (String)student.get("school"));
+			p.setString(5, (String)student.get("branch"));
+			p.setString(6, (String)student.get("roll"));
+			p.setString(7, (String)student.get("aadhar"));
+			p.setString(8, oldEmail);
+			p.executeUpdate();
+			return true;
+		}catch(java.sql.SQLIntegrityConstraintViolationException ex) {
+			return false;
+		}
+	}
 }
