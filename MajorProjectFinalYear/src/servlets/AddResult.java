@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.DAO;
+import javaFiles.Grades;
 
 @WebServlet("/AddResult")
 public class AddResult extends HttpServlet {
@@ -27,17 +28,21 @@ public class AddResult extends HttpServlet {
 			String subjectId[] = request.getParameterValues("subjectId");
 			String marks[] = request.getParameterValues("marks");
 			int flag=0;
+			
+			Grades grades=new Grades();
 			DAO dao = new DAO();
 			if (school != null && branch != null && semester != null && roll != null && subjectId != null && marks != null) {
 				int classId = dao.getBranchId(school, branch, Integer.parseInt(semester));
 				if(subjectId.length==marks.length) {
 				for(int i=0;i<marks.length;i++) {
 					if(i<marks.length) {
+					String grade=grades.getGrades(Integer.parseInt(marks[i]));
 					HashMap result=new HashMap();
 					result.put("roll", roll);
 					result.put("classId", classId);
 					result.put("subjectId", Integer.parseInt(subjectId[i]));
 					result.put("mark", Integer.parseInt(marks[i]));
+					result.put("grade", grade);
 					boolean status=dao.insertResult(result);
 					if(status==true) {
 						flag++;

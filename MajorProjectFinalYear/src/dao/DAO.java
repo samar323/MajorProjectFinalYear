@@ -515,12 +515,12 @@ public byte[] getId(String email) throws Exception{
 	
 	public boolean insertResult(HashMap result) throws Exception {
 		try {
-			PreparedStatement p=con.prepareStatement("insert into result (studentId,classId,subjectId, marks, dateTime)values(?,?,?,?,CURRENT_TIMESTAMP)");
+			PreparedStatement p=con.prepareStatement("insert into result (studentId,classId,subjectId, marks, grade, dateTime)values(?,?,?,?,?,CURRENT_TIMESTAMP)");
 			p.setString(1, (String)result.get("roll"));
 			p.setInt(2, (Integer)result.get("classId"));
 			p.setInt(3, (Integer)result.get("subjectId"));
 			p.setInt(4, (Integer)result.get("mark"));
-			
+			p.setString(5, (String)result.get("grade"));
 			p.executeUpdate();
 			return true;
 		}catch(java.sql.SQLIntegrityConstraintViolationException ex) {
