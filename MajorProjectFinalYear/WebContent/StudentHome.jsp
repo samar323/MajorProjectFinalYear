@@ -47,7 +47,14 @@ response.setDateHeader("Expires",-1);
 		School: <b><%=studentDetails.get("school") %></b> <br>
 		Branch: <b><%=studentDetails.get("branch") %></b> <br>
 		Roll No. : <b><%=studentDetails.get("roll") %></b> <br>
+		
 		ID:<br> <img src='GetId?email=<%=studentDetails.get("email") %>' height="100px" width="100px"/> <br>
+	<%
+	String aadhar=(String)studentDetails.get("aadhar");
+	if(aadhar!=null){
+	%>
+	Aadhar: <b><%=studentDetails.get("aadhar") %></b> 
+	<%} %>
 	</div>
 	
 		<br>

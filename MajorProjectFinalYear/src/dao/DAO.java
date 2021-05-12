@@ -67,6 +67,7 @@ public class DAO {
 			student.put("school", rs.getString("school"));
 			student.put("branch", rs.getString("branch"));
 			student.put("roll", rs.getString("roll"));
+			student.put("aadhar", rs.getString("aadhar"));
 			//student.put("photo",rs.getBlob("photo"));
 			student.put("status", rs.getString("status"));
 			student.put("password", rs.getString("password"));

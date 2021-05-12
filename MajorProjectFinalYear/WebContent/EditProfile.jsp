@@ -35,8 +35,12 @@
 		School Name: <input type="text" name="school" placeholder="ICT" value=<%=studentDetails.get("school") %> required/><br><br>
 		
 	Branch:<input type="text" name="branch" placeholder="IT" value=<%=studentDetails.get("branch") %> required/><br><br>
+	
 	Roll No:<input type="text" name="roll" placeholder="17/BIT/012" value=<%=studentDetails.get("roll") %> required/><br><br>
-	Aadhar No:<input type="text" name="aadhar" maxlength="12" required/><br><br>
+	<%
+	String aadhar=(String)studentDetails.get("aadhar");
+	%>
+	Aadhar No:<input type="text" name="aadhar" maxlength="12" <%if(aadhar!=null){ %> value=<%=studentDetails.get("aadhar")%> <%} %> required/><br><br>
 		<button type="submit">Update</button>
 		<button type="reset">Reset</button>
 	</form>	
