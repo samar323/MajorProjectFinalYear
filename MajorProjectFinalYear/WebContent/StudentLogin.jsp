@@ -33,7 +33,7 @@ if(m!=null){
 <form action="StudentLogin" method="post">
 Email: <input type="email" name="email" required/><br><br>
 Password: <input type="password" name="password" required/><br><br>
-<a href="ForgotPassword.jsp">Forgot Password?</a><br>
+<a href="ForgotPassword.jsp">Forgot Password?</a><br><br>
 <button type="submit">Login</button>
 <button type="reset">Reset</button>
 

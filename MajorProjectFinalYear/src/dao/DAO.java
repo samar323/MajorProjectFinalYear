@@ -574,5 +574,31 @@ public byte[] getId(String email) throws Exception{
 			return false;
 		}
 	}
+
+	public boolean checkSubject(String subjectName, String subjectCode) throws Exception {
+		PreparedStatement p=con.prepareStatement("select * from subjects where subjectName=? and subjectCode=?");
+		p.setString(1, subjectName);
+		p.setString(2, subjectCode);
+		ResultSet rs=p.executeQuery();
+		if(rs.next()) {
+			return false;
+		}else {
+			
+			return true;
+		}	}
+
+	public boolean checkBranch(String school, String branchName)throws Exception {
+		PreparedStatement p=con.prepareStatement("select * from branch where school=? and branchName=? ");
+		p.setString(1, school);
+		p.setString(2, branchName);
+		ResultSet rs=p.executeQuery();
+		if(rs.next()) {
+			return false;
+		}else {
+			
+			return true;
+		}	}
+
+	
 	
 }

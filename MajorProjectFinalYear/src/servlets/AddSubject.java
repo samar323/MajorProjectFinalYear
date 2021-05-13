@@ -23,11 +23,11 @@ public class AddSubject extends HttpServlet {
 		HttpSession session=request.getSession();
 		String subjectName=request.getParameter("subjectName");
 		String subjectCode=request.getParameter("subjectCode");
-		
+		DAO dao=new DAO();
 		HashMap subject=new HashMap();
 		subject.put("subjectName", subjectName);
 		subject.put("subjectCode", subjectCode);
-		DAO dao=new DAO();
+		if(dao.checkSubject(subjectName, subjectCode)) {
 		boolean result=dao.insertSubject(subject);
 		if(result==true) {
 			
@@ -39,7 +39,11 @@ public class AddSubject extends HttpServlet {
 			response.sendRedirect("AddSubject.jsp");
 		}
 		
-	
+		}else {
+			
+			session.setAttribute("message","Subject Already Added!");
+			response.sendRedirect("AddSubject.jsp");
+		}
 	}catch(Exception ex) {
 		ex.printStackTrace();
 		response.sendRedirect("ExceptionPage.jsp");
