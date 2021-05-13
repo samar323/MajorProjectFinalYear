@@ -550,4 +550,29 @@ public byte[] getId(String email) throws Exception{
 			return false;
 		}
 	}
+	public boolean checkEmail(String email) throws Exception{
+		PreparedStatement p=con.prepareStatement("select email from students where email=?");
+		p.setString(1, email);
+		ResultSet rs=p.executeQuery();
+		if(rs.next()) {
+			return true;
+		}else {
+			
+			return false;
+		}
+		
+	}
+	public boolean changePassword(String email, String password) throws Exception {
+		try {
+			PreparedStatement p=con.prepareStatement("UPDATE students SET password=? WHERE email=?");
+			p.setString(1, password);
+			
+			p.setString(2, email);
+			p.executeUpdate();
+			return true;
+		}catch(java.sql.SQLIntegrityConstraintViolationException ex) {
+			return false;
+		}
+	}
+	
 }
