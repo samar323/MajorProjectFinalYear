@@ -585,7 +585,9 @@ public byte[] getId(String email) throws Exception{
 		}else {
 			
 			return true;
-		}	}
+		}	
+		
+	}
 
 	public boolean checkBranch(String school, String branchName)throws Exception {
 		PreparedStatement p=con.prepareStatement("select * from branch where school=? and branchName=? ");
@@ -597,7 +599,9 @@ public byte[] getId(String email) throws Exception{
 		}else {
 			
 			return true;
-		}	}
+		}	
+		
+	}
 
 	
 	
