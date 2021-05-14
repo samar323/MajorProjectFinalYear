@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 import dao.DAO;
+import javaFiles.AES;
 
 
 /**
@@ -35,8 +36,10 @@ public class StudentRegister extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		try {
+			AES aes=new AES();
 			String email=request.getParameter("email");
 			String password=request.getParameter("password");
+			String encryptPassword=aes.encrypt(password);
 			String name=request.getParameter("name");
 			String phone=request.getParameter("phone");
 			String gender=request.getParameter("gender");
@@ -55,7 +58,7 @@ public class StudentRegister extends HttpServlet {
 			}
 			HashMap student=new HashMap();
 			student.put("email", email);
-			student.put("password", password);
+			student.put("password", encryptPassword);
 			student.put("name", name);
 			student.put("phone", phone);
 			student.put("gender", gender);

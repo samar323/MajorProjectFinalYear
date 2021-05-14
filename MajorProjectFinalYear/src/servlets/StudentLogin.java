@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.DAO;
+import javaFiles.AES;
 
 
 /**
@@ -22,12 +23,14 @@ public class StudentLogin extends HttpServlet {
 
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
+			AES aes=new AES();
 			String email=request.getParameter("email");
 			String password=request.getParameter("password");
+			String encryptPassword=aes.encrypt(password);
 			HttpSession session=request.getSession();
 			DAO dao=new DAO();
 			
-			HashMap student=dao.getStudent(email,password);
+			HashMap student=dao.getStudent(email,encryptPassword);
 			
 			if(student!=null)
 			{
