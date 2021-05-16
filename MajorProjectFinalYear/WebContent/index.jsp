@@ -1,3 +1,13 @@
+
+<%@page import="java.time.LocalTime"%>
+<%@page import="javaFiles.*"%>
+<%@page import="java.time.LocalDate"%>
+<%@page import="java.sql.Date"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="javaFiles.DateConversion"%>
+<%@page import="java.util.concurrent.TimeUnit"%>
+<%@page import="java.time.LocalDateTime"%>
+<%@page import="java.time.format.DateTimeFormatter"%>
 <%@page import="dao.DAO"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.ArrayList"%>
@@ -25,8 +35,7 @@
 	<button type="submit">Search</button>
 </form>
 
-<%
-		
+<%		TimeConversion tc=new TimeConversion();
 		DAO dao=new DAO();
 		ArrayList<HashMap> questions=dao.getQuestion(searchQues);
 		try{
@@ -36,8 +45,13 @@
 	%>
 		<b>Q: <%=question.get("quesId") %>,</b>
 		<a href="ViewAnswer.jsp?quesId=<%=question.get("quesId") %>">question: <%=question.get("question") %> </a>,
-		studentId: <%=question.get("studentId") %>,
-		dateTime: <%=question.get("dateTime") %><br>
+		studentId: <%=question.get("studentId") %>
+		<%
+        String time=question.get("time").toString();
+		String date = question.get("date").toString();
+		String timeShow=tc.getTime(time, date);
+		%>
+		time: <%=timeShow %>
 		<hr>
 	<%
 		}
@@ -48,6 +62,7 @@
 		}
 		}
 		}catch(Exception e){
+			e.printStackTrace();
 			%>
 			<p>exception occured</p>
 			<%
