@@ -194,7 +194,8 @@ public byte[] getId(String email) throws Exception{
 			ques.put("quesId", rs.getString("quesId"));
 			ques.put("question", rs.getString("question"));
 			ques.put("studentId", rs.getString("studentId"));
-			ques.put("dateTime", rs.getDate("dateTime"));
+			ques.put("date", rs.getDate("dateTime"));
+			ques.put("time", rs.getTime("dateTime"));
 			questions.add(ques);
 		}
 		return questions;
@@ -585,7 +586,9 @@ public byte[] getId(String email) throws Exception{
 		}else {
 			
 			return true;
-		}	}
+		}	
+		
+	}
 
 	public boolean checkBranch(String school, String branchName)throws Exception {
 		PreparedStatement p=con.prepareStatement("select * from branch where school=? and branchName=? ");
@@ -597,7 +600,9 @@ public byte[] getId(String email) throws Exception{
 		}else {
 			
 			return true;
-		}	}
+		}	
+		
+	}
 
 	
 	

@@ -34,9 +34,9 @@
 	Question: <%=question %><br>
 	<%
 	HashMap studentDetails=(HashMap)session.getAttribute("studentDetails");
-	String studentId=(String)studentDetails.get("roll");
+	
 	if(studentDetails!=null){
-		
+		String studentId=(String)studentDetails.get("roll");
 		if(dao.checkAnswer(quesId, studentId)){
 %>
 	<p>
@@ -64,9 +64,10 @@
 	answer: <%=answer.get("answers") %>,
 	studentId: <%=answer.get("studentId") %>,
 	dateTime: <%=answer.get("dateTime") %><br>
+	<!--  
 	<form action="DeleteAnswer">
  <input type="hidden" name="id" value="<%=quesId%>"/>
- <button type="submit">Delete</button></form>
+ <button type="submit">Delete</button></form>-->
 	<hr>
 <%
 	}
@@ -76,6 +77,7 @@
 		<%
 	}
 	}catch(Exception e){
+		e.printStackTrace();
 		%>
 		<p>exception occured</p>
 		<%

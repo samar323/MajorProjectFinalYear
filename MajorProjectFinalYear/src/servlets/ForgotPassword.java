@@ -22,6 +22,7 @@ public class ForgotPassword extends HttpServlet {
 			throws ServletException, IOException {
 		try {
 		DAO dao= new DAO();
+		AES aes=new AES();
 		HttpSession session = request.getSession();
 		String operation=request.getParameter("operation");
 		if(operation.equalsIgnoreCase("send")) {
@@ -70,7 +71,8 @@ public class ForgotPassword extends HttpServlet {
 		String cnfpassword=request.getParameter("cnfpassword");
 		String email=(String) session.getAttribute("email");
 		if(password.equals(cnfpassword)) {
-			boolean status=dao.changePassword(email, password);
+			
+			boolean status=dao.changePassword(email, aes.encrypt(password));
 			if(status==true) {
 				session.removeAttribute("email");
 				session.removeAttribute("otp");
