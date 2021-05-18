@@ -25,15 +25,22 @@ public class SubjectCombination extends HttpServlet {
 		try {
 			DAO dao = new DAO();
 			
+				
+			
 			if (school != null && branch != null && semester != null) {
 				int sem=Integer.parseInt(semester);
 				int branchId = dao.getBranchId(school, branch, sem);
 				if(branchId!=0) {
 				int flag=0;
+				
 				for(String sub:subject) {
 					flag++;
+					
+					if(dao.checkSubjectCombination(branchId, Integer.parseInt(sub))) {
+						
+					
 					dao.insertSubjectCombination(branchId, Integer.parseInt(sub));
-				}
+				}}
 				if(flag==subject.length) {
 					HttpSession session=request.getSession();
 					session.setAttribute("message","Subjects Combination Stored Successfully");
@@ -44,16 +51,17 @@ public class SubjectCombination extends HttpServlet {
 					response.sendRedirect("SubjectCombination.jsp");
 				}
 				
-				}else{
-					HttpSession session=request.getSession();
-					session.setAttribute("message","galat h");
-					response.sendRedirect("SubjectCombination.jsp");
-				}
+//				else{
+//					HttpSession session=request.getSession();
+//					session.setAttribute("message","Already Added ");
+//					response.sendRedirect("SubjectCombination.jsp");
+//				
+//				}
 				}else {
 				HttpSession session=request.getSession();
 				session.setAttribute("message","Please select all options");
 				response.sendRedirect("SubjectCombination.jsp");
-				
+				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

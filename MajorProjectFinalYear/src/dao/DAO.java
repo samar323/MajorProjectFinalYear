@@ -604,6 +604,36 @@ public byte[] getId(String email) throws Exception{
 		
 	}
 
+	public boolean checkSubjectCombination(int branchId,  int subject) throws Exception {
+		PreparedStatement p=con.prepareStatement("select * from subjectcombination where classId=? and subjectId=? ");
+		p.setInt(1, branchId);
+		p.setInt(2, subject);
+		ResultSet rs=p.executeQuery();
+		if(rs.next()) {
+			return false;
+		}else {
+			
+			return true;
+		}	
+	}
+
+	/*public boolean checkSubjectCombination(String school,String branch, String semester,String subject[])
+			throws Exception 
+	{
+		PreparedStatement p=con.prepareStatement("select * from subjectcombination where school=? and branch=? and semester=? and subject=? ");
+		p.setString(1, school);
+		p.setString(2, branch);
+		p.setString(3, semester);
+		p.setString(4, subject);
+		ResultSet rs=p.executeQuery();
+		if(rs.next()) {
+			return false;
+		}else {
+			
+			return true;
+		}	*/
+	
+
 	
 	
 }
