@@ -70,6 +70,7 @@ public class ForgotPassword extends HttpServlet {
 		String password=request.getParameter("password");
 		String cnfpassword=request.getParameter("cnfpassword");
 		String email=(String) session.getAttribute("email");
+		if(email!=null) {
 		if(password.equals(cnfpassword)) {
 			
 			boolean status=dao.changePassword(email, aes.encrypt(password));
@@ -85,6 +86,10 @@ public class ForgotPassword extends HttpServlet {
 		}else {
 			session.setAttribute("message", "Password Doesn't match");
 			response.sendRedirect("ChangePassword.jsp");
+		}
+		}else {
+			session.setAttribute("message", "Something went wrong!!");
+			response.sendRedirect("ForgotPassword.jsp");
 		}
 	}
 		}catch (Exception e1) {

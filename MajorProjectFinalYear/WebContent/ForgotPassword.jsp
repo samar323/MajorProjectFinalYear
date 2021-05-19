@@ -4,35 +4,53 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
+<link rel="stylesheet" href="css/studentlogin.css">
 <title>Forgot Password</title>
 </head>
 <body>
-	<h1>Forgot Password</h1>
+<jsp:include page="NavBar.jsp" /> 
 	<%	
 		String email=(String)session.getAttribute("email");
 		String m=(String)session.getAttribute("message");
-		if(m!=null){
 	%>
-			<p style="background-color: yellow;width:max-content;"><%=m %></p>
+	<div class="wrapper">
+        <div class="title">Trouble Logging In?</div>
+        <form action="ForgotPassword" method="post">
+            <div class="incorrect"><%
+		if(m!=null){
+	%><%=m %>
 	<%		
 			session.setAttribute("message",null);
 		}
-	%>
-	<form action="ForgotPassword" method="post">
-	<%if(email==null){
-		%>
-	<input type="hidden" name="operation" value="send"/>
+	%></div>
+            
+            <div class="field">
+            <%if(email==null){
+		%><input type="hidden" name="operation" value="send"/>
 	<%
 	} %>
-	Email-ID: <input <%if(email!=null){%> readonly value="<%=email %>"<%} %>type="email" name="email" placeholder="Enter Your Email-ID"/><br>
-	<%if(email!=null){
+                <input <%if(email!=null){%> readonly value="<%=email %>"<%} %> type="email" name="email" required>
+                <label>Email Address</label>
+            </div>
+            <%if(email!=null){
 		%>
-		<input type="hidden" name="operation" value="otp"/>
-	OTP: <input  type="number" name="otp" placeholder="Enter OTP"/><br>
-		<%
-	} %>
-	
-	<button type="submit">Submit</button>
-	</form>
+            <div class="field">
+                <input type="password" required>
+                <label>Enter OTP </label>
+              </div>
+             <div class="field">
+                <input type="submit" value="Verify">
+            </div>
+              <%
+	}else{ %>
+            <div class="field">
+                <input type="submit" value="Send OTP to Email">
+            </div>
+            <%} %>
+            <div class="signup-link">Not a member? <a
+                    href="file:///C:/Users/pc1/Desktop/major-project/Student%20Registration%20Form/studentregistration.html">Register
+                    now</a></div>
+        </form>
+    </div>
 </body>
 </html>

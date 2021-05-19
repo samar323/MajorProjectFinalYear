@@ -15,33 +15,51 @@ response.setDateHeader("Expires",-1);
 <html>
 <head>
 <meta charset="ISO-8859-1">
+
+  <link rel="stylesheet" href="css/studentlogin.css">
 <title>Student Login</title>
 </head>
 <body>
-<%
+<jsp:include page="NavBar.jsp" /> 
+
+<div class="wrapper">
+    <div class="title">Login Form</div>
+    <form action="StudentLogin" method="post">
+      <div class="incorrect"><%
 String m=(String)session.getAttribute("message");
 if(m!=null){
-	%>
-	<p style="background-color:yellow; width:max-content;"><%=m %></p>
+	%><%=m %>
 	<%
 	session.setAttribute("message",null);
 	}
-	%>
-	<a href="index.jsp">Home</a>
-<h1>Student Login</h1>
+	%></div>
+      <div class="field">
+        <input type="email" name="email" required>
+        <label>Email Address</label>
+      </div>
+      <div class="field">
+        <input type="password" name="password" required>
+        <label>Password</label>
+      </div>
+      <div class="content">
+        <div class="checkbox">
+          <input type="checkbox" id="remember-me">
+          <label for="remember-me">Remember me</label>
+        </div>
+        <div class="pass-link"><a href="ForgotPassword.jsp">Forgot password?</a></div>
+      </div>
+      <div class="field">
+        <input type="submit" value="Login">
+      </div>
+      <div class="signup-link">Not a member? <a
+          href="StudentRegister.jsp">Register
+          now</a></div>
+    </form>
+  </div>
 
-<form action="StudentLogin" method="post">
-Email: <input type="email" name="email" required/><br><br>
-Password: <input type="password" name="password" required/><br><br>
-<a href="ForgotPassword.jsp">Forgot Password?</a><br><br>
-<button type="submit">Login</button>
-<button type="reset">Reset</button>
-
-</form>
-<br>Don't have a account?
-<a href="StudentRegister.jsp">Register here</a>
 </body>
 </html>
+
 <%
 	}else{
 		response.sendRedirect("StudentHome.jsp");

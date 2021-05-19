@@ -4,10 +4,12 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
+<link rel="stylesheet" href="css/studentregistration.css">
 <title>Student Register</title>
 </head>
 
 <body>
+<jsp:include page="NavBar.jsp" /> 
 <%
 		String m=(String)session.getAttribute("message");
 		if(m!=null){
@@ -17,25 +19,63 @@
 			session.setAttribute("message",null);
 		}
 	%>
-	<h1>Student Registration Form</h1>
-<form action="StudentRegister" method="post" enctype="multipart/form-data">
-		Email: <input type="email" name="email" required/><br><br>
-		Password: <input type="password" name="password" required/><br><br>
-		Name: <input type="text" name="name" required/><br><br>
-		Phone: <input type="text" name="phone" maxlength="10" required/><br><br>
-		Gender: <input type="radio" name="gender" value="Male" checked/>Male
-				<input type="radio" name="gender" value="Female" />Female 
-				<br><br>
-		Photo:<input type="file" name="photo" required><br><br>
-		
-		School Name: <input type="text" name="school" placeholder="ICT" required/><br><br>
-		
-	Branch:<input type="text" name="branch" placeholder="IT" required/><br><br>
-	Roll No:<input type="text" name="roll" placeholder="17/BIT/012" required/><br><br>
-	College ID: <input type="file" name="id" required/><br><br>
-		<button type="submit">Register</button>
-		<button type="reset">Reset</button>
-	</form>	
+<div class="container">
+    <div class="title">Registration</div>
+    <div class="content">
+      <form action="StudentRegister" method="post" enctype="multipart/form-data">
+        <div class="user-details">
+          <div class="input-box">
+            <span class="details">Full Name</span>
+            <input type="text" name="name" placeholder="Enter your name" required>
+          </div>
+          
+         
+          <div class="input-box">
+            <span class="details">Email</span>
+            <input type="email" name="email" placeholder="Enter your email" required>
+          </div>
+          <div class="input-box">
+            <span class="details">Password</span>
+            <input type="password" name="password" placeholder="Enter your password" required>
+          </div>
+          <div class="radio">
+            <span class="details">Gender</span>
+            <div>
+             <input type="radio" name="gender" value="Male" checked/>Male
+			<input type="radio" name="gender" value="Female" />Female
+			</div>
+          </div>
+          <div class="input-box">
+            <span class="details">Phone No.</span>
+            <input type="text" name="phone" maxlength="10" placeholder="Enter your Phone No." required>
+          </div>
+          <div class="input-box">
+            <span class="details">Roll Number</span>
+            <input type="text" name="roll" placeholder="Enter your roll number" required>
+          </div>
+          <div class="input-box">
+            <span class="details">School</span>
+            <input type="text" name="school" placeholder="Enter your School" required>
+          </div>
+          <div class="input-box">
+            <span class="details">Branch</span>
+            <input type="text" name="branch" placeholder="Enter your Branch" required>
+          </div>
+        <div>
+            <span class="details">Student ID Card</span>
+            <input type="file" name="id"  required>
+          </div>
+        <div>
+            <span class="details">Photo</span>
+            <input type="file" name="photo" required>
+          </div>
+        </div>
+        <div class="button">
+          <input type="submit" value="Register">
+        </div>
+      </form>
+    </div>
+  </div>
 
 
 </body>

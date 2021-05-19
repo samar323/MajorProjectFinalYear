@@ -40,7 +40,7 @@ public class StudentLogin extends HttpServlet {
 			}
 			else {
 
-				session.setAttribute("message", "incorrect email or password");
+				session.setAttribute("message", "Incorrect Email or Password");
 				response.sendRedirect("StudentLogin.jsp");
 			}
 		}catch(Exception ex) {
