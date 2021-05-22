@@ -17,7 +17,7 @@
 <body>
 
 		Welcome: <b> <%=adminDetails.get("name") %> </b> , 
-	<a href='Logout'>Logout</a>
+	<a href='Logout'>Logout</a><a href='Faq.jsp'>FAQ</a>
 	<hr>
 	<a href="AdminHome.jsp?status=pending">Pending Students</a>
 	<a href="AdminHome.jsp?status=accept">Accepted Students</a>
@@ -34,7 +34,7 @@
 	</form>
 	<form action="AddResult.jsp" method="post">
 <button type="submit">Add Result</button>
-	</form>
+</form>
 	
 	<hr>
 	<%
@@ -46,6 +46,12 @@
 			session.setAttribute("message",null);
 		}
 	%>
+	<h2>Add FAQ's</h2>
+	<form action="FAQ" method="post">
+	<b>Q.</b><textarea name="question" rows="5" cols="50" required="required"></textarea><br>
+	<b>Ans.</b><textarea name="answer" rows="10" cols="100" required="required"></textarea>
+	<button type="submit">Add Faq</button>
+	</form>
 		<%
 	DAO dao=new DAO();
 	ArrayList<HashMap> allStudents=dao.getAllStudents(status);

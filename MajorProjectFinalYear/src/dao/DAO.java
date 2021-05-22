@@ -617,21 +617,32 @@ public byte[] getId(String email) throws Exception{
 		}	
 	}
 
-	/*public boolean checkSubjectCombination(String school,String branch, String semester,String subject[])
-			throws Exception 
-	{
-		PreparedStatement p=con.prepareStatement("select * from subjectcombination where school=? and branch=? and semester=? and subject=? ");
-		p.setString(1, school);
-		p.setString(2, branch);
-		p.setString(3, semester);
-		p.setString(4, subject);
-		ResultSet rs=p.executeQuery();
-		if(rs.next()) {
-			return false;
-		}else {
+	public boolean insertFaq(String question, String answer) throws Exception {
+		try {
+		PreparedStatement p=con.prepareStatement("insert into faq (question,answer)values(?,?)");
+						p.setString(1, question);
+						p.setString(2, answer);
+						p.executeUpdate();
+						return true;
+					}catch(java.sql.SQLIntegrityConstraintViolationException ex) {
+						return false;
+					}
+	}
+	public ArrayList<HashMap> getAllFaq() throws Exception {
+		PreparedStatement p = con.prepareStatement("SELECT * FROM faq");
+		ResultSet rs = p.executeQuery();
+		ArrayList<HashMap> faqs=new ArrayList();
+		while(rs.next()) {
+			HashMap faq=new HashMap();
+			faq.put("qid", rs.getString("qid"));
+			faq.put("question", rs.getString("question"));
+			faq.put("answer", rs.getString("answer"));
 			
-			return true;
-		}	*/
+			
+			faqs.add(faq);
+		}
+		return faqs;
+	}
 	
 
 	
