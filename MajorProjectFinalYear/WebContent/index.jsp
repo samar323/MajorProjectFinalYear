@@ -112,28 +112,36 @@
         /* transform: scale(0.99); */
         background: linear-gradient(-135deg, #71b7e6, #9b59b6);
     }
+    
+.banner {
+	min-height: 80vh;
+    background: url(images/bg1.jpg) center no-repeat;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
+}
 </style>
 
 <body>
 <jsp:include page="NavBar.jsp" />  
 
-<div class="wrap">
-        <div class="center" float: center>
-            <h1>GBUVerse</h1> 
-            <h2 class="animateWord">
-                <span>Search Your Query</span>
-                
-            </h2>
-            
-                <div class="search-container">
-                    <form class="example" action="index.jsp">
-                        <input type="text" name="searchQues" Placeholder="Search Questions" required>
-                        <button type="submit"><i class="fas fa-search"></i> Submit </button>
-                    </form>
-                </div>
-
+<div class="banner">
+        <div class="post">
+          <h1 class="banner-title">
+            <span>GBUVerse</span>
+          </h1>
+          <p>Everything that you want to Ask....</p>
+          <form>
+            <a class="post-user" href="pofile.html"><i class="fas fa-user"></i></a>
+            <input type="text" class="post-input" placeholder="Hey, What's in your mind?">
+            <button type="submit" class="post-btn">
+              <i class="fas fa-plus"></i>
+            </button>
+          </form>
         </div>
-    </div>
+      </div>
 
 <%
 	String searchQues=request.getParameter("searchQues");

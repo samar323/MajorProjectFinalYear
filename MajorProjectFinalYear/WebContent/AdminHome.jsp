@@ -13,30 +13,100 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Admin Home</title>
+<style type="text/css">
+        * {
+            padding: 2px;
+            background: rgb(221, 255, 223);
+        }
+
+        .card {
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            transition: 0.3s;
+            width: 100%;
+            margin-bottom: 10px;
+            border: 10px;
+            padding: 10px;
+        }
+
+        .card:hover {
+            box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+        }
+
+        .container {
+            padding: 2px 16px;
+        }
+
+        button {
+            height: 5vh;
+            margin: 5px 0
+        }
+
+        .btn-primary {
+            height: 5vh;
+            width: 200px;
+            border-radius: 5px;
+            border: none;
+            color: #fff;
+            font-size: 18px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: linear-gradient(135deg, #71b7e6, #9b59b6);
+        }
+
+        .btnallans {
+            color: #fff;
+        }
+
+        form .button input:hover {
+            /* transform: scale(0.99); */
+            background: linear-gradient(-135deg, #71b7e6, #9b59b6);
+        }
+
+        .container img {
+            width: 100%;
+            height: auto;
+        }
+
+        .container1 img {
+            width: 40px;
+            height: 40px;
+        }
+
+        .container1 h4 {
+            font-size: 15px;
+            float: left;
+        }
+        
+        .acceptandreject {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+*
+  </style>
 </head>
 <body>
+<jsp:include page="AdminNavBar.jsp" />  
 
-		Welcome: <b> <%=adminDetails.get("name") %> </b> , 
-	<a href='Logout'>Logout</a><a href='Faq.jsp'>FAQ</a>
-	<hr>
-	<a href="AdminHome.jsp?status=pending">Pending Students</a>
-	<a href="AdminHome.jsp?status=accept">Accepted Students</a>
-	<a href="AdminHome.jsp?status=reject">Rejected Students</a>
-	<br>
-	<form action="AddSubject.jsp" method="post">
-<button type="submit">Add Subject</button>
-	</form>
-	<form action="AddBranch.jsp" method="post">
-<button type="submit">Add Branch</button>
-	</form>
-	<form action="SubjectCombination.jsp" method="post">
-<button type="submit">Subject Combination</button>
-	</form>
-	<form action="AddResult.jsp" method="post">
-<button type="submit">Add Result</button>
-</form>
+<header>
+        <div class="first">
+            <h1>Welcome <a href="#"><%=adminDetails.get("name") %></a></h1>
+            <form action="Logout" method="post">
+            <button type="submit" class="btn btn-danger">Logout</button>
+            </form>
+        </div>
+    </header>
+    <a href='Faq.jsp'>FAQ</a>
 	
-	<hr>
+	<div class="btnsection">
+        <button type="button" class="btn btn-primary"><a href="AdminHome.jsp?status=pending" class="btnallans">Pending Students</a></button>
+        <button type="button" class="btn btn-primary"><a href="AdminHome.jsp?status=accept" class="btnallans">Accepted Students</a></button>
+        <button type="button" class="btn btn-primary"><a href="AdminHome.jsp?status=reject" class="btnallans">Rejected Students</a></button>
+    </div>
 	<%
 		String m=(String)session.getAttribute("message");
 		if(m!=null){
@@ -46,53 +116,71 @@
 			session.setAttribute("message",null);
 		}
 	%>
+	<!--  
 	<h2>Add FAQ's</h2>
 	<form action="FAQ" method="post">
 	<b>Q.</b><textarea name="question" rows="5" cols="50" required="required"></textarea><br>
 	<b>Ans.</b><textarea name="answer" rows="10" cols="100" required="required"></textarea>
 	<button type="submit">Add Faq</button>
-	</form>
+	</form>-->
+	
+	<section id="team">
+        <div class="container">
+            <div class="row">
 		<%
 	DAO dao=new DAO();
 	ArrayList<HashMap> allStudents=dao.getAllStudents(status);
 	for(HashMap student:allStudents){
 	%>
-		<img src='GetPhoto?email=<%=student.get("email") %>&type=student' height="100px" width="100px"/> <br>
-		Name: <b><%=student.get("name") %>, </b>
-		Phone: <%=student.get("phone") %>,
-		Email: <%=student.get("email") %>,
-		School: <%=student.get("school") %>,
-		Gender: <%=student.get("gender") %>,
-		Branch: <%=student.get("branch") %>,
-		Roll No: <%=student.get("roll") %>
-	
-		<br>
-		<%
+                <div class="col-md-3 profile-pic text-center">
+                    <div class="card">
+                        <img src="GetPhoto?email=<%=student.get("email") %>&type=student" alt="Avatar" style="width:100%">
+                        <div class="container1">
+                            <h4><b>Name : <%=student.get("name") %></b></h4>
+                            <h4><b>Phone No. : <%=student.get("phone") %></b></h4>
+                            <h4><b>Email : <%=student.get("email") %></b></h4>
+                            <h4><b>School : <%=student.get("school") %></b></h4>
+                            <h4><b>Gender : <%=student.get("gender") %></b></h4>
+                            <h4><b>Branch : <%=student.get("branch") %></b></h4>
+                            <h4><b>Roll No. : <%=student.get("roll") %></b></h4>
+                            <h4><b>ID : <a href="GetId?email=<%=student.get("email") %>"><img src="GetId?email=<%=student.get("email") %>" target="_blank"></a></b></h4>
+
+                        </div>
+                        <%
 			String s=(String)student.get("status");
 		
 			if(s.equalsIgnoreCase("pending")){
 		%>
-			<a href="ChangeStudentStatus?email=<%=student.get("email") %>&status=Accept">Accept</a>
-			<a href="ChangeStudentStatus?email=<%=student.get("email") %>&status=Reject">Reject</a>
-		<%		
+                        <div class="acceptandreject">
+                            <button type="button" class="btn btn-primary"><a href="#"
+                                    class="btnallans">Accept</a></button><br>
+                            <button type="button" class="btn btn-primary"><a href="#"
+                                    class="btnallans">Reject</a></button>
+                        </div>
+                    </div>
+                    <%		
 			}else if(s.equalsIgnoreCase("accept")){
 		%>
-		Status: <%=s %>
-				<a href="ChangeStudentStatus?email=<%=student.get("email") %>&status=Reject">Reject</a>
-			<%	
+		 <div class="acceptandreject">
+                            <button type="button" class="btn btn-primary"><a href="#"
+                                    class="btnallans">Reject</a></button>
+                        </div>
+                <%	
 			}else if(s.equalsIgnoreCase("reject")){
 		%>
-				<a href="ChangeStudentStatus?email=<%=student.get("email") %>&status=Accept">Accept</a>
-			<%	
+		<div class="acceptandreject">
+                            <button type="button" class="btn btn-primary"><a href="#"
+                                    class="btnallans">Accept</a></button>
+                        </div>
+                       <%	
 			}
-		%>
-	
-	<br>
-ID:<br> <img src='GetId?email=<%=student.get("email") %>' height="100px" width="100px"/> <br>
-<hr>
-	<%	
 	}
 	%>
+	
+            </div>
+        </div>
+    </section>
+	    
 </body>
 </html>
 <%

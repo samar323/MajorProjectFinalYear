@@ -1,209 +1,355 @@
-*{
-    margin:0px;
-    padding:0px;
-}
-/*----------Navigation-----------*/
+#nav-bar {
 
-#nav-bar{
     position: fixed;
-    top:0;
+    top: 0;
     z-index: 10;
-    width: 100vw;
+    width: 100vw
 }
-.navbar-brand img{
+
+
+.navbar {
+
+    display: flex;
+    width: 100%;
+    position: relative;
+    justify-content: space-between;
+    text-align: center;
+    padding: 5px 5px;
+
+}
+
+.navbar-brand img {
     height: 40px;
-    padding-left: 30px;
+    padding-left: 5px;
+    padding-right: 150px;
+
 }
-.navbar-nav li{
+
+.navbar-nav li {
     padding: 0 10px;
 }
-.navbar-nav li{
+
+.navbar-nav li {
     float: right;
     text-align: left;
 }
-#nav-bar ul{
+
+.navbar ul {
     list-style-type: none;
-}
-#nav-bar ul li a:hover{
-    color: #007bff!important;
-}
-#nav-bar ul li .dropbtn:hover{
-    color: #007bff!important;
-}
-.navbar{
-    background: rgb(255, 255, 255);
-}
-.navbar-toggler{
-    border: none!important;
-}
-.nav-link{
-    color:rgb(0, 0, 0)!important;
-    font-weight:600;
-    font-size: 16px;
-    font-family:sans-serif;
+    display: flex;
+    margin: auto 0;
 }
 
-  
-.nav-link .dropbtn {
-    font-size: 16px;  
+.navbar ul li a {
+    text-transform: capitalize;
+}
+
+.navbar ul li a:hover {
+    color: #007bff !important;
+}
+
+.navbar ul li .dropbtn:hover {
+    color: #007bff !important;
+}
+
+.navbar {
+    background: rgb(139, 234, 247);
+}
+
+nav .search_box {
+    display: flex;
+    margin: auto 0;
+    line-height: 35px;
+}
+nav .search_box input {
     border: none;
     outline: none;
-    color:rgb(0, 0, 0)!important;
-    font-weight:600;
-    
+    background: white;
+    height: 100%;
+    padding: 0 10px;
+    font-size: 20px;
+    width: 350px;
+
+
+}
+
+
+nav .search_box input[type="search"] {
+    border-radius: 3px;
+}
+
+
+nav .search_box span {
+    color: #0a5071;
+    font-size: 20px;
+    background: white;
+    height: 100%;
+    padding: 8px;
+    position: relative;
+    cursor: pointer;
+    z-index: 1;
+}
+
+nav .search_box span:hover {
+    color: white;
+
+}
+
+nav .search_box span::after {
+    height: 100%;
+    width: 100%;
+    content: '';
+    background: red;
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: -1;
+    transition: 0.3s;
+}
+
+nav .search_box span:hover::after {
+    width: 100%;
+}
+
+
+.navbar-toggler {
+    border: none !important;
+}
+
+.nav-link {
+    color: rgb(0, 0, 0) !important;
+    font-weight: 600;
+    font-size: 16px;
+    font-family: sans-serif;
+    padding-bottom: px;
+}
+
+
+.nav-link .dropbtn {
+    font-size: 16px;
+    border: none;
+    outline: none;
+    color: rgb(0, 0, 0) !important;
+    font-weight: 600;
     background-color: inherit;
-    font-family:sans-serif;
-    margin: 0;
-  }
+    font-family: sans-serif;
+}
 
-
-  
-  .dropdown-content {
+.dropdown-content {
     display: none;
     position: absolute;
-    
     min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
-    
-  }
-  
-  .dropdown-content a {
+}
+
+.dropdown-content a {
     float: none;
-    color:rgb(0, 0, 0)!important;
+    color: rgb(0, 0, 0) !important;
     padding: 12px 16px;
     text-decoration: none;
     display: block;
     text-align: left;
     background-color: rgb(244, 238, 255);
-    
-  }
-  
-  .dropdown-content a:hover {
-    color: #007bff;
-  }
-  
-  .nav-link:hover .dropdown-content {
-    display: block;
-  }
-  
 
-.wrap{
-	background: url(../images/bg1.jpg);
-	background-size: cover;
-	height: 80vh;
+}
+
+.dropdown-content a:hover {
+    color: #007bff;
+}
+
+.nav-link:hover .dropdown-content {
+    display: block;
+}
+
+
+.wrap {
+    background: url(images/bg1.jpg);
+    background-size: cover;
+    height: 100vh;
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: 100% 100%;
 }
-.wrap .center{
-	position: absolute;
-	left: 50%;
-	top: 55%;
-	transform: translate(-50%, -50%);
-	font-family: sans-serif;
-	user-select: none;
-}
-.wrap .center h1{
-	color: white;
-	font-size: 5vw;
-	width: 900px;
-	font-weight: bold;
-	text-align: center;
-}
-.center h2{
-	color: white;
-	font-size: 5vw;
-	font-weight: bold;
-	margin-top: 10px;
-	width: 885px;
-	text-align: center;
-    
+
+.wrap .center {
+    position: absolute;
+    left: 50%;
+    top: 55%;
+    transform: translate(-50%, -50%);
+    font-family: sans-serif;
+    user-select: none;
 }
 
-.center .buttons{
-	margin: 35px 280px;
+.wrap .center h1 {
+    color: white;
+    font-size: 5vw;
+    width: 900px;
+    font-weight: bold;
+    text-align: center;
 }
-.buttons button{
-	height: 50px;
-	width: 150px;
-	font-size: 18px;
-	font-weight: 600;
-	color: #ffb3b3;
-	background: red;
-	outline: none;
-	cursor: pointer;
-	border: 1px solid #cc0000;
-	border-radius: 25px;
-	transition: .4s;
+
+.center h2 {
+    color: white;
+    font-size: 5vw;
+    font-weight: bold;
+    margin-top: 10px;
+    width: 885px;
+    text-align: center;
+
 }
-.buttons .btn2{
-	margin-left: 25px;
+
+.center .buttons {
+    margin: 35px 280px;
 }
-.buttons button:hover{
-	background: #cc0000;
+
+.buttons button {
+    height: 50px;
+    width: 150px;
+    font-size: 18px;
+    font-weight: 600;
+    color: #ffb3b3;
+    background: red;
+    outline: none;
+    cursor: pointer;
+    border: 1px solid #cc0000;
+    border-radius: 25px;
+    transition: .4s;
 }
-.container {
-  width: 100%;
-  padding-right: 0;
-  padding-left: 0;
-  margin-right: 0;
-  margin-left: 0;
+
+.buttons .btn2 {
+    margin-left: 25px;
 }
-.search-container 
-{
-	
-	display:flex;
-	justify-content: center;
+
+.buttons button:hover {
+    background: #cc0000;
+}
+
+
+.search-container {
+    display: flex;
+    justify-content: center;
     max-width: 100%;
-    max-height:100%;
+    max-height: 100%;
     position: relative;
-	
+
 }
 
 .center form.example input {
-  padding: 10px;
-  font-size: 17px;
-  border: 1px #cc0000;
-  float: left;
-  width: 80%;
-  background: #f1f1f1;
+    padding: 10px;
+    font-size: 17px;
+    border: 1px #cc0000;
+    float: left;
+    width: 80%;
+    background: #f1f1f1;
 }
 
-form.example{
-	display:flex;
-	width:80%;
+form.example {
+    display: flex;
+    width: 80%;
 }
 
 .center form.example button {
-  float: center;
-  width: 20%;
-  padding: 10px;
-  background: #cc0000;
-  color: white;
-  font-size: 17px;
-  border: 1px #cc0000;
-  border-left: none;
-  cursor: pointer;
+    float: center;
+    width: 20%;
+    padding: 10px;
+    background: #cc0000;
+    color: white;
+    font-size: 17px;
+    border: 1px #cc0000;
+    border-left: none;
+    cursor: pointer;
 }
 
 .center form.example button:hover {
-  background: #0b7dda;
+    background: #0b7dda;
 }
 
 .center form.example::after {
-  content: "";
-  clear: both;
-  display: table;
+    content: "";
+    clear: both;
+    display: table;
 }
 
-/*---------footer----------*/
-#footer{
-    background:#333;
-    color:#fff;
-    padding:12px;
+
+.banner .post {
+    flex: 1;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #fff;
 }
-.fa-heart-o{
-    margin: 3px;
-    color:red;
+
+.banner-title {
+    font-size: 4rem;
+    font-family: 'Times New Roman', Times, serif;
+    line-height: 0.5;
+    font-weight: 700;
+
+}
+
+.banner-title span {
+    font-family: sans-serif;
+}
+
+.banner h1 {
+    padding: 16rem 0 1rem 0;
+}
+
+.banner p {
+
+    padding: .8rem 0 1rem 0;
+    text-transform: capitalize;
+    font-family: sans-serif;
+    font-weight: 400;
+    word-spacing: 2px;
+}
+
+.banner form {
+    background: linear-gradient(-135deg, #a2d3f3, #d598ec);
+    border-radius: 2rem;
+    padding: 0.2rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.post-user i {
+    padding: 5px;
+    margin: 5px;
+
+
+
+}
+
+.post-input {
+    font-family: sans-serif;
+    font-size: 1.1rem;
+    width: 35vw;
+    outline: 0;
+    padding: 0.3rem 0;
+    margin: 0 1rem 0 1rem;
+    border: none;
+    background: linear-gradient(-135deg, #a2d3f3, #d598ec);
+
+
+}
+
+.post-input::placeholder {
+    text-transform: capitalize;
+    color: #000000;
+    padding: 1.5rem;
+    text-align: left;
+
+
+}
+
+.post-btn {
+    width: 40px;
+    font-size: 1.1rem;
+    color: #000000;
+    border: none;
+    background: transparent;
+    outline: 0;
+    cursor: pointer;
 }

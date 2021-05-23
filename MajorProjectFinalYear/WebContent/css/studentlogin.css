@@ -132,3 +132,7 @@ form .signup-link a:hover{
 form .incorrect{
     color: red;
 }
+form .content label {
+    display: inline-block;
+    margin-bottom: 0;
+}

@@ -17,9 +17,16 @@
 <title>Insert title here</title>
 </head>
 <body>
+
 	<section id="nav-bar"> 
         <nav class="navbar navbar-expand-lg navbar-light">
             <a class="navbar-brand" href="index.jsp"><img src="images/logo.png"></a>
+             <div class="search_box">
+             <form action="index.jsp">
+              <input type="search" name="searchQues" placeholder="Search Your Queries....">
+              <span class="fa fa-search"></span>
+              </form>
+            </div>
             <button class="navbar-toggler"v type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -37,7 +44,7 @@
 	if(studentDetails!=null){
 %>  
 						 
-                        <button class="dropbtn">Welcome User
+                        <button class="dropbtn">Welcome <%=studentDetails.get("name") %>
                           <i class="fa fa-caret-down"></i>
                         </button>
                         <div class="dropdown-content">
