@@ -21,9 +21,11 @@
 	<section id="nav-bar"> 
         <nav class="navbar navbar-expand-lg navbar-light">
             <a class="navbar-brand" href="index.jsp"><img src="images/logo.png"></a>
-             <div class="search_box">
+             <div id="search_box" class="search_box">
              <form action="index.jsp">
-              <input type="search" name="searchQues" placeholder="Search Your Queries....">
+              <input type="search" id="searchQues" name="searchQues" placeholder="Search Your Queries....">
+              <div id="showList" class="autocom-box">
+              </div>
               <span class="fa fa-search"></span>
               </form>
             </div>
@@ -81,5 +83,65 @@
             </div>
         </nav>
     </section>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script type="text/javascript">
+    const searchWrapper=document.querySelector(".search_box");
+        $(document).ready(function () {
+            $('#searchQues').keyup(function () {
+            	$('.autocom-box').find('li').remove();
+                let search = $('#searchQues').val();
+                if (search !== '' && search !== null) {
+                    $.ajax({
+                    	url: "SearchQuestions",
+                        type: "GET",
+                        data: { searchQues: search },
+                        success: function (data, textStatus, jqXHR) {
+							if(data!=='[]'){
+								
+								let obj = $.parseJSON(data);
+	                            $.each(obj, function (key, value) {
+	                                $('#showList').append('<a href="ViewAnswer.jsp?quesId='+value.qid+'"><li class="list-group-item">' + value.question + '</li></a>')
+	                            });
+	                            searchWrapper.classList.add("active");
+							}else{
+								$('.autocom-box').find('li').remove();
+								$('#showList').append('<li class="list-group-item">No Result</li>')
+							}
+                            
+                            
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            $('#showList').append('<li class="list-group-item">No Result</li>');
+                        },
+                        cache: false
+                    });
+                } else {
+                    $('#showlist').append('<li class="list-group-item">No Result</li>');
+                }
+
+            });
+            $(document).on('click', 'li', function () {
+            	if($(this).text().localeCompare("No Result")!==0){
+            		$('#searchQues').val($(this).text());
+                    searchWrapper.classList.remove("active");
+            	}
+                
+            });
+        });
+        document.addEventListener("click", (evt) => {
+            const flyoutElement = document.getElementById("search_box");
+            let targetElement = evt.target; 
+
+            do {
+                if (targetElement != flyoutElement) {
+                    searchWrapper.classList.remove("active");
+                    return;
+                }
+                targetElement = targetElement.parentNode;
+            } while (targetElement);
+        });
+    </script>
 </body>
 </html>

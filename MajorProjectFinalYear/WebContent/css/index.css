@@ -61,6 +61,17 @@ nav .search_box {
     margin: auto 0;
     line-height: 35px;
 }
+.search_box .autocom-box{
+	opacity: 0;
+	max-height: 280px;
+	overflow-y: auto;
+	pointer-events: none;
+}
+.search_box.active .autocom-box{
+	opacity: 1;
+	pointer-events: auto;
+}
+
 nav .search_box input {
     border: none;
     outline: none;
@@ -71,6 +82,9 @@ nav .search_box input {
     width: 350px;
 
 
+}
+.search_box form {
+    display: inherit;
 }
 
 
@@ -162,6 +176,15 @@ nav .search_box span:hover::after {
     display: block;
 }
 
+div#showList {
+    position: fixed;
+    margin-top: 36px;
+    width: 23.5%;
+}
+
+.autocom-box li:hover{
+	background:#efefef;
+}
 
 .wrap {
     background: url(images/bg1.jpg);

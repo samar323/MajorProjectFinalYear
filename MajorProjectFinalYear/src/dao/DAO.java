@@ -449,6 +449,21 @@ public byte[] getId(String email) throws Exception{
 		}
 		return schools;
 	}
+	
+	public List<SearchQuestion> getSearchQuestion(String question) throws Exception {
+		PreparedStatement p = con.prepareStatement("select * from questions where question like ?");
+		p.setString(1, "%"+question+"%");
+		ResultSet rs = p.executeQuery();
+		List<SearchQuestion> questions = new ArrayList();
+		while (rs.next()) {
+			SearchQuestion sq=new SearchQuestion();
+			sq.setQid(rs.getInt("quesId"));
+			sq.setQuestion(rs.getString("question"));
+			questions.add(sq);
+		}
+		return questions;
+	}
+	
 	public List<Branch> getAllBranchesBySchool(String school) throws Exception {
 		PreparedStatement p = con.prepareStatement("SELECT distinct branchName FROM branch where school=?");
 		p.setString(1, school);
