@@ -122,18 +122,38 @@
     flex-direction: column;
     justify-content: stretch;
 }
+
+.alert.alert-primary.d-flex.align-items-center {
+    font-size: 18px;
+}
 </style>
 
 <body>
-<jsp:include page="NavBar.jsp" />  
-
+<jsp:include page="NavBar.jsp" /> 
 <div class="banner">
         <div class="post">
           <h1 class="banner-title">
+          <%
+		String m=(String)session.getAttribute("message");
+		if(m!=null){
+	%>
+	<div id="message" class="alert alert-primary d-flex align-items-center" role="alert">
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:">
+    <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+  </svg>
+  <div><%=m %>
+  </div>
+</div>
+	<%		
+			session.setAttribute("message",null);
+		}
+	%>
+          
+          
             <span>GBUVerse</span>
           </h1>
           <p>Everything that you want to Ask....</p>
-          <form>
+          <form action="PostQuestion" method="post">
             <a class="post-user" href="pofile.html"><i class="fas fa-user"></i></a>
             <input type="text" class="post-input" placeholder="Hey, What's in your mind?">
             <button type="submit" class="post-btn">
@@ -156,7 +176,7 @@
 		%>
 		<div class="">
         <div class="box">
-            <p class="heading">Recent Question and Answers</p>
+            <p class="heading">Search Result for <b><%=searchQues %></b></p>
             
 		<%
 		for(HashMap question:questions){
@@ -170,7 +190,7 @@
 	 <div class="faqs">
                 <div class="details">
                     <summary style="font-weight:bold;"><a href="ViewAnswer.jsp?quesId=<%=question.get("quesId") %>"><%=question.get("question") %></a></summary>
-                    <summary><div class="time" style="font-weight:bold;">asked by <a href="#"><%=question.get("studentId") %></a> <%=timeShow %></div></summary>
+                    <summary><div class="time" style="font-weight:bold;">asked by <a href="#"><%=question.get("name") %></a> <%=timeShow %></div></summary>
                     
                 </div>
             </div>
@@ -182,9 +202,61 @@
 	    <%
 		}else{
 			%>
-				<p>No data Found..</p>
+			<div class="">
+        <div class="box">
+            <p class="heading">No Result for <b><%=searchQues %></b></p>
+			
+		</div>
+	    </div>
 			<%
 		}
+		}else{ 
+			int limit=10;
+			String quesLimit=request.getParameter("quesLimit");
+			if(quesLimit!=null){
+				limit=Integer.parseInt(request.getParameter("quesLimit"));
+			}
+			ArrayList<HashMap> allQuestions=dao.getAllQuestion(limit);
+		
+		%>
+		<div class="">
+        <div class="box">
+            <p class="heading">Recent Question and Answers</p>
+            
+		<%
+		for(HashMap question:allQuestions){
+			
+	%>
+	<%
+        String time=question.get("time").toString();
+		String date = question.get("date").toString();
+		String timeShow=tc.getTime(time, date);
+		%>
+	 <div class="faqs">
+                <div class="details">
+                    <summary style="font-weight:bold;"><a href="ViewAnswer.jsp?quesId=<%=question.get("quesId") %>"><%=question.get("question") %></a></summary>
+                    <summary><div class="time" style="font-weight:bold;">asked by <a href="#"><%=question.get("name") %></a> <%=timeShow %></div></summary>
+                    
+                </div>
+            </div>
+        
+	<%
+		}
+		limit+=limit;
+		
+		if(dao.countAllQues()>limit){
+		%>
+		<div class="faqs">
+		<form action="index.jsp" method="post">
+		<input type="hidden" name="quesLimit" value="<%=limit%>"/>
+		<button class="btn btn-danger"type="Submit">More Questions</button>
+		</form>
+		</div>
+		<%} %>
+		</div>
+	    </div>
+			
+			<%
 		}
 		}catch(Exception e){
 			e.printStackTrace();
@@ -195,9 +267,10 @@
 	%>
 
 
-
-
-
-
+<script type="text/javascript">
+setTimeout(function() {
+	  $("#message").remove();
+	}, 5000);
+</script>
 </body>
 </html>

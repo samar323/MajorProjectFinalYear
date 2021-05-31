@@ -185,7 +185,7 @@ public byte[] getId(String email) throws Exception{
 	}
 	
 	public ArrayList<HashMap> getQuestion(String question) throws Exception {
-		PreparedStatement p = con.prepareStatement("select * from questions where question like ?");
+		PreparedStatement p = con.prepareStatement("select * from questions q join students s on q.studentId=s.roll where question like ?");
 		p.setString(1, "%"+question+"%");
 		ResultSet rs = p.executeQuery();
 		ArrayList<HashMap> questions = new ArrayList();
@@ -196,6 +196,27 @@ public byte[] getId(String email) throws Exception{
 			ques.put("studentId", rs.getString("studentId"));
 			ques.put("date", rs.getDate("dateTime"));
 			ques.put("time", rs.getTime("dateTime"));
+			ques.put("name", rs.getString("name"));
+			ques.put("branch", rs.getString("branch"));
+			questions.add(ques);
+		}
+		return questions;
+	}
+	
+	public ArrayList<HashMap> getAllQuestion(int start) throws Exception {
+		PreparedStatement p = con.prepareStatement("SELECT * FROM questions q join students s on q.studentId=s.roll limit ?;");
+		p.setInt(1, start);
+		ResultSet rs = p.executeQuery();
+		ArrayList<HashMap> questions = new ArrayList();
+		while (rs.next()) {
+			HashMap ques = new HashMap();
+			ques.put("quesId", rs.getString("quesId"));
+			ques.put("question", rs.getString("question"));
+			ques.put("studentId", rs.getString("studentId"));
+			ques.put("date", rs.getDate("dateTime"));
+			ques.put("time", rs.getTime("dateTime"));
+			ques.put("name", rs.getString("name"));
+			ques.put("branch", rs.getString("branch"));
 			questions.add(ques);
 		}
 		return questions;
@@ -659,7 +680,15 @@ public byte[] getId(String email) throws Exception{
 		return faqs;
 	}
 	
-
+	public int countAllQues() throws Exception {
+		PreparedStatement p=con.prepareStatement("select count(question) countQues from questions");
+		ResultSet rs = p.executeQuery();
+		if (rs.next()) {
+			return rs.getInt("countQues");
+		} else {
+			return 0;
+		}
+	}
 	
 	
 }

@@ -24,6 +24,7 @@ public class PostQuestion extends HttpServlet {
 		HttpSession session=request.getSession();
 		//
 		HashMap studentDetails=(HashMap)session.getAttribute("studentDetails");
+		if(studentDetails!=null) {
 		String studentId=(String)studentDetails.get("roll");
 		try {
 			String question=request.getParameter("question");
@@ -49,6 +50,10 @@ public class PostQuestion extends HttpServlet {
 		catch(Exception ex) {
 			ex.printStackTrace();
 			response.sendRedirect("ExceptionPage.jsp");
+		}
+		}else {
+			session.setAttribute("message","Login First for post Questions");
+			response.sendRedirect("index.jsp");
 		}
 	}
 
