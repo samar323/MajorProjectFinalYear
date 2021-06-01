@@ -155,7 +155,7 @@
           <p>Everything that you want to Ask....</p>
           <form action="PostQuestion" method="post">
             <a class="post-user" href="pofile.html"><i class="fas fa-user"></i></a>
-            <input type="text" class="post-input" placeholder="Hey, What's in your mind?">
+            <input type="text" class="post-input" name="question" placeholder="Hey, What's in your mind?">
             <button type="submit" class="post-btn">
               <i class="fas fa-plus"></i>
             </button>
@@ -244,7 +244,7 @@
 		}
 		limit+=limit;
 		
-		if(dao.countAllQues()>limit){
+		if(dao.countAllQues()>limit || dao.countAllQues()/(limit-10)>0){
 		%>
 		<div class="faqs">
 		<form action="index.jsp" method="post">

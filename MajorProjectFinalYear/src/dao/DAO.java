@@ -204,7 +204,7 @@ public byte[] getId(String email) throws Exception{
 	}
 	
 	public ArrayList<HashMap> getAllQuestion(int start) throws Exception {
-		PreparedStatement p = con.prepareStatement("SELECT * FROM questions q join students s on q.studentId=s.roll limit ?;");
+		PreparedStatement p = con.prepareStatement("SELECT * FROM questions q join students s on q.studentId=s.roll order by dateTime desc limit ? ");
 		p.setInt(1, start);
 		ResultSet rs = p.executeQuery();
 		ArrayList<HashMap> questions = new ArrayList();
@@ -308,6 +308,7 @@ public byte[] getId(String email) throws Exception{
 			p.executeUpdate();
 			return true;
 		}catch(java.sql.SQLIntegrityConstraintViolationException ex) {
+			ex.printStackTrace();
 			return false;
 		}
 	}
