@@ -15,13 +15,15 @@ response.setDateHeader("Expires",-1);
 <!DOCTYPE html>
 <html>
 <head>
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/profile.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 <meta charset="ISO-8859-1">
 <title>Student Profile</title>
 </head>
 <body>
-
-<h1>Your Profile</h1>
-	<%
+<header>
+<%
 		String m=(String)session.getAttribute("message");
 		if(m!=null){
 	%>
@@ -31,49 +33,129 @@ response.setDateHeader("Expires",-1);
 		}
 	%>
 	
-	<hr>
-	Welcome: <b> <%=studentDetails.get("name") %> </b> ,<br>
-	   
-	<h2>[Status: <%=studentDetails.get("status") %>]</h2> 
-	<a href='Logout'>Logout</a>,
-	<a href='index.jsp'>Search Questions</a>,
-	<a href='StudentQuestions.jsp'>Your Questions</a>
-		<a href='StudentAnswers.jsp'>Your Answers</a>
-	<hr>
-	<img src='GetPhoto?email=<%=studentDetails.get("email") %>&type=student' height="100px" width="100px"/>
-	<div>
-		Email: <b><%=studentDetails.get("email") %></b> <br>
-		Phone: <b><%=studentDetails.get("phone") %></b> <br>
-		School: <b><%=studentDetails.get("school") %></b> <br>
-		Branch: <b><%=studentDetails.get("branch") %></b> <br>
-		Roll No. : <b><%=studentDetails.get("roll") %></b> <br>
-		
-		ID:<br> <img src='GetId?email=<%=studentDetails.get("email") %>' height="100px" width="100px"/> <br>
-	<%
+    <div class="menu-toggle" id="hamburger">
+        <i class="fas fa-bars"></i>
+    </div>
+    <div class="overlay"></div>
+    <div class="container">
+        <nav>
+            <ul>
+                <li><a href="index.jsp">Home</a></li>
+                <li><a href="EditProfile.jsp">Update Profile</a></li>
+                <li><a href="selfans.html">QnA's</a></li>
+                <li><a href="#">Results</a></li>
+                <li><a href="Logout">Logout</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+<div class="row">
+        <div class="col-md-4 mt-1">
+            <div class="card text-center sidebar">
+                <div class="card-body">
+                    <img src='GetPhoto?email=<%=studentDetails.get("email") %>&type=student' class="rounded-circle" width="150vw">
+                    <div class="mt-3">
+                        <h3><%=studentDetails.get("name") %></h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8 mt-1">
+            <div class="card mb-3 content">
+                <h1 class="m-3 pt-3">About [Status: <%=studentDetails.get("status") %>]</h1>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <h5>Email</h5>
+                        </div>
+                        <div class="col-md-9 text-secondary">
+                            <%=studentDetails.get("email") %>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <h5>School</h5>
+                        </div>
+                        <div class="col-md-9 text-secondary">
+                            <%=studentDetails.get("school") %>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <h5>Phone</h5>
+                        </div>
+                        <div class="col-md-9 text-secondary">
+                            <%=studentDetails.get("phone") %>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <h5>Branch</h5>
+                        </div>
+                        <div class="col-md-9 text-secondary">
+                            <%=studentDetails.get("branch") %>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <h5>Roll No</h5>
+                        </div>
+                        <div class="col-md-9 text-secondary">
+                            <%=studentDetails.get("roll") %>
+                        </div>
+                    </div>
+                    <%
 	String aadhar=(String)studentDetails.get("aadhar");
 	if(aadhar!=null){
-	%>
-	Aadhar: <b><%=studentDetails.get("aadhar") %></b> 
-	<%} %>
-	</div>
-	
-		<br>
-	<form action="EditProfile.jsp" method="post">
-<button type="submit">Edit Profile</button>
-	</form>
-	<% String status=(String)studentDetails.get("status") ;
+	%>				<hr>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <h5>Aadhaar</h5>
+                        </div>
+                        <div class="col-md-9 text-secondary">
+                            <%=aadhar %>
+                        </div>
+                    </div>
+<%} %>
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <h5>ID</h5>
+                        </div>
+                        <div class="col-md-9 text-secondary">
+						<form action="GetId" method="post" target="_blank">
+							<input type="hidden" name="email" value="<%=studentDetails.get("email") %>"/>
+							<button class="btn btn-danger" type="submit">View ID</button>
+						</form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+<% String status=(String)studentDetails.get("status") ;
 	
 	if(status.equalsIgnoreCase("accept")){
 		%>
-	
-	Ask any question?
-	<form action="PostQuestion" method="post">
-	
-	<textarea name="question" rows="5" cols="100" required></textarea>
-	<input type="submit" value="Post Your Question"/>
-	
-	</form>
-	<%} %>
+            <form action="PostQuestion" method="post">
+                <label for="w3review"><b>Ask your Questions</b></label>
+                <textarea id="w3review" name="question" rows="6" cols="90" required>
+                </textarea>
+                <br>
+                <div class="button">
+                    <input type="submit" value="Submit">
+                </div>
+            </form>
+            <%} %>
+
+        </div>
+    </div>
+    
+	<!--  <a href='index.jsp'>Search Questions</a>,
+	<a href='StudentQuestions.jsp'>Your Questions</a>
+		<a href='StudentAnswers.jsp'>Your Answers</a>-->
 </body>
 </html>
 <%

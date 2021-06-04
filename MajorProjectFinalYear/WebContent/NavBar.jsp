@@ -23,7 +23,7 @@
             <a class="navbar-brand" href="index.jsp"><img src="images/logo.png"></a>
              <div id="search_box" class="search_box">
              <form action="index.jsp">
-              <input type="search" id="searchQues" name="searchQues" placeholder="Search Your Queries....">
+              <input type="search" id="searchQues" name="searchQues" placeholder="Search Your Queries...." autocomplete="off">
               <div id="showList" class="autocom-box">
               </div>
               <span class="fa fa-search"></span>
