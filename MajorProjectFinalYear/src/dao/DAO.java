@@ -690,6 +690,18 @@ public byte[] getId(String email) throws Exception{
 			return 0;
 		}
 	}
-	
-	
+
+	public boolean insertMessage(HashMap message) throws Exception{
+		try {
+			PreparedStatement p=con.prepareStatement("insert into message"
+	+ "(name,email,message,dateTime)values(?,?,?,CURRENT_TIMESTAMP)");
+			p.setString(1, (String)message.get("name"));
+			p.setString(2, (String)message.get("email"));
+			p.setString(3, (String)message.get("message"));
+			p.executeUpdate();
+			return true;
+		}catch(java.sql.SQLIntegrityConstraintViolationException ex) {
+			return false;
+		}
+	}
 }
