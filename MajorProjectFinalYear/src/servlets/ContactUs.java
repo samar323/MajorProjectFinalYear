@@ -13,25 +13,25 @@ import javax.servlet.http.HttpSession;
 import dao.DAO;
 
 /**
- * Servlet implementation class Message
+ * Servlet implementation class ContactUs
  */
-@WebServlet("/Message")
-public class Message extends HttpServlet {
+@WebServlet("/ContactUs")
+public class ContactUs extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			HttpSession session=request.getSession();
-			String	studentEmail=(String) session.getAttribute("email");
+			
 			String name=request.getParameter("name");
 			String email=request.getParameter("email");
 			String message=request.getParameter("message");
-			//String	studentEmail=request.getParameter("studentEmail");
-			//if(email==studentEmail) {
+			DAO dao=new DAO();
+			if(dao.checkEmail(email)) {
 				
 			
-			DAO dao=new DAO();
+			
 			HashMap messages=new HashMap();
 			
 			messages.put("name", name);
@@ -41,17 +41,17 @@ public class Message extends HttpServlet {
 			if(result==true) {
 				
 				session.setAttribute("message","Message Added Successfully!");
-				response.sendRedirect("Message.jsp");
+				response.sendRedirect("ContactUs.jsp");
 			}else {
 				
-				session.setAttribute("message","Message Already Added!");
-				response.sendRedirect("Message.jsp");
+				session.setAttribute("message","Message  not Added!");
+				response.sendRedirect("ContactUs.jsp");
 			}
-//			}else {
-//				
-//				session.setAttribute("message","Galat ha");
-//				response.sendRedirect("Message.jsp");
-//			}
+			}else {
+				
+				session.setAttribute("message","This email does not exist");
+				response.sendRedirect("StudentLogin.jsp");
+			}
 		}catch(Exception ex) {
 			ex.printStackTrace();
 			response.sendRedirect("ExceptionPage.jsp");
