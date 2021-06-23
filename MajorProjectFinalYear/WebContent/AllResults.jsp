@@ -131,7 +131,7 @@
                         method: "GET",
                         data: data,
                         success: function (data, textStatus, jqXHR) {
-                            console.log(data);
+                           // console.log(data);
                             let obj = $.parseJSON(data);
                             $.each(obj, function (key, value) {
                                 $('#branch').append('<option value="' + value.name + '">' + value.name + '</option>')
@@ -161,7 +161,7 @@
                         method: "GET",
                         data: data,
                         success: function (data, textStatus, jqXHR) {
-                            console.log(data);
+                           // console.log(data);
                             let obj = $.parseJSON(data);
                             $.each(obj, function (key, value) {
                                 $('#semester').append('<option value="' + value.semester + '"> Semester' + value.semester + '</option>')
@@ -174,12 +174,10 @@
                         cache: false
                     });
                 });
-                
+            
+
                 $('#semester').change(function () {
-                    $('#subjectName').find('input').remove();
-                    $('#subjectName').find('span').remove();
-                    $('#subjectName').find('br').remove();
-                    
+                	$('tbody').find('.content').remove();
                     let schoolName = $('#school').val();
                     let id = $('#branch').val();
                     let sem= $('#semester').val();
@@ -190,43 +188,14 @@
                     };
 
                     $.ajax({
-                        url: "GetSubjectCombination",
+                        url: "ShowResult",
                         method: "GET",
                         data: data,
                         success: function (data, textStatus, jqXHR) {
-                            console.log(data);
+                           // console.log(data);
                             let obj = $.parseJSON(data);
                             $.each(obj, function (key, value) {
-                                $('#subjectName').append('<span class="details">' + value.subjectName +'('+value.subjectCode+ ')</span> <input type="number" name="marks" placeholder="Enter the Marks" required><input type="hidden" name="subjectId" value="'+value.id+'">')
-                            });
-                        },
-                        error: function (jqXHR, textStatus, errorThrown) {
-                            $('#subjectName').append('<option>Subject Unavailable</option>');
-                        },
-                        cache: false
-                    });
-                });
-
-                $('#semester').change(function () {
-                	$('tbody').find('.content').remove();
-                    $('#view-result').find('tbody').append('<tr class="content"><td>ICT</td><td>IT</td><td>8th</td><tr>');
-                    let schoolName = $('#school').val();
-                    let id = $('#branch').val();
-                    let sem= $('#semester').val();
-                    let data = {
-                        sid: id ,
-                        semester: sem
-                    };
-
-                    $.ajax({
-                        url: "GetSubjectCombination",
-                        method: "GET",
-                        data: data,
-                        success: function (data, textStatus, jqXHR) {
-                            console.log(data);
-                            let obj = $.parseJSON(data);
-                            $.each(obj, function (key, value) {
-                                $('#subjectName').append('<span class="details">' + value.subjectName +'('+value.subjectCode+ ')</span> <input type="number" name="marks" placeholder="Enter the Marks" required><input type="hidden" name="subjectId" value="'+value.id+'">')
+                                $('#view-result').find('tbody').append('<tr class="content"><td>'+value.school+'</td><td>'+value.branch+'</td><td>'+value.semester+'</td><td>'+value.studentId+'</td><td><form action="DeleteResult" method="post"><input type="hidden" name="studentId" value="'+value.studentId+'"/><input type="hidden" name="classId" value="'+value.classId+'"/><button class="btn btn-danger" type="submit">Delete</button></form></td></tr>')
                             });
                         },
                         error: function (jqXHR, textStatus, errorThrown) {

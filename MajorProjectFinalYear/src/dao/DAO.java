@@ -596,18 +596,44 @@ public byte[] getId(String email) throws Exception{
 		return results;
 	}
 	
-	public List<Subject> getAllResult(String school, String branch, int semester) throws Exception {
-		PreparedStatement p = con.prepareStatement("SELECT * FROM result r join branch b on r.classId=b.branchId group by studentId order by r.dateTime desc");
+	public ArrayList<HashMap> getResultByRoll(String school, String branch, int semester, String roll) throws Exception {
+		PreparedStatement p = con.prepareStatement("SELECT * FROM result r join branch b join subjects s on r.classId=b.branchId and r.subjectId=s.subjectId where school=? AND branchName=? AND semester=? AND studentId=?");
+		p.setString(1, school);
+		p.setString(2, branch);
+		p.setInt(3, semester);
+		p.setString(2, roll);
 		ResultSet rs = p.executeQuery();
-		List<Subject> subjects = new ArrayList();
-		while (rs.next()) {
-			Subject subject=new Subject();
-			subject.setId(Integer.parseInt(rs.getString("subjectId")));
-			subject.setSubjectName(rs.getString("subjectName"));
-			subject.setSubjectCode(rs.getString("subjectCode"));
-			subjects.add(subject);
+		ArrayList<HashMap> results=new ArrayList();
+		while(rs.next()) {
+			HashMap result=new HashMap();
+			result.put("school", rs.getString("subjectName"));
+			result.put("branchName", rs.getString("subjectCode"));
+			result.put("semester", rs.getInt("marks"));
+			result.put("studentId", rs.getString("studentId"));
+			result.put("classId", rs.getInt("classId"));
+			
+			results.add(result);
 		}
-		return subjects;
+		return results;
+	}
+	
+	public List<Result> getAllResult(String school, String branch, int semester) throws Exception {
+		PreparedStatement p = con.prepareStatement("SELECT * FROM result r join branch b on r.classId=b.branchId where school=? AND branchName=? AND semester=? group by studentId order by r.dateTime desc;");
+		p.setString(1, school);
+		p.setString(2, branch);
+		p.setInt(3, semester);
+		ResultSet rs = p.executeQuery();
+		List<Result> results = new ArrayList();
+		while (rs.next()) {
+			Result result=new Result();
+			result.setSchool(rs.getString("school"));
+			result.setBranch(rs.getString("branchName"));
+			result.setSemester(Integer.parseInt(rs.getString("semester")));
+			result.setStudentId(rs.getString("studentId"));
+			result.setClassId(Integer.parseInt(rs.getString("classId")));
+			results.add(result);
+		}
+		return results;
 	}
 	
 	

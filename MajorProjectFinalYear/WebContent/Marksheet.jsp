@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<%@page import="dao.DAO"%>
 <html lang="en">
 
 <head>
@@ -11,6 +12,14 @@
 </head>
 
 <body>
+<%
+String school=request.getParameter("school");
+String branch=request.getParameter("branch");
+String semester=request.getParameter("semester");
+String roll=request.getParameter("roll");
+if(school!=null && branch!=null && semester!=null && roll!=null){
+	DAO dao=new DAO();
+%>
     <div class="container-image">
         <img src="images/logo.png" alt="">
     </div>
@@ -163,6 +172,12 @@
     <div class="btn">
     <button onclick="window.print()">Print this page</button>
 </div>
+<%
+}else{
+	session.setAttribute("message","Plz Fill all details!");
+	response.sendRedirect("ViewResult.jsp");
+}
+%>
 </body>
 
 </html>

@@ -75,7 +75,7 @@
                     </div>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="Marksheet.jsp">Result</a>
+                    <a class="nav-link" href="ViewResult.jsp">Result</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="About">About Us</a>
