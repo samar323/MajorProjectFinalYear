@@ -23,13 +23,13 @@ public class DeleteSubject extends HttpServlet {
 			boolean quesDeleteStatus=dao.deleteSubject(subjectId);
 			if(quesDeleteStatus==true) {
 				session.setAttribute("message","Subject Deleted Successfully!");
-				response.sendRedirect("AddSubject.jsp");
+				response.sendRedirect("Subject");
 			}else {
 				session.setAttribute("message","Unable to delete subject.!");
-				response.sendRedirect("AddSubject.jsp");
+				response.sendRedirect("Subject");
 			}
 		}catch(Exception e) {
-			
+			e.printStackTrace();
 		}
 		
 	}

@@ -25,6 +25,8 @@ public class PostQuestion extends HttpServlet {
 		//
 		HashMap studentDetails=(HashMap)session.getAttribute("studentDetails");
 		if(studentDetails!=null) {
+			String status=(String) studentDetails.get("status");
+			if(status.equalsIgnoreCase("accept")) {
 		String studentId=(String)studentDetails.get("roll");
 		try {
 			String question=request.getParameter("question");
@@ -38,11 +40,11 @@ public class PostQuestion extends HttpServlet {
 			if(result==true) {
 				
 				session.setAttribute("message","Question Posted Successfully!");
-				response.sendRedirect("StudentHome.jsp");
+				response.sendRedirect("StudentHome");
 			}else {
 				
 				session.setAttribute("message","Question Already Posted!");
-				response.sendRedirect("StudentHome.jsp");
+				response.sendRedirect("StudentHome");
 			}
 			
 		}
@@ -51,9 +53,13 @@ public class PostQuestion extends HttpServlet {
 			ex.printStackTrace();
 			response.sendRedirect("ExceptionPage.jsp");
 		}
+			}else {
+				session.setAttribute("message","Your status is pending");
+				response.sendRedirect("home");
+			}
 		}else {
 			session.setAttribute("message","Login First for post Questions");
-			response.sendRedirect("index.jsp");
+			response.sendRedirect("home");
 		}
 	}
 

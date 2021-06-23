@@ -195,6 +195,20 @@ body{
     flex-direction: column;
     
 }
+
+.circle {
+    display: inline-block;
+    position: relative;
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+    border-radius: 50%;
+}
+.rounded-circle {
+    width: 100px;
+    border-radius: 0;
+}
+
 .row{
 	width: 100%;
 }
@@ -208,11 +222,12 @@ form{
 form textarea{
 	display: center;
 	border-radius: 5px;
+	width: 80%;
+    max-height: 150px;
 }
 form label{
 	font-size: large;
 	font-family: "Roboto Cn", sans-serif;
-	padding-right: 700px;
     margin-top: 20px;
 	display: flex;
 }

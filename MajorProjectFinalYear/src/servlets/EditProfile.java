@@ -55,11 +55,11 @@ public class EditProfile extends HttpServlet {
 				HashMap students=dao.getStudent(email,password);
 				session.setAttribute("studentDetails", students);
 				session.setAttribute("message","Profile Updated Successfully!");
-				response.sendRedirect("StudentHome.jsp");
+				response.sendRedirect("StudentHome");
 			}else {
 				 session=request.getSession();
 				session.setAttribute("message","Something went wrong!");
-				response.sendRedirect("EditProfile.jsp");
+				response.sendRedirect("UpdateProfile.jsp");
 			}
 			
 		}catch(Exception ex) {

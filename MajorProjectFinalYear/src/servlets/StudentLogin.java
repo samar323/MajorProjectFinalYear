@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
 
 import javax.servlet.ServletException;
@@ -22,6 +23,7 @@ public class StudentLogin extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		PrintWriter out=response.getWriter();
 		try {
 			AES aes=new AES();
 			String email=request.getParameter("email");
@@ -36,16 +38,16 @@ public class StudentLogin extends HttpServlet {
 			{
 				
 				session.setAttribute("studentDetails", student);
-				response.sendRedirect("StudentHome.jsp");
+				response.sendRedirect("StudentHome");
 			}
 			else {
 
 				session.setAttribute("message", "Incorrect Email or Password");
-				response.sendRedirect("StudentLogin.jsp");
+				response.sendRedirect("Login");
 			}
 		}catch(Exception ex) {
 			ex.printStackTrace();
-			response.sendRedirect("ExceptionPage.jsp");
+			out.print(ex);
 		}
 	}
 

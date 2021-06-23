@@ -52,21 +52,21 @@ public class AddResult extends HttpServlet {
 				if(flag==marks.length) {
 					HttpSession session=request.getSession();
 					session.setAttribute("message","Result Added Successfully");
-					response.sendRedirect("AddResult.jsp");
+					response.sendRedirect("ResultAdd");
 				}else {
 					HttpSession session=request.getSession();
 					session.setAttribute("message","Result Doesn't added!!");
-					response.sendRedirect("AddResult.jsp");
+					response.sendRedirect("ResultAdd");
 				}
 				}else {
 					HttpSession session=request.getSession();
 					session.setAttribute("message","Some Went Wrong!!");
-					response.sendRedirect("AddResult.jsp");
+					response.sendRedirect("ResultAdd");
 				}
 			}else {
 				HttpSession session=request.getSession();
 				session.setAttribute("message","Please select & Enter all options");
-				response.sendRedirect("AddResult.jsp");
+				response.sendRedirect("ResultAdd");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

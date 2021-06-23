@@ -23,10 +23,10 @@ public class DeleteBranch extends HttpServlet {
 			boolean quesDeleteStatus=dao.deleteBranch(branchId);
 			if(quesDeleteStatus==true) {
 				session.setAttribute("message","Branch Deleted Successfully!");
-				response.sendRedirect("AddBranch.jsp");
+				response.sendRedirect("Branch");
 			}else {
 				session.setAttribute("message","Unable to delete branch.!");
-				response.sendRedirect("AddBranch.jsp");
+				response.sendRedirect("Branch");
 			}
 		}catch(Exception e) {
 			

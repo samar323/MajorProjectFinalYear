@@ -23,6 +23,7 @@
         </style>
     </head>
     <body class="cyan">
+    <jsp:include page="AdminNavBar.jsp" /> 
         <div class="container">
             <div class="drop-down-list card">
                 <div class="center">

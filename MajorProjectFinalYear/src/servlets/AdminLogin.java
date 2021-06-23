@@ -22,11 +22,11 @@ public class AdminLogin extends HttpServlet {
 			if(admin!=null) {
 				HttpSession session=request.getSession();
 				session.setAttribute("adminDetails", admin);
-				response.sendRedirect("AdminHome.jsp");
+				response.sendRedirect("AdminHome");
 			}else {
 				HttpSession session=request.getSession();
 				session.setAttribute("message", "ID/Password wrong!");
-				response.sendRedirect("AdminLogin.jsp");
+				response.sendRedirect("LoginAdmin");
 			}
 		}catch(Exception ex) {
 			ex.printStackTrace();

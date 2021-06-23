@@ -6,14 +6,21 @@
   font-family: 'Poppins',sans-serif;
 }
 body{
-  height: 100vh;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   background: linear-gradient(135deg, #71b7e6, #9b59b6);
-      flex-direction: column;
+  overflow-x: hidden;
 }
-.container{
+.content-class {
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+}
+.container2{
   max-width: 700px;
   width: 100%;
   background-color: #fff;
@@ -21,24 +28,12 @@ body{
   border-radius: 5px;
   box-shadow: 0 5px 10px rgba(0,0,0,0.15);
 }
-.container .title{
+.container2 .title{
   font-size: 25px;
   font-weight: 500;
   position: relative;
 }
-input[type=radio] {
-    box-sizing: border-box;
-    padding: 0px;
-    width: 40px;
-}
-.radio {
-    display: flex;
-    flex-direction: column;
-    align-items: end;
-    width: 48%;
-    justify-content: space-evenly;
-}
-.container .title::before{
+.container2 .title::before{
   content: "";
   position: absolute;
   left: 0;
@@ -58,6 +53,59 @@ form .user-details .input-box{
   margin-bottom: 15px;
   width: calc(100% / 2 - 20px);
 }
+form .user-details .gender-box{
+  display: inline-flex;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+  font-size: 16px;
+  margin-top: 15px;
+  
+}
+form .user-details .gender-box input[type=radio]{
+  width: 100%;
+  height: 20px; 
+}
+
+form .user-details .photo-box{
+  width: 100%;
+  height: 100%;
+  font-size: 16px;
+  font-weight: 500;
+  width: calc(100% / 2 - 20px);
+  margin-bottom: 10px;
+}
+form .user-details .custom-files-input {
+  color:solid;
+}
+form .user-details .custom-files-input::-webkit-file-upload-button {
+  visibility: visible;
+  content: 'Choose file...';
+  color: black;
+  display: inline-block;
+  background: -webkit-linear-gradient(top, #f9f9f9, #e3e3e3);
+  border: 1px solid #999;
+  border-radius: 3px;
+  padding: 5px 8px;
+  margin-top: 10px;
+  margin-left: 5px;
+  outline: none;
+  white-space: nowrap;
+  cursor: pointer;
+  text-shadow: 1px 1px #fff;
+  font-weight: 700;
+  font-size: 10pt;
+}
+
+form .user-details .custom-files-input:hover::before {
+  border-color: black;
+}
+form .user-details .custom-files-input:active {
+  outline: 0;
+}
+form .user-details .custom-files-input:active::before {
+  background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9); 
+}
 form .input-box span.details{
   display: block;
   font-weight: 500;
@@ -73,11 +121,33 @@ form .input-box span.details{
   border: 1px solid #ccc;
   border-bottom-width: 2px;
   transition: all 0.3s ease;
+  border-color: #9b59b6;
+}
+.user-details .input-box .input-select{
+  height: 45px;
+  width: 100%;
+  outline: none;
+  font-size: 16px;
+  border-radius: 5px;
+  padding-left: 15px;
+  color: rgb(148, 146, 146);
+  border: 1px solid #ccc;
+  border-bottom-width: 2px;
+  transition: all 0.3s ease;
+}
+.user-details .input-box .input-select option{
+  color: black;
 }
 .user-details .input-box input:focus,
 .user-details .input-box input:valid{
   border-color: #9b59b6;
 }
+.user-details .input-box .input-select:focus,
+.user-details .input-box .input-select:valid{
+  border-color: #9b59b6;
+  color: black;
+}
+
 form .user-details .select{
     margin-bottom: 0px;
     padding: 20px;
@@ -92,12 +162,15 @@ form .user-details .select{
     font-weight: 500;
   }
  form .button{
-   height: 45px;
-   margin: 35px 0
+   
+   margin: 10px 10px 10px 10px;
+   width:100%;
+   height: 100%;
  }
  form .button input{
    height: 100%;
-   width: 650px;
+   width: 100%;   
+   padding: 12px;
    border-radius: 5px;
    border: none;
    color: #fff;
@@ -113,7 +186,7 @@ form .user-details .select{
   background: linear-gradient(-135deg, #71b7e6, #9b59b6);
   }
  @media(max-width: 584px){
- .container{
+ .container2{
   max-width: 100%;
 }
 form .user-details .input-box{
@@ -122,15 +195,18 @@ form .user-details .input-box{
   }
 
   .content form .user-details{
-    max-height: 300px;
+    max-height: 80vh;
     overflow-y: scroll;
+    overflow-x: hidden;
+    
+    
   }
   .user-details::-webkit-scrollbar{
     width: 5px;
   }
   }
   @media(max-width: 459px){
-  .container .content .category{
+  .container2 .content .category{
     flex-direction: column;
   }
 }

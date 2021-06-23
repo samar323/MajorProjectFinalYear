@@ -15,13 +15,13 @@ response.setDateHeader("Expires",-1);
 <html>
 <head>
 <meta charset="ISO-8859-1">
-
+<meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="css/studentlogin.css">
 <title>Student Login</title>
 </head>
 <body>
 <jsp:include page="NavBar.jsp" /> 
-
+<div class="wrap-pad">
 <div class="wrapper">
     <div class="title">Login Form</div>
     <form action="StudentLogin" method="post">
@@ -56,7 +56,8 @@ if(m!=null){
           now</a></div>
     </form>
   </div>
-
+</div>
+<jsp:include page="Footer.jsp" /> 
 </body>
 </html>
 

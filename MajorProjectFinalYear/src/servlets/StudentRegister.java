@@ -39,6 +39,8 @@ public class StudentRegister extends HttpServlet {
 			AES aes=new AES();
 			String email=request.getParameter("email");
 			String password=request.getParameter("password");
+			String cnfpassword=request.getParameter("cnfpassword");
+			if(password.equals(cnfpassword)) {
 			String encryptPassword=aes.encrypt(password);
 			String name=request.getParameter("name");
 			String phone=request.getParameter("phone");
@@ -73,11 +75,17 @@ public class StudentRegister extends HttpServlet {
 			if(result==true) {
 				HttpSession session=request.getSession();
 				session.setAttribute("message","Student Registered Successfully!");
-				response.sendRedirect("StudentLogin.jsp");
+				response.sendRedirect("Login");
 			}else {
 				HttpSession session=request.getSession();
 				session.setAttribute("message","Student Already Registered!");
-				response.sendRedirect("StudentRegister.jsp");
+				response.sendRedirect("Register");
+			}
+			
+			}else {
+				HttpSession session=request.getSession();
+				session.setAttribute("message","Password doesn't match");
+				response.sendRedirect("Register");
 			}
 			
 		}
