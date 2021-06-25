@@ -44,6 +44,14 @@ header{
     background: #3af4d5;
     
 }
+@media screen and (max-width:500px){
+button.btn.btn-danger {
+    font-size: 9px;
+}
+tr {
+    font-size: 10px;
+}
+}
 @media screen and (max-width:980px){
     .columns .column{
         margin-bottom: 5px;
@@ -141,10 +149,12 @@ header{
       border-collapse: collapse;
       width: 100%;
     }
+    tr {
+    text-align: center;
+}
     
     td{
       border: 1px solid #b42e9e;
-      text-align: left;
       padding: 8px;
       
     }

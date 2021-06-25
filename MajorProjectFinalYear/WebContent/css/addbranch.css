@@ -170,7 +170,7 @@ table {
     background-color: #dddddd;
   }
   @media (max-width: 411px){
-  	.h2, h2 {
+  	.h2, div h2 {
     font-size: 1rem;
 }
 .container-scroll {

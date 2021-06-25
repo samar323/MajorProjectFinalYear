@@ -39,6 +39,10 @@
             <input type="text" name="school" placeholder="Enter the School" required>
           </div>
           <div class="input-box">
+            <span class="details">Programme</span>
+            <input type="text" name="programme" placeholder="Enter the Programme" required>
+          </div>
+          <div class="input-box">
             <span class="details">Branch</span>
             <input type="text" name="branch" placeholder="Enter the Branch" required>
           </div>

@@ -190,8 +190,6 @@
 		<%
 		for(HashMap question:questions){
 			
-	%>
-	<%
         String time=question.get("time").toString();
 		String date = question.get("date").toString();
 		String timeShow=tc.getTime(time, date);

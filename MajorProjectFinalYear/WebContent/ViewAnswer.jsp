@@ -209,7 +209,7 @@
 			timeShow=tc.getTime(time, date);
 %>
                     <p class="text"><summary><div class="time">answered by <a href="#"><%=answer.get("name") %></a> <%=timeShow %></div></summary></p>
-                    <div class="pborder"><a><%=answer.get("answers") %></div>
+                    <div class="pborder"><%=answer.get("answers") %></div>
                     <%
 	}
 	}else{
