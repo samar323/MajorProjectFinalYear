@@ -1,3 +1,4 @@
+<%@page import="javaFiles.TimeConversion"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="dao.DAO"%>
@@ -11,9 +12,10 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Insert title here</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script src="https://cdn.tiny.cloud/1/tblirgs9iclfy2vhfk5h2xvxqnkm882tp2vsoz9nij4c3wqn/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
@@ -25,12 +27,23 @@
     
     body {
         font-family: 'Baloo Bhaina 2', cursive;
-        background-color: #333;
+        background: linear-gradient(
+135deg
+, #71b7e6, #9b59b6);
         display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 5%;
+    flex-direction: column;
+    height: 100vh;
     }
+    .tox.tox-silver-sink.tox-tinymce-aux {
+    display: none;
+}
+
+.cont {
+    height: -webkit-fill-available;
+    padding: 20px;
+}
 
     .box {
         
@@ -48,6 +61,9 @@
         color: #fff;
         text-align: center;
         font-size: 30px;
+    }
+    .btn{
+    	font-size:2rem;
     }
 
     .faqs {
@@ -81,13 +97,13 @@
         outline: none;
         display: contents;
     }
+    
     .pborder{
         border-left: 6px solid red;
         background-color: lightgrey;
         padding-left: 4px;
         border-bottom-style: solid red;
     }
-
     
     button {
         height: 5vh;
@@ -112,9 +128,6 @@
         background: linear-gradient(135deg, #71b7e6, #9b59b6);
     }
     
-    .cont {
-    margin-top: 5%;
-}
 
     form .button input:hover {
         /* transform: scale(0.99); */
@@ -123,6 +136,17 @@
     .tox.tox-tinymce {
         border-radius: 7px;
     }
+    @media(max-width: 680px) {
+    .cont {
+    width: -webkit-fill-available;
+}
+.box {
+    width: -webkit-fill-available;
+}
+.details {
+    width: auto;
+}
+}
 </style>
 </head>
 <body>
@@ -139,9 +163,12 @@
 <% 
 	int quesId=Integer.parseInt(request.getParameter("quesId"));
 	DAO dao=new DAO();
-	
+	TimeConversion tc=new TimeConversion();
 	ArrayList<HashMap> answers=dao.getAnswer(quesId);
-	String question=dao.getQuestionById(quesId);
+	HashMap question=dao.getQuestionById(quesId);
+	String time=question.get("time").toString();
+	String date = question.get("date").toString();
+	String timeShow=tc.getTime(time, date);
 	try{
 	%>
 	<%
@@ -153,11 +180,12 @@
             <p class="heading">GBUVerse | QnA's</p>
             <div class="faqs">
                 <div class="details">
-                    <summary style="font-weight:bold;"><a href="#"><%=question %></a></summary>
-                    <summary><div class="time" style="font-weight:bold;">asked by <a href="#">Rohan</a> on May 6 at 6:00pm</div></summary>
+                    <summary style="font-weight:bold;"><a href="#"><%=question.get("question") %></a></summary>
+                    <summary><div class="time" style="font-weight:bold;">asked by <a href="#"><%=question.get("name") %></a> on <%=timeShow %></div></summary>
                    <% if(studentDetails!=null){
 		String studentId=(String)studentDetails.get("roll");
-		if(dao.checkAnswer(quesId, studentId)){
+		String status=(String) studentDetails.get("status");
+		if(dao.checkAnswer(quesId, studentId) && status.equalsIgnoreCase("accept")){
 %>
                     <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
                         Answer
@@ -176,21 +204,24 @@
 	<%} 
 	if(answers.size()!=0 ){
 	for(HashMap answer:answers){
+		 time=answer.get("time").toString();
+			date = answer.get("date").toString();
+			timeShow=tc.getTime(time, date);
 %>
-                    <p class="text"><summary><div class="time">answered by <a href="#"><%=answer.get("studentId") %></a> on May 7 at 12:34pm</div></summary></p>
-                    <p class="pborder"><%=answer.get("answers") %></p>
+                    <p class="text"><summary><div class="time">answered by <a href="#"><%=answer.get("name") %></a> <%=timeShow %></div></summary></p>
+                    <div class="pborder"><a><%=answer.get("answers") %></div>
                     <%
 	}
 	}else{
-		%>
-			<p>No data Found..</p>
+		%><br>
+			<p class="pborder">No Answer Found..</p>
 		<%
 	}%>
                 </div>
             </div>
         </div>
     </div>
-
+<jsp:include page="Footer.jsp" />
 <script>
     tinymce.init({
       selector: 'textarea',

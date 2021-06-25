@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<link rel="stylesheet" href="css/index.css">
+<link rel="stylesheet" href="css/navbar.css">
     
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -15,12 +15,18 @@
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css">
 <title>Insert title here</title>
+<style type="text/css">
+
+.navbar-brand {
+    margin-right: 0px;
+}
+</style>
 </head>
 <body>
 
 	<section id="nav-bar"> 
         <nav class="navbar navbar-expand-lg navbar-light">
-            <a class="navbar-brand" href="index.jsp"><img src="images/logo.png"></a>
+            <a class="navbar-brand" href="home"><img src="images/logo.png"></a>
              <div id="search_box" class="search_box">
              <form action="index.jsp">
               <input type="search" id="searchQues" name="searchQues" placeholder="Search Your Queries...." autocomplete="off">
@@ -35,7 +41,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
                   <li class="nav-item">
-                    <a class="nav-link" href="index.jsp">Home</a>
+                    <a class="nav-link" href="home">Home</a>
                   </li>
                   <li class="nav-item">
                     <!--<a class="nav-link" href="#testimonials">Registration and Login</a>-->
@@ -50,7 +56,7 @@
                           <i class="fa fa-caret-down"></i>
                         </button>
                         <div class="dropdown-content">
-                          <a href="StudentHome.jsp">Profile</a>
+                          <a href="StudentHome">Profile</a>
                           <a href="Logout">Logout</a>
                         </div>
                         <%}else{
@@ -59,9 +65,9 @@
                           <i class="fa fa-caret-down"></i>
                         </button>
                         <div class="dropdown-content">
-                          <a href="StudentRegister.jsp">Registration for Student</a>
-                          <a href="StudentLogin.jsp">Login for Student</a>
-                          <a href="teacherlogin.html">Login for Teacher</a>
+                          <a href="Register">Registration for Student</a>
+                          <a href="Login">Login for Student</a>
+                          <a href="TeacherLogin.jsp">Login for Teacher</a>
                         </div>
                        
                         	<%
@@ -69,16 +75,16 @@
                     </div>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="result.html">Result</a>
+                    <a class="nav-link" href="ViewResult.jsp">Result</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="#about">About Us</a>
+                    <a class="nav-link" href="About">About Us</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="#contact">Contact Us</a>
+                    <a class="nav-link" href="Contact">Contact Us</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="FAQ.html">FAQ</a>
+                    <a class="nav-link" href="Faq">FAQ</a>
                 </ul>
             </div>
         </nav>
@@ -90,6 +96,7 @@
     const searchWrapper=document.querySelector(".search_box");
         $(document).ready(function () {
             $('#searchQues').keyup(function () {
+            	$('.autocom-box').find('a').remove();
             	$('.autocom-box').find('li').remove();
                 let search = $('#searchQues').val();
                 if (search !== '' && search !== null) {
@@ -106,7 +113,8 @@
 	                            });
 	                            searchWrapper.classList.add("active");
 							}else{
-								$('.autocom-box').find('li').remove();
+								$('.autocom-box').find('a').remove();
+				            	$('.autocom-box').find('li').remove();
 								$('#showList').append('<li class="list-group-item">No Result</li>')
 							}
                             

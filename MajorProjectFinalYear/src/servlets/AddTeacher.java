@@ -50,7 +50,7 @@ public class AddTeacher extends HttpServlet {
 		ex.printStackTrace();
 		response.sendRedirect("ExceptionPage.jsp");
 	}
-		
+	//hgjsd	
 	}
 
 }

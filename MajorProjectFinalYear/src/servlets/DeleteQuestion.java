@@ -23,10 +23,10 @@ public class DeleteQuestion extends HttpServlet {
 			boolean quesDeleteStatus=dao.deleteQuestion(quesId);
 			if(quesDeleteStatus==true) {
 				session.setAttribute("message","Question Deleted Successfully!");
-				response.sendRedirect("StudentQuestions.jsp");
+				response.sendRedirect("YourQuestions");
 			}else {
 				session.setAttribute("message","Unable to delete ques.!");
-				response.sendRedirect("StudentQuestions.jsp");
+				response.sendRedirect("YourQuestions");
 			}
 		}catch(Exception e) {
 			

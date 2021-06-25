@@ -25,11 +25,11 @@ try {
 	if(result==true) {
 		
 		session.setAttribute("message","FAQ Added Successfully!");
-		response.sendRedirect("AdminHome.jsp");
+		response.sendRedirect("AddFaq.jsp");
 	}else {
 		
 		session.setAttribute("message","FAQ Already Added!");
-		response.sendRedirect("AdminHome.jsp");
+		response.sendRedirect("AddFaq.jsp");
 	}
 }catch(Exception ex) {
 	ex.printStackTrace();

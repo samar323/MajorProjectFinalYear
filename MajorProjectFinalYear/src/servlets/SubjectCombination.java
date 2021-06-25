@@ -44,11 +44,11 @@ public class SubjectCombination extends HttpServlet {
 				if(flag==subject.length) {
 					HttpSession session=request.getSession();
 					session.setAttribute("message","Subjects Combination Stored Successfully");
-					response.sendRedirect("SubjectCombination.jsp");
+					response.sendRedirect("SubjectCombination");
 				}else {
 					HttpSession session=request.getSession();
 					session.setAttribute("message","Something went wrong!!");
-					response.sendRedirect("SubjectCombination.jsp");
+					response.sendRedirect("SubjectCombination");
 				}
 				
 //				else{

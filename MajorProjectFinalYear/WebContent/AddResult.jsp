@@ -1,4 +1,7 @@
- <%@page import="java.util.HashMap"%>
+ <%@page import="javaFiles.SuffixSem"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="dao.DAO"%>
+<%@page import="java.util.HashMap"%>
 <%
 	HashMap adminDetails=(HashMap)session.getAttribute("adminDetails");
 	if(adminDetails!=null){
@@ -8,79 +11,102 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Dependent Select Option</title>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-        <style type="text/css">
-            body{
-                background: url(image/roenkae.jpg);
-                background-size: cover;
-            }
-            .drop-down-list{
-                margin: 150px auto;
-                width: 50%;
-                padding: 30px;
-            }
-            label, .input-field>label {
-			    font-size: 1rem;
-			    color: #000000;
-			    font-weight: bold;
-			}
-        </style>
+        <link rel="stylesheet" href="css/addresult.css">
+<meta charset="ISO-8859-1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Add Result</title>
     </head>
-    <body class="cyan">
-        <div class="container">
-            <div class="drop-down-list card">
-                <div class="center">
-                    <h5>Add Result</h5>
-                </div>
-                <div class="divider"></div>
-                <%
+    <body>
+    <jsp:include page="AdminNavBar.jsp" /> 
+    
+    <section id="mid">
+    <div class="mid-container">
+    <div class="title">Add Results</div>
+    <div class="content">
+      <form action="AddResult" method="post">
+      <%
 		String m=(String)session.getAttribute("message");
 		if(m!=null){
 	%>
-			<p style="background-color: yellow;width:max-content;"><%=m %></p>
+			<div class="incorrect"><%=m %></div>
 	<%		
 			session.setAttribute("message",null);
 		}
 	%>
-                <form action="AddResult">
-                    <div class="input-field">
-                        <select id="school" name="school" required>
+        
+        <div class="user-details">
+          <div class="input-box">
+            <span for="school" class="details">School Name</span>
+            <select id="school" name="school" class="options" required>
                             <option disabled selected>Select School</option>
-                        </select>
-                    </div>
-                    <div class="input-field">
-                        <select id="branch" name="branch" required>
+                 </select>
+          </div>
+          <div class="input-box">
+            <span for="branch" class="details">Branch</span>
+             <select id="branch" name="branch" class="options" required>
                             <option disabled selected>Select Branch</option>
                         </select>
-                    </div>
-                    <div class="input-field">
-                        <select id="semester" name="semester" required>
+          </div>
+          <div class="input-box">
+            <span for="semester" class="details">Semester</span>
+            <select id="semester" name="semester" class="options"  required>
                             <option disabled selected>Select Semester</option>
                         </select>
-                    </div>
-                    <br>
-                    <div class="input-field">
-                    <label>Roll No.</label>
-                    <input type="text" name="roll" placeholder="Enter the Rooll No."/>
-                    </div>
-                    
-                    <div class="input-field">
-                    <div id="subjectName">
-                    <input type="hidden" name="subjectId" value=""/>
-                    <label></label>
-                    <input type="hidden" name="roll" placeholder="Enter Marks"/>
-                    </div>
-                    </div>
-                    
-                    <div class="center">
-                        <button class="btn" type="submit">Submit</button>
-                    </div>
-                </form>
+          </div>
+          <div class="input-box">
+            <span class="details">Roll No.</span>
+            <input type="text" name="roll" placeholder="Enter the Rooll No." required>
+          </div>
+          <div class="input-box">
+          <div id="subjectName">
             </div>
-        </div>
+          </div>
+          <div class="button">
+            <input type="submit" value="Submit">
+          </div>
+
+      </form>
+    </div>
+  </div>
+  <div class="banner">
+  <p class="all">Recent Results</p>
+  <a href="AllResults.jsp"><button class="btn btn-primary" type="submit">All Results</button></a>
+  
+  </div>
+<div class="container-scroll">
+  <table>
+    <tr>
+      <th>School</th>
+      <th>Branch</th>
+      <th>Semester</th>
+      <th>Roll No.</th>
+      <th>Action</th>
+    </tr>
+    <%
+    DAO dao=new DAO();
+    SuffixSem suf=new SuffixSem();
+    ArrayList<HashMap> allResults=dao.getResult();
+    if(allResults!=null){
+    for(HashMap result:allResults){
+    %>
+    <tr>
+      <td><%=result.get("school") %></td>
+      <td><%=result.get("branchName") %></td>
+      <td><%=result.get("semester") %><%=suf.suffix((int)result.get("semester")) %></td>
+      <td><%=result.get("studentId") %></td>
+      <td><form action="DeleteResult" method="post">
+      <input type="hidden" name="studentId" value="<%=result.get("studentId") %>"/>
+      <input type="hidden" name="classId" value="<%=result.get("classId") %>"/>
+      <button class="btn btn-danger" type="submit">Delete</button>
+      </form></td>
+    </tr>
+    <%} 
+    }%>
+  </table>
+  </div>
+   </section>
+	   <jsp:include page="Footer.jsp" /> 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
         <script type="text/javascript">
             $(document).ready(function () {
                 $.ajax({
@@ -165,7 +191,7 @@
                 
                 $('#semester').change(function () {
                     $('#subjectName').find('input').remove();
-                    $('#subjectName').find('label').remove();
+                    $('#subjectName').find('span').remove();
                     $('#subjectName').find('br').remove();
 
                     let id = $('#branch').val();
@@ -183,7 +209,7 @@
                             console.log(data);
                             let obj = $.parseJSON(data);
                             $.each(obj, function (key, value) {
-                                $('#subjectName').append('<label>' + value.subjectName +'('+value.subjectCode+ ')</label> <input type="number" name="marks" required><input type="hidden" name="subjectId" value="'+value.id+'"><br>')
+                                $('#subjectName').append('<span class="details">' + value.subjectName +'('+value.subjectCode+ ')</span> <input type="number" name="marks" placeholder="Enter the Marks" required><input type="hidden" name="subjectId" value="'+value.id+'">')
                             });
                         },
                         error: function (jqXHR, textStatus, errorThrown) {

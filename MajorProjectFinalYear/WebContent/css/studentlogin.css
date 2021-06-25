@@ -6,13 +6,23 @@
   font-family: 'Poppins', sans-serif;
 }
 html,body{
-  display: grid;
+  display: flex;
   height: 100%;
   width: 100%;
   place-items: center;
   background: #f2f2f2;
   background: linear-gradient(135deg, #71b7e6, #9b59b6);
+  flex-direction: column;
+  justify-content: space-between;
 }
+
+.wrap-pad {
+    display: flex;
+    padding: 10px;
+    width: 100%;
+    justify-content: center;
+}
+
 ::selection{
   background: #4158d0;
   color: #fff;
@@ -42,6 +52,8 @@ html,body{
   margin-top: 20px;
   position: relative;
 }
+
+
 .wrapper form .field input{
   height: 100%;
   width: 100%;
@@ -135,4 +147,28 @@ form .incorrect{
 form .content label {
     display: inline-block;
     margin-bottom: 0;
+}
+
+
+@media(max-width: 420px) {
+	.wrapper {
+    width: 80vw;
+}
+.wrapper .title {
+    font-size: 20px;
+    line-height: 60px;
+}
+.wrapper form {
+    padding: 10px 30px 30px 30px;
+}
+
+form .content {
+    font-size: 10px;
+}
+form .field input[type="submit"] {
+	font-size: 18px;
+}
+form .signup-link {
+    font-size: 10px;
+}
 }

@@ -12,6 +12,7 @@ public class DAO {
 //		Class.forName("com.mysql.cj.jdbc.Driver");
 //		con = DriverManager.getConnection("jdbc:mysql://localhost:3306/major_project?allowPublicKeyRetrieval=true", "root",
 //				"Samar323@");
+		
 		Class.forName("com.mysql.jdbc.Driver");
 		con=DriverManager.getConnection("jdbc:mysql://localhost:3306/major_project","root","aniket");
 
@@ -223,7 +224,7 @@ public byte[] getId(String email) throws Exception{
 	}
 	
 	public ArrayList<HashMap> getAnswer(int quesId) throws Exception {
-		PreparedStatement p = con.prepareStatement("select * from answers where qid= ?");
+		PreparedStatement p = con.prepareStatement("SELECT qid, studentId, answers, name, a.dateTime FROM answers a join students s on a.studentId=s.roll where a.qid= ? order by a.dateTime desc;");
 		p.setInt(1, quesId);
 		ResultSet rs = p.executeQuery();
 		ArrayList<HashMap> answers = new ArrayList();
@@ -232,7 +233,9 @@ public byte[] getId(String email) throws Exception{
 			ans.put("qid", rs.getString("qid"));
 			ans.put("answers", rs.getString("answers"));
 			ans.put("studentId", rs.getString("studentId"));
-			ans.put("dateTime", rs.getDate("dateTime"));
+			ans.put("name", rs.getString("name"));
+			ans.put("date", rs.getDate("dateTime"));
+			ans.put("time", rs.getTime("dateTime"));
 			answers.add(ans);
 		}
 		return answers;
@@ -258,18 +261,25 @@ public byte[] getId(String email) throws Exception{
 		 
 	}
 	
-	
-	public String getQuestionById(int qid) throws Exception {
-		PreparedStatement p = con.prepareStatement("select * from questions where quesId=?");
+	public HashMap getQuestionById(int qid) throws Exception {
+		PreparedStatement p=con.prepareStatement("SELECT * FROM questions q join students s on q.studentId=s.roll where quesId=?");
 		p.setInt(1, qid);
-		ResultSet rs = p.executeQuery();
-		if (rs.next()) {
-			return rs.getString("question");
-		} else {
+		ResultSet rs=p.executeQuery();
+		if(rs.next()) {
+			HashMap ques = new HashMap();
+			ques.put("quesId", rs.getString("quesId"));
+			ques.put("question", rs.getString("question"));
+			ques.put("studentId", rs.getString("studentId"));
+			ques.put("date", rs.getDate("dateTime"));
+			ques.put("time", rs.getTime("dateTime"));
+			ques.put("name", rs.getString("name"));
+			ques.put("branch", rs.getString("branch"));
+			return ques;
+		}else {
 			return null;
-		}
-
+		}	
 	}
+	
 	public String getQuestionByStudentId(String studentId) throws Exception {
 		PreparedStatement p = con.prepareStatement("select * from questions where studentId=?");
 		p.setString(1, studentId);
@@ -355,6 +365,7 @@ public byte[] getId(String email) throws Exception{
 		return subjects;
 	}
 	
+	
 	public ArrayList<HashMap> getAllSubject() throws Exception {
 		PreparedStatement p = con.prepareStatement("SELECT * FROM subjects");
 		ResultSet rs = p.executeQuery();
@@ -434,7 +445,7 @@ public byte[] getId(String email) throws Exception{
 		}
 	}
 	public ArrayList<HashMap> getAllBranches() throws Exception {
-		PreparedStatement p = con.prepareStatement("select * from branch");
+		PreparedStatement p = con.prepareStatement("select * from branch limit 8");
 		ResultSet rs = p.executeQuery();
 		ArrayList<HashMap> branches = new ArrayList();
 		while (rs.next()) {
@@ -564,6 +575,77 @@ public byte[] getId(String email) throws Exception{
 			p.executeUpdate();
 			return true;
 		}catch(java.sql.SQLIntegrityConstraintViolationException ex) {
+			return false;
+		}
+	}
+	
+	public ArrayList<HashMap> getResult() throws Exception {
+		PreparedStatement p = con.prepareStatement("SELECT * FROM result r join branch b on r.classId=b.branchId group by studentId order by r.dateTime desc");
+		ResultSet rs = p.executeQuery();
+		ArrayList<HashMap> results=new ArrayList();
+		while(rs.next()) {
+			HashMap result=new HashMap();
+			result.put("school", rs.getString("school"));
+			result.put("branchName", rs.getString("branchName"));
+			result.put("semester", rs.getInt("semester"));
+			result.put("studentId", rs.getString("studentId"));
+			result.put("classId", rs.getInt("classId"));
+			
+			results.add(result);
+		}
+		return results;
+	}
+	
+	public ArrayList<HashMap> getResultByRoll(String school, String branch, int semester, String roll) throws Exception {
+		PreparedStatement p = con.prepareStatement("SELECT * FROM result r join branch b join subjects s on r.classId=b.branchId and r.subjectId=s.subjectId where school=? AND branchName=? AND semester=? AND studentId=?");
+		p.setString(1, school);
+		p.setString(2, branch);
+		p.setInt(3, semester);
+		p.setString(2, roll);
+		ResultSet rs = p.executeQuery();
+		ArrayList<HashMap> results=new ArrayList();
+		while(rs.next()) {
+			HashMap result=new HashMap();
+			result.put("school", rs.getString("subjectName"));
+			result.put("branchName", rs.getString("subjectCode"));
+			result.put("semester", rs.getInt("marks"));
+			result.put("studentId", rs.getString("studentId"));
+			result.put("classId", rs.getInt("classId"));
+			
+			results.add(result);
+		}
+		return results;
+	}
+	
+	public List<Result> getAllResult(String school, String branch, int semester) throws Exception {
+		PreparedStatement p = con.prepareStatement("SELECT * FROM result r join branch b on r.classId=b.branchId where school=? AND branchName=? AND semester=? group by studentId order by r.dateTime desc;");
+		p.setString(1, school);
+		p.setString(2, branch);
+		p.setInt(3, semester);
+		ResultSet rs = p.executeQuery();
+		List<Result> results = new ArrayList();
+		while (rs.next()) {
+			Result result=new Result();
+			result.setSchool(rs.getString("school"));
+			result.setBranch(rs.getString("branchName"));
+			result.setSemester(Integer.parseInt(rs.getString("semester")));
+			result.setStudentId(rs.getString("studentId"));
+			result.setClassId(Integer.parseInt(rs.getString("classId")));
+			results.add(result);
+		}
+		return results;
+	}
+	
+	
+	public boolean deleteResult(String studentId, int classId) throws Exception {
+		try {
+			PreparedStatement p = con.prepareStatement(
+					"delete from result where studentId=? and classId=?");
+			p.setString(1, studentId);
+			p.setInt(2, classId);
+			p.executeUpdate();
+			return true;
+		} catch (java.sql.SQLIntegrityConstraintViolationException ex) {
 			return false;
 		}
 	}
@@ -746,5 +828,5 @@ public byte[] getId(String email) throws Exception{
 			teachers.add(teacher);
 		}
 		return teachers;
-	}
+	}//add
 }

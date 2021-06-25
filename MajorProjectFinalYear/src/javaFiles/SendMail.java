@@ -35,10 +35,13 @@ public class SendMail {
 			message.setContent(Body,"text/html");
 			
 			Transport.send(message);
+			
+			return true;
 			}catch(Exception e) {
 				e.printStackTrace();
+				return false;
 			}
 		
-		return true;
+		
 	}
 }

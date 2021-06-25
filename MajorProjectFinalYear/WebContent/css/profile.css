@@ -6,7 +6,10 @@ html{
 	font-size: 10px;
 	font-family: "Roboto Cn", sans-serif;
 }
-
+body{
+    margin-top: 20px;
+    background-color: lightgray;
+}
 a{
 	text-decoration: none;
 	color: rgb(15, 15, 15);
@@ -21,6 +24,7 @@ header{
 	max-width: 200rem;
 	width: 100%;
 	margin: 5 auto;
+	padding: 0;
 }
 
 .menu-toggle{
@@ -136,6 +140,7 @@ nav ul li a:hover::after{
 }
 
 @media screen and (max-width: 700px){
+	
 
 	.menu-toggle{
 		display: block;
@@ -150,9 +155,16 @@ nav ul li a:hover::after{
 		height: 100vh;
 		text-align: center;
 	}
-
+	nav.show{
+		display: block;
+    position: fixed;
+    z-index: 1;
+    background: aliceblue;
+    width: -webkit-fill-available;
+	}
 	nav ul{
 		flex-direction: column;
+		padding: 0;
 	}
 
 	nav ul li{
@@ -173,10 +185,7 @@ nav ul li a:hover::after{
   }
   
 }
-body{
-    margin-top: 20px;
-    background-color: lightgray;
-}
+
 .main{
     padding: 50px;
     font-family: Arial, Helvetica, sans-serif;
@@ -195,8 +204,23 @@ body{
     flex-direction: column;
     
 }
+
+.circle {
+    display: inline-block;
+    position: relative;
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+    border-radius: 50%;
+}
+.rounded-circle {
+    width: 100px;
+    border-radius: 0;
+}
+
 .row{
 	width: 100%;
+	margin:0;
 }
 .content{
     background-color: whitesmoke;
@@ -208,11 +232,12 @@ form{
 form textarea{
 	display: center;
 	border-radius: 5px;
+	width: 80%;
+    max-height: 150px;
 }
 form label{
 	font-size: large;
 	font-family: "Roboto Cn", sans-serif;
-	padding-right: 700px;
     margin-top: 20px;
 	display: flex;
 }

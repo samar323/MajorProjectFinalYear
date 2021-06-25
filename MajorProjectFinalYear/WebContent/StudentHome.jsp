@@ -18,7 +18,16 @@ response.setDateHeader("Expires",-1);
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/profile.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+	<script>
+		$(document).ready(function(){
+			$('#hamburger').click(function(){
+				$('nav').toggleClass('show');
+			});
+		});
+	</script>
 <meta charset="ISO-8859-1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Student Profile</title>
 </head>
 <body>
@@ -53,7 +62,9 @@ response.setDateHeader("Expires",-1);
         <div class="col-md-4 mt-1">
             <div class="card text-center sidebar">
                 <div class="card-body">
-                    <img src='GetPhoto?email=<%=studentDetails.get("email") %>&type=student' class="rounded-circle" width="150vw">
+                <div class="circle">
+                    <img src='GetPhoto?email=<%=studentDetails.get("email") %>&type=student' class="rounded-circle" width="100px">
+                 </div>
                     <div class="mt-3">
                         <h3><%=studentDetails.get("name") %></h3>
                     </div>

@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Properties;
 
 import javax.mail.Message;
@@ -30,6 +31,7 @@ public class ChangeStudentStatus extends HttpServlet {
 	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		PrintWriter out=response.getWriter();
 		String email=request.getParameter("email");
 		String status=request.getParameter("status");
 		HttpSession session=request.getSession();
@@ -49,24 +51,54 @@ public class ChangeStudentStatus extends HttpServlet {
 						Body="You are rejected, You can Register again with correct credentials";
 					}
 				if(Sub!=null && Body!=null && (status.equalsIgnoreCase("accept") || status.equalsIgnoreCase("reject"))) {
-					boolean mailStatus=sendMail.emailSend(email,Sub,Body);
-					if(mailStatus==true) {
-						session.setAttribute("message", "Student's status is updated successfully");
-						response.sendRedirect("AdminHome.jsp");
-					}else {
-						session.setAttribute("message", "Student's status is not updated!!");
-						response.sendRedirect("AdminHome.jsp");
+					try {
+					final String SEmail="fiverphoto123@gmail.com";
+					final String SPass="Samar323@";
+					final String REmail=email;
+					//Mail send
+					Properties props = new Properties();
+					props.put("mail.smtp.auth", "true");
+					props.put("mail.smtp.starttls.enable", "true");
+			        props.put("mail.smtp.ssl.trust", "smtp.gmail.com");
+					props.put("mail.smtp.host", "smtp.gmail.com");
+					props.put("mail.smtp.port", "587");
+				
+					Session ses=Session.getInstance(props, new javax.mail.Authenticator() {
+						protected PasswordAuthentication getPasswordAuthentication() {
+							return new PasswordAuthentication(SEmail,SPass);
+						}
+					});
+					Message message=new MimeMessage(ses);
+					message.setFrom(new InternetAddress(SEmail));
+					message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(REmail));
+					message.setSubject(Sub);
+					message.setContent(Body,"text/html");
+					
+					Transport.send(message);
+					session.setAttribute("message", "Student's status is updated successfully");
+					response.sendRedirect("AdminHome");
+					
+					//boolean mailStatus=sendMail.emailSend(email,Sub,Body);
+//					if(mailStatus==true) {
+//						session.setAttribute("message", "Student's status is updated successfully");
+//						response.sendRedirect("AdminHome");
+//					}else {
+//						session.setAttribute("message", "Something went wrong with mail!!");
+//						response.sendRedirect("AdminHome");
+//					}
+					}catch(Exception ex) {
+						out.println(ex);
 					}
 				}
-				
-				
-				
 				
 				}catch(Exception e) {
 					e.printStackTrace();
 					session.setAttribute("message", "Something went wrong with mail!!");
-					response.sendRedirect("AdminHome.jsp");
+					response.sendRedirect("AdminHome");
 				}
+			}else {
+				session.setAttribute("message", "Student's status is not updated!!");
+				response.sendRedirect("AdminHome");
 			}
 		} catch (Exception e) {
 			

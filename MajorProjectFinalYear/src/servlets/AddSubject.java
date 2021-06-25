@@ -32,17 +32,17 @@ public class AddSubject extends HttpServlet {
 		if(result==true) {
 			
 			session.setAttribute("message","Subject Added Successfully!");
-			response.sendRedirect("AddSubject.jsp");
+			response.sendRedirect("Subject");
 		}else {
 			
 			session.setAttribute("message","Subject Already Added!");
-			response.sendRedirect("AddSubject.jsp");
+			response.sendRedirect("Subject");
 		}
 		
 		}else {
 			
 			session.setAttribute("message","Subject Already Added!");
-			response.sendRedirect("AddSubject.jsp");
+			response.sendRedirect("Subject");
 		}
 	}catch(Exception ex) {
 		ex.printStackTrace();

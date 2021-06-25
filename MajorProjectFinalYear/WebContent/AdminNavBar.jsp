@@ -15,13 +15,22 @@
 <style type="text/css">
 #nav-bar {
             position: sticky;
-            top: 0;
-            z-index: 10;
+    top: 0;
+    z-index: 10;
+    width: 100vw;
         }
 
         .navbar-brand img {
             height: 40px;
         }
+        ::-webkit-scrollbar{
+	width:7px;
+}
+
+::-webkit-scrollbar-thumb{
+	background: #b8b0b0;
+	border-radius:20px;
+}
 
         .navbar-nav li {
             padding: 0 10px;
@@ -55,7 +64,7 @@
 <body>
 <section id="nav-bar">
         <nav class="navbar navbar-expand-lg navbar-light">
-            <a class="navbar-brand" href="#"><img src="images/logo.png"></a>
+            <a class="navbar-brand" href="AdminHome"><img src="images/logo.png"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -63,19 +72,22 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="#top">Home</a>
+                        <a class="nav-link" href="AdminHome">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="AddBranch.jsp">Branch</a>
+                        <a class="nav-link" href="Branch">Branch</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="AddSubject.jsp">Subject</a>
+                        <a class="nav-link" href="Subject">Subject</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="SubjectCombination.jsp">Subject Combination</a>
+                        <a class="nav-link" href="SubjectCombo">Subject Combination</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="AddResult.jsp">Add Result</a>
+                        <a class="nav-link" href="ResultAdd">Add Result</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="AddFaq.jsp">Add FAQ</a>
                     </li>
 
                 </ul>

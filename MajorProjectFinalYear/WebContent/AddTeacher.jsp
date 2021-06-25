@@ -23,7 +23,7 @@
 <button type="submit">Add Teacher</button>
 </form>
 
-	<%
+	<%//jnk
 		String m=(String)session.getAttribute("message");
 		if(m!=null){
 	%>

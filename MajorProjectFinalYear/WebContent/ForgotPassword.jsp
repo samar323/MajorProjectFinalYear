@@ -5,6 +5,8 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="css/studentlogin.css">
 <title>Forgot Password</title>
 </head>
@@ -49,9 +51,10 @@
             </div>
             <%} %>
             <div class="signup-link">Not a member? <a
-                    href="file:///C:/Users/pc1/Desktop/major-project/Student%20Registration%20Form/studentregistration.html">Register
+                    href="Register">Register
                     now</a></div>
         </form>
     </div>
+    <jsp:include page="Footer.jsp" /> 
 </body>
 </html>

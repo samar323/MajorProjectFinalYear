@@ -18,6 +18,7 @@
 
 <link rel="stylesheet" href="css/index.css">
 <meta charset="ISO-8859-1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Insert title here</title>
 </head>
 <style>
@@ -79,6 +80,9 @@
         display: contents;
         outline: none;
     }
+    summary a {
+    overflow-wrap: break-word;
+}
     button {
         
     }
@@ -126,6 +130,11 @@
 .alert.alert-primary.d-flex.align-items-center {
     font-size: 18px;
 }
+@media(max-width: 680px){
+	.details {
+    width: 80vw;
+}
+}
 </style>
 
 <body>
@@ -155,7 +164,7 @@
           <p>Everything that you want to Ask....</p>
           <form action="PostQuestion" method="post">
             <a class="post-user" href="pofile.html"><i class="fas fa-user"></i></a>
-            <input type="text" class="post-input" name="question" placeholder="Hey, What's in your mind?">
+            <input type="text" class="post-input" name="question" placeholder="Hey, What's in your mind?" required>
             <button type="submit" class="post-btn">
               <i class="fas fa-plus"></i>
             </button>
@@ -189,7 +198,7 @@
 		%>
 	 <div class="faqs">
                 <div class="details">
-                    <summary style="font-weight:bold;"><a href="ViewAnswer.jsp?quesId=<%=question.get("quesId") %>"><%=question.get("question") %></a></summary>
+                    <summary style="font-weight:bold;"><a href="Answer?quesId=<%=question.get("quesId") %>"><%=question.get("question") %></a></summary>
                     <summary><div class="time" style="font-weight:bold;">asked by <a href="#"><%=question.get("name") %></a> <%=timeShow %></div></summary>
                     
                 </div>
@@ -234,7 +243,7 @@
 		%>
 	 <div class="faqs">
                 <div class="details">
-                    <summary style="font-weight:bold;"><a href="ViewAnswer.jsp?quesId=<%=question.get("quesId") %>"><%=question.get("question") %></a></summary>
+                    <summary style="font-weight:bold;"><a href="Answer?quesId=<%=question.get("quesId") %>"><%=question.get("question") %></a></summary>
                     <summary><div class="time" style="font-weight:bold;">asked by <a href="#"><%=question.get("name") %></a> <%=timeShow %></div></summary>
                     
                 </div>
@@ -255,7 +264,7 @@
 		<%} %>
 		</div>
 	    </div>
-			
+		<jsp:include page="Footer.jsp" /> 
 			<%
 		}
 		}catch(Exception e){

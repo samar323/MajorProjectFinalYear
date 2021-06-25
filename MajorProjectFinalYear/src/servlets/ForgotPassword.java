@@ -41,14 +41,14 @@ public class ForgotPassword extends HttpServlet {
 					session.setAttribute("otp", otp);
 					session.setMaxInactiveInterval(180);
 					session.setAttribute("message", "OTP has been sent to "+email);
-					response.sendRedirect("ForgotPassword.jsp");
+					response.sendRedirect("ForgetPassword");
 				} else {
 					session.setAttribute("message", "Something went wrong!!");
-					response.sendRedirect("ForgotPassword.jsp");
+					response.sendRedirect("ForgetPassword");
 				}
 			}else {
 				session.setAttribute("message", "Email Doesn't Exist!!");
-				response.sendRedirect("ForgotPassword.jsp");
+				response.sendRedirect("ForgetPassword");
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -60,10 +60,10 @@ public class ForgotPassword extends HttpServlet {
 		String otp=(String) session.getAttribute("otp");
 		String getOtp=request.getParameter("otp");
 		if(otp.equals(getOtp)) {
-			response.sendRedirect("ChangePassword.jsp");
+			response.sendRedirect("NewPassword");
 		}else {
 			session.setAttribute("message", "Wrong OTP");
-			response.sendRedirect("ForgotPassword.jsp");
+			response.sendRedirect("ForgetPassword");
 		}
 	}
 	else if(operation.equalsIgnoreCase("newpass")) {
@@ -78,18 +78,18 @@ public class ForgotPassword extends HttpServlet {
 				session.removeAttribute("email");
 				session.removeAttribute("otp");
 				session.setAttribute("message", "Your Password has been changed");
-				response.sendRedirect("StudentLogin.jsp");
+				response.sendRedirect("Login");
 			}else {
 				session.setAttribute("message", "password not changed");
-				response.sendRedirect("ChangePassword.jsp");
+				response.sendRedirect("NewPassword");
 			}
 		}else {
 			session.setAttribute("message", "Password Doesn't match");
-			response.sendRedirect("ChangePassword.jsp");
+			response.sendRedirect("NewPassword.jsp");
 		}
 		}else {
 			session.setAttribute("message", "Something went wrong!!");
-			response.sendRedirect("ForgotPassword.jsp");
+			response.sendRedirect("ForgetPassword.jsp");
 		}
 	}
 		}catch (Exception e1) {

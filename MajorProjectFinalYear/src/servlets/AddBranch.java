@@ -49,16 +49,16 @@ public class AddBranch extends HttpServlet {
 		if(status==semester) {
 			
 			session.setAttribute("message","Branch Added Successfully!");
-			response.sendRedirect("AddBranch.jsp");
+			response.sendRedirect("Branch");
 		}else {
 			
 			session.setAttribute("message","Something went wrong!");
-			response.sendRedirect("AddBranch.jsp");
+			response.sendRedirect("Branch");
 		}
 		}
 		else {
 			session.setAttribute("message","Branch Already Added!");
-			response.sendRedirect("AddBranch.jsp");
+			response.sendRedirect("Branch");
 		}
 	}catch(Exception ex) {
 		ex.printStackTrace();
