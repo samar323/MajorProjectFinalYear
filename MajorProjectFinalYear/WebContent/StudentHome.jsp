@@ -51,7 +51,7 @@ response.setDateHeader("Expires",-1);
             <ul>
                 <li><a href="index.jsp">Home</a></li>
                 <li><a href="EditProfile.jsp">Update Profile</a></li>
-                <li><a href="selfans.html">QnA's</a></li>
+                <li><a href="StudentQuestions.jsp">QnA's</a></li>
                 <li><a href="#">Results</a></li>
                 <li><a href="Logout">Logout</a></li>
             </ul>

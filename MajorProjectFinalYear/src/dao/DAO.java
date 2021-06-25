@@ -241,7 +241,7 @@ public byte[] getId(String email) throws Exception{
 		return answers;
 	}
 	public ArrayList<HashMap> getAnswerByStudent(String studentId) throws Exception {
-		PreparedStatement p = con.prepareStatement("select  q.question, q.quesId, a.studentId, a.dateTime, a.answers "
+		PreparedStatement p = con.prepareStatement("select q.question, q.quesId, a.studentId, a.dateTime, a.answers "
 				+ "from questions q join answers a on q.quesId=a.qid"
 				+ " where a.studentId=?");
 		p.setString(1, studentId);
@@ -253,7 +253,8 @@ public byte[] getId(String email) throws Exception{
 			ans.put("qid", rs.getInt("quesId"));
 			ans.put("answers", rs.getString("answers"));
 			ans.put("studentId", rs.getString("studentId"));
-			ans.put("dateTime", rs.getDate("dateTime"));
+			ans.put("date", rs.getDate("dateTime"));
+			ans.put("time", rs.getTime("dateTime"));
 			answers.add(ans);
 		}
 		return answers;
@@ -293,7 +294,7 @@ public byte[] getId(String email) throws Exception{
 	}
 
 	public ArrayList<HashMap> getQuestionByStudent(String studentId) throws Exception{
-	PreparedStatement p=con.prepareStatement("select * from questions where studentId=?");
+	PreparedStatement p=con.prepareStatement("select * from questions q join students s on q.studentId=s.roll where studentId=?");
 	p.setString(1, studentId);
 	ResultSet rs=p.executeQuery();
 	ArrayList<HashMap> questions = new ArrayList();
@@ -302,7 +303,9 @@ public byte[] getId(String email) throws Exception{
 		student.put("quesId", rs.getInt("quesId"));
 		student.put("question", rs.getString("question"));
 		student.put("studentId", rs.getString("studentId"));
-		student.put("dateTime", rs.getDate("dateTime"));
+		student.put("date", rs.getDate("dateTime"));
+		student.put("time", rs.getTime("dateTime"));
+		student.put("name", rs.getString("name"));
 		questions.add(student);
 		
 	}
@@ -434,10 +437,11 @@ public byte[] getId(String email) throws Exception{
 	public boolean insertBranch(HashMap branch) throws Exception {
 		try {
 			PreparedStatement p=con.prepareStatement("insert into branch"
-	+ "(branchName,school,semester,dateTime)values(?,?,?,CURRENT_TIMESTAMP)");
+	+ "(branchName,school,programme,semester,dateTime)values(?,?,?,?,CURRENT_TIMESTAMP)");
 			p.setString(1, (String)branch.get("branch"));
 			p.setString(2, (String)branch.get("school"));
-			p.setInt(3, (int) branch.get("semester"));
+			p.setString(3, (String)branch.get("programme"));
+			p.setInt(4, (int) branch.get("semester"));
 			p.executeUpdate();
 			return true;
 		}catch(java.sql.SQLIntegrityConstraintViolationException ex) {
@@ -498,13 +502,14 @@ public byte[] getId(String email) throws Exception{
 	}
 	
 	public List<Branch> getAllBranchesBySchool(String school) throws Exception {
-		PreparedStatement p = con.prepareStatement("SELECT distinct branchName FROM branch where school=?");
+		PreparedStatement p = con.prepareStatement("SELECT distinct branchName, programme FROM branch where school=?");
 		p.setString(1, school);
 		ResultSet rs = p.executeQuery();
 		List<Branch> list  = new ArrayList<>();
 		while (rs.next()) {
 			Branch br=new Branch();
 			br.setName(rs.getString("branchName"));
+			br.setProgramme(rs.getString("programme"));
 			list.add(br);
 		}
 		return list;
@@ -601,16 +606,17 @@ public byte[] getId(String email) throws Exception{
 		p.setString(1, school);
 		p.setString(2, branch);
 		p.setInt(3, semester);
-		p.setString(2, roll);
+		p.setString(4, roll);
 		ResultSet rs = p.executeQuery();
 		ArrayList<HashMap> results=new ArrayList();
 		while(rs.next()) {
 			HashMap result=new HashMap();
-			result.put("school", rs.getString("subjectName"));
-			result.put("branchName", rs.getString("subjectCode"));
-			result.put("semester", rs.getInt("marks"));
+			result.put("subjectName", rs.getString("subjectName"));
+			result.put("subjectCode", rs.getString("subjectCode"));
+			result.put("marks", rs.getInt("marks"));
 			result.put("studentId", rs.getString("studentId"));
 			result.put("classId", rs.getInt("classId"));
+			result.put("grade", rs.getString("grade"));
 			
 			results.add(result);
 		}

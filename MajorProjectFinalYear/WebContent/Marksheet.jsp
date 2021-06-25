@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+<%@page import="java.text.DecimalFormat"%>
+<%@page import="java.util.HashMap"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="dao.DAO"%>
 <html lang="en">
 
@@ -8,6 +11,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script>
     <title>Document</title>
 </head>
 
@@ -19,8 +23,10 @@ String semester=request.getParameter("semester");
 String roll=request.getParameter("roll");
 if(school!=null && branch!=null && semester!=null && roll!=null){
 	DAO dao=new DAO();
+	ArrayList<HashMap> result=dao.getResultByRoll(school, branch, Integer.parseInt(semester), roll);
+	if(result.size()!=0){
 %>
-    <div class="container-image">
+    <div class="container-image" >
         <img src="images/logo.png" alt="">
     </div>
     <div class="head">
@@ -36,133 +42,57 @@ if(school!=null && branch!=null && semester!=null && roll!=null){
         <h3>(2019-2020)</h3>
     </div>
     <div class="skills">
-        <span>Name Of the Student: Aditi Malhotra</span>
-        <span>Son/Daughter of: Balraj Malhotra</span>
-        <span>Enrollment Number: 17/BIT/004</span>
+        <span>Enrollment Number: <%=roll %></span>
     </div>
     <div class="skills">
-        <span>Name of the Programme: B. Tech in information Technology(IT)</span>
-        <span>Name of the School: School of Information and Communication Technology</span>
+        <span>Name of the Programme: <%=branch %></span>
+        <span>Name of the School: <%=school %></span>
     </div>
     <table>
         <tr class="border">
             <th></th>
             <th></th>
-            <th>Semester V</th>
+            <th>Semester <%=semester %></th>
             <th></th>
             <th></th>
             <th></th>
             <th></th>
         </tr>
-        <tr></tr>
         <tr>
             <th>S. No</th>
             <th>COURSE CODE</th>
             <th>COURSE NAME</th>
             <th></th>
-            <th>CREDITS</th>
-            <th></th>
             <th>GRADE</th>
         </tr>
+        <%
+        int sno=1;
+        double total_marks=0;
+        for(HashMap marks:result){
+        	total_marks+=(int)marks.get("marks");
+        	%>
         <tr>
-            <td>1</td>
-            <td>IT306</td>
-            <td>Information and Network Security</td>
+            <td><%=sno++ %></td>
+            <td><%=marks.get("subjectCode") %></td>
+            <td><%=marks.get("subjectName") %></td>
             <th></th>
-            <td>4</td>
-            <th></th>
-            <td>A+</td>
+            <td><%=marks.get("grade") %></td>
         </tr>
-        <tr>
-            <td>2</td>
-            <td>IT302</td>
-            <td>Algorithm Design and Analysis</td>
-            <th></th>
-            <td>4</td>
-            <th></th>
-            <td>A+</td>
-        </tr>
-        <tr>
-            <td>3</td>
-            <td>IT304</td>
-            <td>Computer Organisation</td>
-            <th></th>
-            <td>4</td>
-            <th></th>
-            <td>A+</td>
-        </tr>
-        <tr>
-            <td>4</td>
-            <td>IT308</td>
-            <td>Information Retrieval and Management</td>
-            <th></th>
-            <td>4</td>
-            <th></th>
-            <td>A+</td>
-        </tr>
-        <tr>
-            <td>5</td>
-            <td>IT310</td>
-            <td>Artificial Intelligence</td>
-            <th></th>
-            <td>4</td>
-            <th></th>
-            <td>A+</td>
-        </tr>
-        <tr>
-            <td>6</td>
-            <td>IT386</td>
-            <td>Information and Network Security Lab</td>
-            <th></th>
-            <td>1</td>
-            <th></th>
-            <td>A+</td>
-        </tr>
-        <tr>
-            <td>7</td>
-            <td>IT382</td>
-            <td>Algorithm and Design Analysis Lab</td>
-            <th></th>
-            <td>1</td>
-            <th></th>
-            <td>A+</td>
-        </tr>
-        <tr>
-            <td>8</td>
-            <td>IT384</td>
-            <td>Artificial Intelligence Lab</td>
-            <th></th>
-            <td>1</td>
-            <th></th>
-            <td>A+</td>
-        </tr>
-        <tr>
-            <td>9</td>
-            <td>IT492</td>
-            <td>Seminar</td>
-            <th></th>
-            <td>1</td>
-            <th></th>
-            <td>A+</td>
-        </tr>
-        <tr>
-            <td>10</td>
-            <td>GP</td>
-            <td>General Proficiency</td>
-            <th></th>
-            <td>0</td>
-            <th></th>
-            <td>B+</td>
-        </tr>
-        <tr></tr>
+        	<%
+        }
+        double sgpa=total_marks/((sno-1)*10);
+        DecimalFormat df = new DecimalFormat();
+        df.setMaximumFractionDigits(2);
+        %>
+       
         <tr class="border">
             <td>SGPA:</td>
-            <td>9.00</td>
+            <td><%=df.format(sgpa) %></td>
             <td></td>
             <th></th>
-            <td>CGPA:</td>
+            <td></td>
             <th></th>
-            <td>8.45</td>
+            <td></td>
         </tr>
     </table>
     <div class="sign">
@@ -171,8 +101,13 @@ if(school!=null && branch!=null && semester!=null && roll!=null){
     </div>
     <div class="btn">
     <button onclick="window.print()">Print this page</button>
+    <a href="ViewResult.jsp"><button>Go Back</button></a>
 </div>
 <%
+	}else{
+		session.setAttribute("message","No Result Found!!");
+		response.sendRedirect("ViewResult.jsp");
+	}
 }else{
 	session.setAttribute("message","Plz Fill all details!");
 	response.sendRedirect("ViewResult.jsp");

@@ -24,6 +24,7 @@ public class AddBranch extends HttpServlet {
 		int semester=(Integer.parseInt(request.getParameter("sem")));
 		String school=request.getParameter("school");
 		String branchName=request.getParameter("branch");
+		String programme=request.getParameter("programme");
 		int status=0;
 		DAO dao=new DAO();
 		if(dao.checkBranch(school,branchName)) {
@@ -32,6 +33,7 @@ public class AddBranch extends HttpServlet {
 		branch.put("semester", sem);
 		branch.put("school", school);
 		branch.put("branch", branchName);
+		branch.put("programme", programme);
 		
 		
 		dao.insertBranch(branch);
