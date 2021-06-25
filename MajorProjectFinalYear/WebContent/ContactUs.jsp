@@ -1,35 +1,3 @@
-<<<<<<< HEAD
-
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-   
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="ISO-8859-1">
-<title>Contact Us</title>
-</head>
-<body>
-<%
-		String m=(String)session.getAttribute("message");
-		if(m!=null){
-	%>
-			<p style="background-color: yellow;width:max-content;"><%=m %></p>
-	<%		
-			session.setAttribute("message",null);
-		}
-	%>
-<h2>Send Message</h2>
-
-
-<form action="ContactUs" method="post"> 
-Name : <input type="text" name="name"  required/><br><br>
-Email : <input type="email" name="email"  required/><br><br>
-Type Your Message : <textarea name="message" rows="10" cols="100" required="required"></textarea><br><br>
-<button type="submit">Add Message</button>
-</body>
-</html>
-=======
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -43,6 +11,10 @@ Type Your Message : <textarea name="message" rows="10" cols="100" required="requ
 </head>
 <body>
 <jsp:include page="NavBar.jsp" />
+
+
+
+
 <section class="contact">
         <div class="content">
             <h2>Contact Us</h2>
@@ -77,22 +49,31 @@ Type Your Message : <textarea name="message" rows="10" cols="100" required="requ
                 </div>
             </div>
             <div class="contactform">
-                <form>
+            <%
+		String m=(String)session.getAttribute("message");
+		if(m!=null){
+	%>
+			<p style="background-color: yellow;width:max-content;"><%=m %></p>
+	<%		
+			session.setAttribute("message",null);
+		}
+	%>
+                <form action="ContactUs" method="post">
                     <h2>Send Message</h2>
                     <div class="inputbox">
-                        <input type="text" name="" required="required">
+                        <input type="text" name="name" required="required">
                         <span>Full Name</span>
                     </div>
                     <div class="inputbox">
-                        <input type="text" name="" required="required">
+                        <input type="text" name="email" required="required">
                         <span>Email</span>
                     </div>
                     <div class="inputbox">
-                        <textarea required="required"></textarea>
+                        <textarea name="message" required="required"></textarea>
                         <span>Type Your Message...</span>
                     </div>
                     <div class="inputbox">
-                        <input type="submit" name="" value="Send">
+                        <input type="submit" value="Send">
                     </div>
                 </form>
             </div>

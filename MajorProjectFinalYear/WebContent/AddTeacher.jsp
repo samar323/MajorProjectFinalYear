@@ -19,6 +19,7 @@
 <form action="AddTeacher" method="post"> 
  Name: <input type="text" name="name" required/><br><br>
  Email: <input type="email" name="email" required/><br><br>
+ Password: <input type="password" name="password" required/><br><br>
   Phone: <input type="text" name="phone" maxlength="10" required/><br><br>
 <button type="submit">Add Teacher</button>
 </form>

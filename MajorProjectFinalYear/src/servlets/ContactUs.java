@@ -38,11 +38,11 @@ public class ContactUs extends HttpServlet {
 			boolean result=dao.insertMessage(messages);
 			if(result==true) {
 				
-				session.setAttribute("message","Message Added Successfully!");
+				session.setAttribute("message","Message Sent Successfully!");
 				response.sendRedirect("ContactUs.jsp");
 			}else {
 				
-				session.setAttribute("message","Message  not Added!");
+				session.setAttribute("message","Sent failed!");
 				response.sendRedirect("ContactUs.jsp");
 			}
 			}else {

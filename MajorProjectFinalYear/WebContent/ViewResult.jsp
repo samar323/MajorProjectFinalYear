@@ -106,7 +106,7 @@
                             console.log(data);
                             let obj = $.parseJSON(data);
                             $.each(obj, function (key, value) {
-                                $('#branch').append('<option value="' + value.name + '">'+value.programme+'(' + value.name + ')</option>')
+                                $('#branch').append('<option value="' + value.name + '">' + value.name + '</option>')
                             });
                             $('select').formSelect();
                         },

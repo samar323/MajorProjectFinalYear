@@ -52,40 +52,40 @@ public class ChangeStudentStatus extends HttpServlet {
 					}
 				if(Sub!=null && Body!=null && (status.equalsIgnoreCase("accept") || status.equalsIgnoreCase("reject"))) {
 					try {
-					final String SEmail="fiverphoto123@gmail.com";
-					final String SPass="Samar323@";
-					final String REmail=email;
-					//Mail send
-					Properties props = new Properties();
-					props.put("mail.smtp.auth", "true");
-					props.put("mail.smtp.starttls.enable", "true");
-			        props.put("mail.smtp.ssl.trust", "smtp.gmail.com");
-					props.put("mail.smtp.host", "smtp.gmail.com");
-					props.put("mail.smtp.port", "587");
-				
-					Session ses=Session.getInstance(props, new javax.mail.Authenticator() {
-						protected PasswordAuthentication getPasswordAuthentication() {
-							return new PasswordAuthentication(SEmail,SPass);
-						}
-					});
-					Message message=new MimeMessage(ses);
-					message.setFrom(new InternetAddress(SEmail));
-					message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(REmail));
-					message.setSubject(Sub);
-					message.setContent(Body,"text/html");
+//					final String SEmail="fiverphoto123@gmail.com";
+//					final String SPass="Samar323@";
+//					final String REmail=email;
+//					//Mail send
+//					Properties props = new Properties();
+//					props.put("mail.smtp.auth", "true");
+//					props.put("mail.smtp.starttls.enable", "true");
+//			        props.put("mail.smtp.ssl.trust", "smtp.gmail.com");
+//					props.put("mail.smtp.host", "smtp.gmail.com");
+//					props.put("mail.smtp.port", "587");
+//				
+//					Session ses=Session.getInstance(props, new javax.mail.Authenticator() {
+//						protected PasswordAuthentication getPasswordAuthentication() {
+//							return new PasswordAuthentication(SEmail,SPass);
+//						}
+//					});
+//					Message message=new MimeMessage(ses);
+//					message.setFrom(new InternetAddress(SEmail));
+//					message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(REmail));
+//					message.setSubject(Sub);
+//					message.setContent(Body,"text/html");
+//					
+//					Transport.send(message);
+//					session.setAttribute("message", "Student's status is updated successfully");
+//					response.sendRedirect("AdminHome");
 					
-					Transport.send(message);
-					session.setAttribute("message", "Student's status is updated successfully");
-					response.sendRedirect("AdminHome");
-					
-					//boolean mailStatus=sendMail.emailSend(email,Sub,Body);
-//					if(mailStatus==true) {
-//						session.setAttribute("message", "Student's status is updated successfully");
-//						response.sendRedirect("AdminHome");
-//					}else {
-//						session.setAttribute("message", "Something went wrong with mail!!");
-//						response.sendRedirect("AdminHome");
-//					}
+					boolean mailStatus=sendMail.emailSend(email,Sub,Body);
+					if(mailStatus==true) {
+						session.setAttribute("message", "Student's status is updated successfully");
+						response.sendRedirect("AdminHome");
+					}else {
+						session.setAttribute("message", "Something went wrong with mail!!");
+						response.sendRedirect("AdminHome");
+					}
 					}catch(Exception ex) {
 						out.println(ex);
 					}

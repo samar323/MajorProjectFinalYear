@@ -437,11 +437,10 @@ public byte[] getId(String email) throws Exception{
 	public boolean insertBranch(HashMap branch) throws Exception {
 		try {
 			PreparedStatement p=con.prepareStatement("insert into branch"
-	+ "(branchName,school,programme,semester,dateTime)values(?,?,?,?,CURRENT_TIMESTAMP)");
+	+ "(branchName,school,semester,dateTime)values(?,?,?,CURRENT_TIMESTAMP)");
 			p.setString(1, (String)branch.get("branch"));
 			p.setString(2, (String)branch.get("school"));
-			p.setString(3, (String)branch.get("programme"));
-			p.setInt(4, (int) branch.get("semester"));
+			p.setInt(3, (int) branch.get("semester"));
 			p.executeUpdate();
 			return true;
 		}catch(java.sql.SQLIntegrityConstraintViolationException ex) {
@@ -449,7 +448,7 @@ public byte[] getId(String email) throws Exception{
 		}
 	}
 	public ArrayList<HashMap> getAllBranches() throws Exception {
-		PreparedStatement p = con.prepareStatement("select * from branch limit 8");
+		PreparedStatement p = con.prepareStatement("select * from branch order by dateTime desc");
 		ResultSet rs = p.executeQuery();
 		ArrayList<HashMap> branches = new ArrayList();
 		while (rs.next()) {
@@ -502,14 +501,13 @@ public byte[] getId(String email) throws Exception{
 	}
 	
 	public List<Branch> getAllBranchesBySchool(String school) throws Exception {
-		PreparedStatement p = con.prepareStatement("SELECT distinct branchName, programme FROM branch where school=?");
+		PreparedStatement p = con.prepareStatement("SELECT distinct branchName FROM branch where school=?");
 		p.setString(1, school);
 		ResultSet rs = p.executeQuery();
 		List<Branch> list  = new ArrayList<>();
 		while (rs.next()) {
 			Branch br=new Branch();
 			br.setName(rs.getString("branchName"));
-			br.setProgramme(rs.getString("programme"));
 			list.add(br);
 		}
 		return list;
@@ -809,10 +807,11 @@ public byte[] getId(String email) throws Exception{
 	public boolean insertTeacher(HashMap teacher) throws Exception{
 		try {
 			PreparedStatement p=con.prepareStatement("insert into teachers"
-	+ "(name,email,phone)values(?,?,?)");
+	+ "(name,email,password,phone)values(?,?,?,?)");
 			p.setString(1, (String)teacher.get("name"));
 			p.setString(2, (String)teacher.get("email"));
-			p.setString(3, (String)teacher.get("phone"));
+			p.setString(3, (String)teacher.get("password"));
+			p.setString(4, (String)teacher.get("phone"));
 			p.executeUpdate();
 			return true;
 		}catch(java.sql.SQLIntegrityConstraintViolationException ex) {
