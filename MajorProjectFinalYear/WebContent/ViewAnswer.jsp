@@ -172,7 +172,7 @@
 	try{
 	%>
 	<%
-	HashMap studentDetails=(HashMap)session.getAttribute("studentDetails");
+	//HashMap studentDetails=(HashMap)session.getAttribute("studentDetails");
 	
 %>
 <div class="cont">

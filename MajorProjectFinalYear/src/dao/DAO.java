@@ -834,5 +834,5 @@ public byte[] getId(String email) throws Exception{
 			teachers.add(teacher);
 		}
 		return teachers;
-	}//add
+	}
 }

@@ -28,12 +28,10 @@
             </form>
         </div>
     </header>
-<<<<<<< HEAD
+ps
     <a href='Faq.jsp'>FAQ</a>
     <a href='AddTeacher.jsp'>Add Teacher</a>
-=======
-	
->>>>>>> branch 'main' of https://github.com/samar323/MajorProjectFinalYear.git
+p
 	
 	<div class="btnsection">
         <button type="button" class="btn btn-primary"><a href="AdminHome.jsp?status=pending" class="btnallans">Pending Students</a></button>
