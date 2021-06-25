@@ -101,6 +101,7 @@
         </div>
     </header>
     <a href='Faq.jsp'>FAQ</a>
+    <a href='AddTeacher.jsp'>Add Teacher</a>
 	
 	<div class="btnsection">
         <button type="button" class="btn btn-primary"><a href="AdminHome.jsp?status=pending" class="btnallans">Pending Students</a></button>

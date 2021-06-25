@@ -704,4 +704,47 @@ public byte[] getId(String email) throws Exception{
 			return false;
 		}
 	}
+
+	public boolean checkTeacher(String name, String email)throws Exception {
+		PreparedStatement p=con.prepareStatement("select * from teachers where name=? and email=?");
+		p.setString(1, name);
+		p.setString(2, email);
+		ResultSet rs=p.executeQuery();
+		if(rs.next()) {
+			return false;
+		}else {
+			
+			return true;
+		}
+	}
+
+	public boolean insertTeacher(HashMap teacher) throws Exception{
+		try {
+			PreparedStatement p=con.prepareStatement("insert into teachers"
+	+ "(name,email,phone)values(?,?,?)");
+			p.setString(1, (String)teacher.get("name"));
+			p.setString(2, (String)teacher.get("email"));
+			p.setString(3, (String)teacher.get("phone"));
+			p.executeUpdate();
+			return true;
+		}catch(java.sql.SQLIntegrityConstraintViolationException ex) {
+			return false;
+		}
+	}
+	
+	public ArrayList<HashMap> getAllTeahers() throws Exception {
+		PreparedStatement p = con.prepareStatement("SELECT * FROM teachers");
+		ResultSet rs = p.executeQuery();
+		ArrayList<HashMap> teachers=new ArrayList();
+		while(rs.next()) {
+			HashMap teacher=new HashMap();
+			teacher.put("name", rs.getString("name"));
+			teacher.put("email", rs.getString("email"));
+			teacher.put("phone", rs.getString("phone"));
+			
+			
+			teachers.add(teacher);
+		}
+		return teachers;
+	}
 }
