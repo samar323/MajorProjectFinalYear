@@ -31,7 +31,7 @@ public class GetPhoto extends HttpServlet {
 			if(photo==null) {
 				photo=new byte[3500];
 				ServletContext ctx=getServletContext();
-				InputStream i=ctx.getResourceAsStream("images/logo.png");
+				InputStream i=ctx.getResourceAsStream("images/user.jpg");
 				i.read(photo);
 			}
 			response.getOutputStream().write(photo);
