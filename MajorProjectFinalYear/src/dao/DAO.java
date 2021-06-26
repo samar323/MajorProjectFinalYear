@@ -834,4 +834,20 @@ public byte[] getId(String email) throws Exception{
 		}
 		return teachers;
 	}
+
+	public HashMap getTeacher(String email, String password) throws Exception {
+		PreparedStatement p = con.prepareStatement("select * from teachers where email=? and password=?");
+		p.setString(1, email);
+		p.setString(2, password);
+		ResultSet rs = p.executeQuery();
+		if (rs.next()) {
+			HashMap teacher = new HashMap();
+			teacher.put("name", rs.getString("name"));
+			teacher.put("email", rs.getString("email"));
+			teacher.put("phone", rs.getString("phone"));
+			return teacher;
+		} else {
+			return null;
+		}
+	}
 }

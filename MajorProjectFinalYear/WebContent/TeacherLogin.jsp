@@ -20,11 +20,11 @@ response.setDateHeader("Expires",-1);
 <title>Teacher Login</title>
 </head>
 <body>
-<jsp:include page="NavBar.jsp" /> 
+<jsp:include page="NavBar.jsp"/> 
 <div class="wrap-pad">
 <div class="wrapper">
     <div class="title">Login Form</div>
-    <form action="#" method="post">
+    <form action="TeacherLogin" method="post">
       <div class="incorrect"><%
 String m=(String)session.getAttribute("message");
 if(m!=null){
