@@ -23,6 +23,7 @@
 <header>
         <div class="first">
             <h1>Welcome <a href="#"><%=adminDetails.get("name") %></a></h1>
+            <!-- Admin Home -->
             <form action="Logout" method="post">
             <button type="submit" class="btn btn-danger">Logout</button>
             </form>
