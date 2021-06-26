@@ -86,7 +86,8 @@ public class DAO {
 				"select (photo) from students where email=?");
 		}
 		else{
-			
+			pr=con.prepareStatement(
+					"select (photo) from teachers where email=?");
 		}
 		pr.setString(1, email);
 		ResultSet rs=pr.executeQuery();
