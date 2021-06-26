@@ -83,4 +83,7 @@
     <jsp:include page="Footer.jsp" /> 
 </body>
 </html>
+<<<<<<< HEAD
 
+=======
+>>>>>>> branch 'main' of https://github.com/samar323/MajorProjectFinalYear.git
