@@ -101,8 +101,7 @@ public class DAO {
 			}
 			
 			
-		}
-		else {
+		}else {
 			return null;
 		}
 	}
@@ -820,6 +819,21 @@ public byte[] getId(String email) throws Exception{
 		}
 	}
 	
+	public boolean insertAssignmentClass(HashMap assignmentclass) throws Exception{
+		try {
+			PreparedStatement p=con.prepareStatement("insert into assignment_class"
+	+ "(teacher_id,class_name,subject,class_code,date)values(?,?,?,?,CURRENT_TIMESTAMP)");
+			p.setInt(1, (int)assignmentclass.get("teacherId"));
+			p.setString(2, (String)assignmentclass.get("className"));
+			p.setString(3, (String)assignmentclass.get("subject"));
+			p.setString(4, (String)assignmentclass.get("randomCode"));
+			p.executeUpdate();
+			return true;
+		}catch(Exception ex) {
+			return false;
+		}
+	}
+	
 	public ArrayList<HashMap> getAllTeahers() throws Exception {
 		PreparedStatement p = con.prepareStatement("SELECT * FROM teachers");
 		ResultSet rs = p.executeQuery();
@@ -843,6 +857,7 @@ public byte[] getId(String email) throws Exception{
 		ResultSet rs = p.executeQuery();
 		if (rs.next()) {
 			HashMap teacher = new HashMap();
+			teacher.put("tid", rs.getInt("tid"));
 			teacher.put("name", rs.getString("name"));
 			teacher.put("email", rs.getString("email"));
 			teacher.put("phone", rs.getString("phone"));
@@ -852,6 +867,7 @@ public byte[] getId(String email) throws Exception{
 			return null;
 		}
 	}
+
 
 	public boolean updateTeacher(HashMap teacher, String oldEmail, InputStream photo) throws Exception {
 		try {
@@ -873,4 +889,58 @@ public byte[] getId(String email) throws Exception{
 			return false;
 		}
 	}
+
+	
+	public ArrayList<HashMap> getAllAssignmentclass(int tid) throws Exception {
+		PreparedStatement p = con.prepareStatement("SELECT * FROM assignment_class where teacher_id=?;");
+		p.setInt(1, tid);
+		ResultSet rs = p.executeQuery();
+		ArrayList<HashMap> Assignmentclasses=new ArrayList();
+		while (rs.next()) {
+			HashMap Assignmentclass = new HashMap();
+			Assignmentclass.put("aid", rs.getInt("aid"));
+			Assignmentclass.put("teacher_id", rs.getInt("teacher_id"));
+			Assignmentclass.put("className", rs.getString("class_name"));
+			Assignmentclass.put("subject", rs.getString("subject"));
+			Assignmentclass.put("classCode", rs.getString("class_code"));
+			Assignmentclass.put("date", rs.getDate("date"));
+			Assignmentclass.put("time", rs.getTime("date"));
+			
+			Assignmentclasses.add(Assignmentclass);
+		} 
+		return Assignmentclasses;
+	}
+	
+	public boolean insertAssignment(HashMap assignmentDetails) throws Exception{
+		try {
+			PreparedStatement p=con.prepareStatement("insert into assignment"
+	+ "(aid,assignment,date,dueDate)values(?,?,CURRENT_TIMESTAMP,?)");
+			p.setInt(1, (int)assignmentDetails.get("aid"));
+			p.setString(2, (String)assignmentDetails.get("assignment"));
+			p.setDate(3, (java.sql.Date)assignmentDetails.get("dueDate"));
+			p.executeUpdate();
+			return true;
+		}catch(Exception ex) {
+			ex.printStackTrace();
+			return false;
+		}
+	}
+	
+	public ArrayList<HashMap> getAllAssignments(int aid) throws Exception {
+		PreparedStatement p = con.prepareStatement("SELECT * FROM assignment where aid=?");
+		p.setInt(1, aid);
+		ResultSet rs = p.executeQuery();
+		ArrayList<HashMap> assignments=new ArrayList();
+		while (rs.next()) {
+			HashMap assignment = new HashMap();
+			assignment.put("assignment", rs.getString("assignment"));
+			assignment.put("date", rs.getDate("date"));
+			assignment.put("time", rs.getTime("date"));
+			assignment.put("dueDate", rs.getDate("dueDate"));
+			
+			assignments.add(assignment);
+		} 
+		return assignments;
+	}
+
 }

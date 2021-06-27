@@ -3,9 +3,10 @@
     pageEncoding="ISO-8859-1"%>
 <%
 	HashMap studentDetails=(HashMap)session.getAttribute("studentDetails");
+	HashMap teacherDetails=(HashMap)session.getAttribute("teacherDetails");
 	if(studentDetails==null){
-%>
-<%
+		if(teacherDetails==null){
+
 response.setHeader("Pragma","no-cache");
 response.setHeader("Cache-Control","no-store");
 response.setHeader("Expires","0");
@@ -58,7 +59,9 @@ if(m!=null){
 </body>
 </html>
 
-<%
+<%}else{
+	response.sendRedirect("TeacherHome.jsp");
+}
 	}else{
 		response.sendRedirect("StudentHome.jsp");
 	}
