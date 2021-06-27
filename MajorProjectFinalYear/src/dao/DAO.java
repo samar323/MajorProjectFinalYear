@@ -927,7 +927,7 @@ public byte[] getId(String email) throws Exception{
 	}
 	
 	public ArrayList<HashMap> getAllAssignments(int aid) throws Exception {
-		PreparedStatement p = con.prepareStatement("SELECT * FROM assignment where aid=?");
+		PreparedStatement p = con.prepareStatement("SELECT * FROM assignment where aid=? order by date desc");
 		p.setInt(1, aid);
 		ResultSet rs = p.executeQuery();
 		ArrayList<HashMap> assignments=new ArrayList();
@@ -942,6 +942,22 @@ public byte[] getId(String email) throws Exception{
 		} 
 		return assignments;
 	}
+	
+	public HashMap getAssignmentClass(int aid) throws Exception {
+		PreparedStatement p = con.prepareStatement("select * from assignment_class where aid=?");
+		p.setInt(1, aid);
+		ResultSet rs = p.executeQuery();
+		if (rs.next()) {
+			HashMap assignment = new HashMap();
+			assignment.put("className", rs.getString("class_name"));
+			assignment.put("subject", rs.getString("subject"));
+			assignment.put("classCode", rs.getString("class_code"));
+			return assignment;
+		} else {
+			return null;
+		}
+	}
+
 
 	public boolean insertStudentClass(HashMap classDetails) throws Exception{
 		try {

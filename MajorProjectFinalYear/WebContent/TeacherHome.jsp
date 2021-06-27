@@ -14,7 +14,19 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/profile.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="https://cdn.tiny.cloud/1/tblirgs9iclfy2vhfk5h2xvxqnkm882tp2vsoz9nij4c3wqn/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+	<script>
+		$(document).ready(function(){
+			$('#hamburger').click(function(){
+				$('nav').toggleClass('show');
+			});
+		});
+	</script>
 <title>Profile</title>
 <style type="text/css">
 .tox.tox-silver-sink.tox-tinymce-aux {
@@ -23,13 +35,10 @@
 </style>
 </head>
 <body>
-<h1>My Profile</h1>
-Welcome <b><%=teacherDetails.get("name") %></b>
-<a href='Logout'>Logout</a>
-	
-<br>
-<hr>
-	<%
+
+
+<header>
+<%
 		String m=(String)session.getAttribute("message");
 		if(m!=null){
 	%>
@@ -38,65 +47,83 @@ Welcome <b><%=teacherDetails.get("name") %></b>
 			session.setAttribute("message",null);
 		}
 	%>
+	
 	<%
 	DAO dao=new DAO();
 	String email=(String)teacherDetails.get("email");
 	String type="teacher";
 	byte [] photo=dao.getPhoto(email,type);
-	if(photo!=null){
 	%>
-<img src='GetPhoto?email=<%=teacherDetails.get("email")%>&type=teacher' height="100px" width="100px" />
-<%
-	}else{
-		%>
-		<img src='images/user.jpg' height="100px" width="100px" />
+	
+    <div class="menu-toggle" id="hamburger">
+        <i class="fas fa-bars"></i>
+    </div>
+    <div class="overlay"></div>
+    <div class="container">
+        <nav>
+            <ul>
+                <li><a href="index.jsp">Home</a></li>
+                <li><a href="UpdateTeacher.jsp">Update Profile</a></li>
+                <li><a href="TeacherHome.jsp">Profile</a></li>
+                <li><a href="TeacherClassroom.jsp">Classroom</a></li>
+                <li><a href="Logout">Logout</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+<div class="row">
+        <div class="col-md-4 mt-1">
+            <div class="card text-center sidebar">
+                <div class="card-body">
+                <div class="circle">
+		                <%
+			if(photo!=null){
+			%>
+			 <img src='GetPhoto?email=<%=teacherDetails.get("email")%>&type=teacher' class="rounded-circle" width="100px">
 		<%
-	}
-%>
-<div>
-		Email: <b><%=teacherDetails.get("email" )%></b> <br>
-		Phone: <b><%=teacherDetails.get("phone") %></b> <br>
-
-		<a href="UpdateTeacher.jsp">Update Profile</a>
-
-		<%
-		
-		int id=(int)teacherDetails.get("tid");
+			}else{
+				%>
+				<img src='images/user.jpg' class="rounded-circle" width="100px" />
+				<%
+			}
 		%>
-		Id: <b><%=id %></b> <br>
-		
+                   
+                 </div>
+                    <div class="mt-3">
+                        <h3><%=teacherDetails.get("name") %></h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8 mt-1">
+            <div class="card mb-3 content">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <h5>Email</h5>
+                        </div>
+                        <div class="col-md-9 text-secondary">
+                            <%=teacherDetails.get("email") %>
+                        </div>
+                    </div>
+                    
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <h5>Phone</h5>
+                        </div>
+                        <div class="col-md-9 text-secondary">
+                            <%=teacherDetails.get("phone") %>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
 
-	</div>
-<hr>
-<h1>Add Assignment Class</h1> 
-<form action="AddAssignmentClass">
-	Class Name: <input type="text" name="class" placeholder="B.Tech(IT) 4A" required/><br>
-	Subject Name: <input type="text" name="subject" placeholder="IT 301" required/><br>
-	<button type="submit">Submit</button>
-</form>
-<%
+        </div>
+    </div>
 
-ArrayList<HashMap> assignmentclasses=dao.getAllAssignmentclass(id);
-if(assignmentclasses.size()!=0){
-%>
-<hr>
-<h1>Assignment class</h1>
-<%
-for(HashMap assignmentclass:assignmentclasses ){
-%>
-Class: <%=assignmentclass.get("className") %><br>
-Subject: <%=assignmentclass.get("subject") %><br>
-Code: <%=assignmentclass.get("classCode") %><br>
-Date: <%=assignmentclass.get("date") %><br>
-Time: <%=assignmentclass.get("time") %><br>
-  <form action="DeleteClass" method="post">
-			<input type="hidden" name="id" value="<%=assignmentclass.get("aid")%>"/>
- <button class="btn btn-danger" type="submit">Delete</button>
-			</form></td>
-<a href="AddAssignment.jsp?aid=<%=assignmentclass.get("aid") %>">ADD</a>
-<hr>
-<%}
-}%>
+<jsp:include page="Footer.jsp" /> 
 <script>
     tinymce.init({
       selector: 'textarea',

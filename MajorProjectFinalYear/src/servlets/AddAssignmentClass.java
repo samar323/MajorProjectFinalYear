@@ -44,15 +44,15 @@ public class AddAssignmentClass extends HttpServlet {
 		boolean status=dao.insertAssignmentClass(assignmentclass);
 		if(status==true) {
 			session.setAttribute("message", "Class Added Successfully");
-			response.sendRedirect("TeacherHome.jsp");
+			response.sendRedirect("TeacherClassroom.jsp");
 		}else {
 			session.setAttribute("message", "Class Not Added");
-			response.sendRedirect("TeacherHome.jsp");
+			response.sendRedirect("TeacherClassroom.jsp");
 		}
 		}catch(Exception ex) {
 			ex.printStackTrace();
 			session.setAttribute("message", "Something went wrong!!");
-			response.sendRedirect("TeacherHome.jsp");
+			response.sendRedirect("TeacherClassroom.jsp");
 		}
 	}
 

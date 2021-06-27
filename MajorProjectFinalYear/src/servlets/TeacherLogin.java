@@ -39,7 +39,7 @@ public class TeacherLogin extends HttpServlet {
 			}else {
 				
 				session.setAttribute("message", "ID/Password wrong!");
-				response.sendRedirect("TeacherLogin");
+				response.sendRedirect("TeacherHome.jsp");
 			}
 		}catch(Exception ex) {
 			ex.printStackTrace();

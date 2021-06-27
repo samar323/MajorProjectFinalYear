@@ -29,10 +29,10 @@ public class DeleteClass extends HttpServlet {
 			boolean DeleteStatus=dao.deleteClass(classId);
 			if(DeleteStatus==true) {
 				session.setAttribute("message","Class Deleted Successfully!");
-				response.sendRedirect("TeacherHome.jsp");
+				response.sendRedirect("TeacherClassroom.jsp");
 			}else {
 				session.setAttribute("message","Unable to delete class.!");
-				response.sendRedirect("TeacherHome.jsp");
+				response.sendRedirect("TeacherClassroom.jsp");
 			}
 		}catch(Exception e) {
 			
