@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     <%@page import="java.util.*" %>
+    <%@page import="dao.DAO"%>
     <%
     HashMap teacherDetails=(HashMap)session.getAttribute("teacherDetails");
     if(teacherDetails!=null){
@@ -30,11 +31,21 @@ Welcome <b><%=teacherDetails.get("name") %></b>
 			session.setAttribute("message",null);
 		}
 	%>
+	<%
+	DAO dao=new DAO();
+	String email=(String)teacherDetails.get("email");
+	String type="teacher";
+	byte [] photo=dao.getPhoto(email,type);
+	if(photo!=null){
+	%>
 <img src='GetPhoto?email=<%=teacherDetails.get("email")%>&type=teacher' height="100px" width="100px" />
+<%
+	}
+%>
 <div>
-		Email: <b><%=teacherDetails.get("email") %></b> <br>
+		Email: <b><%=teacherDetails.get("email" )%></b> <br>
 		Phone: <b><%=teacherDetails.get("phone") %></b> <br>
-		
+		<a href="UpdateTeacher.jsp">Update Profile</a>
 	</div>
 
 </body>

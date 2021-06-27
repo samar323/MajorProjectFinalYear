@@ -846,9 +846,31 @@ public byte[] getId(String email) throws Exception{
 			teacher.put("name", rs.getString("name"));
 			teacher.put("email", rs.getString("email"));
 			teacher.put("phone", rs.getString("phone"));
+			teacher.put("password", rs.getString("password"));
 			return teacher;
 		} else {
 			return null;
+		}
+	}
+
+	public boolean updateTeacher(HashMap teacher, String oldEmail, InputStream photo) throws Exception {
+		try {
+			PreparedStatement p=con.prepareStatement("UPDATE teachers SET email=?,name=?,"
+					+ "phone=?,password=?,photo=? WHERE email=?");
+			p.setString(1, (String)teacher.get("email"));
+			
+			p.setString(2, (String)teacher.get("name"));
+			p.setString(3, (String)teacher.get("phone"));
+			
+			p.setString(4, (String)teacher.get("password"));
+			if(photo!=null) {
+			p.setBinaryStream(5, (InputStream)teacher.get("photo"));
+			}
+			p.setString(6, oldEmail);
+			p.executeUpdate();
+			return true;
+		}catch(java.sql.SQLIntegrityConstraintViolationException ex) {
+			return false;
 		}
 	}
 }

@@ -59,7 +59,7 @@ public class EditProfile extends HttpServlet {
 			}else {
 				 session=request.getSession();
 				session.setAttribute("message","Something went wrong!");
-				response.sendRedirect("UpdateProfile.jsp");
+				response.sendRedirect("EditProfile.jsp");
 			}
 			
 		}catch(Exception ex) {
