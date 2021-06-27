@@ -63,7 +63,7 @@ Welcome <b><%=teacherDetails.get("name") %></b>
 
 	</div>
 <hr>
-<h1>Add Assignment Class</h1>
+<h1>Add Assignment Class</h1> 
 <form action="AddAssignmentClass">
 	Class Name: <input type="text" name="class" placeholder="B.Tech(IT) 4A" required/><br>
 	Subject Name: <input type="text" name="subject" placeholder="IT 301" required/><br>
