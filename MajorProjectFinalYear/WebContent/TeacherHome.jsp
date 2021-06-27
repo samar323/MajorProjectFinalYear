@@ -42,7 +42,7 @@ Welcome <b><%=teacherDetails.get("name") %></b>
 		Email: <b><%=teacherDetails.get("email") %></b> <br>
 		Phone: <b><%=teacherDetails.get("phone") %></b> <br>
 		<%
-		int id=Integer.parseInt((String)teacherDetails.get("tid"));
+		int id=(int)teacherDetails.get("tid");
 		%>
 		Id: <b><%=id %></b> <br>
 		

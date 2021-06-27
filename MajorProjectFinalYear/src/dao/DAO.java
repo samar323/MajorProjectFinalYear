@@ -919,4 +919,39 @@ public byte[] getId(String email) throws Exception{
 		return assignments;
 	}
 	
+	public boolean insertStudentClass(HashMap classDetails) throws Exception{
+		try {
+			PreparedStatement p=con.prepareStatement("insert into student_assignment"
+	+ "(studentId,classCode,dateTime)values(?,?,CURRENT_TIMESTAMP)");
+			p.setString(1, (String)classDetails.get("studentId"));
+			p.setString(2, (String)classDetails.get("classCode"));
+			p.executeUpdate();
+			return true;
+		}catch(Exception ex) {
+			ex.printStackTrace();
+			return false;
+		}
+	}
+	
+	public ArrayList<HashMap> getStudentClass(String studentId) throws Exception {
+		PreparedStatement p = con.prepareStatement("SELECT * FROM student_assignment s join assignment_class c join teachers t on s.classCode=c.class_code and c.teacher_id=t.tid where studentId=?");
+		p.setString(1, studentId);
+		ResultSet rs = p.executeQuery();
+		ArrayList<HashMap> studentClasses=new ArrayList();
+		while (rs.next()) {
+			HashMap studentClass = new HashMap();
+			studentClass.put("classCode", rs.getString("classCode"));
+			studentClass.put("class_name", rs.getString("class_name"));
+			studentClass.put("subject", rs.getString("subject"));
+			studentClass.put("name", rs.getString("name"));
+			studentClass.put("email", rs.getString("email"));
+			studentClass.put("phone", rs.getString("phone"));
+			studentClass.put("date", rs.getDate("dateTime"));
+			studentClass.put("time", rs.getTime("dateTime"));
+			
+			studentClasses.add(studentClass);
+		} 
+		return studentClasses;
+	}
+	
 }
