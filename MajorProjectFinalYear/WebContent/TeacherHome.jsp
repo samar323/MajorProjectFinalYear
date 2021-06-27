@@ -47,6 +47,10 @@ Welcome <b><%=teacherDetails.get("name") %></b>
 	%>
 <img src='GetPhoto?email=<%=teacherDetails.get("email")%>&type=teacher' height="100px" width="100px" />
 <%
+	}else{
+		%>
+		<img src='images/user.jpg' height="100px" width="100px" />
+		<%
 	}
 %>
 <div>

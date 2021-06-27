@@ -94,7 +94,7 @@ public class DAO {
 		if(rs.next()) {
 		
 			byte[] photo=rs.getBytes("photo");
-			if(photo.length!=0) {
+			if(photo!=null) {
 				return photo;
 			}else {
 				return null;
