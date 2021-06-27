@@ -28,7 +28,7 @@
 		if(m!=null){
 	%>
 			<div class="incorrect"><%=m %></div>
-	<%		
+	<%	
 			session.setAttribute("message",null);
 		}
 	%>

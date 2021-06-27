@@ -28,7 +28,7 @@ public class UpdateTeacher extends HttpServlet {
 			HashMap teacherDetails=(HashMap)session.getAttribute("teacherDetails");
 			
 			String oldEmail=(String) teacherDetails.get("email");
-			
+		
 			
 			String email=request.getParameter("email");
 			String name=request.getParameter("name");
