@@ -85,6 +85,10 @@ Subject: <%=assignmentclass.get("subject") %><br>
 Code: <%=assignmentclass.get("classCode") %><br>
 Date: <%=assignmentclass.get("date") %><br>
 Time: <%=assignmentclass.get("time") %><br>
+  <form action="DeleteClass" method="post">
+			<input type="hidden" name="id" value="<%=assignmentclass.get("aid")%>"/>
+ <button class="btn btn-danger" type="submit">Delete</button>
+			</form></td>
 <a href="AddAssignment.jsp?aid=<%=assignmentclass.get("aid") %>">ADD</a>
 <hr>
 <%}

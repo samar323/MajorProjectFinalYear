@@ -978,4 +978,16 @@ public byte[] getId(String email) throws Exception{
 		return studentClasses;
 	}
 
+	public boolean deleteClass(int classId)throws Exception {
+		try {
+			PreparedStatement p = con.prepareStatement(
+					"delete from assignment_class where aid=?");
+			p.setInt(1, classId);
+			p.executeUpdate();
+			return true;
+		} catch (java.sql.SQLIntegrityConstraintViolationException ex) {
+			return false;
+		}
+	}
+
 }
