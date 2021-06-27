@@ -56,7 +56,8 @@ Welcome <b><%=teacherDetails.get("name") %></b>
 		<a href="UpdateTeacher.jsp">Update Profile</a>
 
 		<%
-		int id=Integer.parseInt((String)teacherDetails.get("tid"));
+		
+		int id=(int)teacherDetails.get("tid");
 		%>
 		Id: <b><%=id %></b> <br>
 		

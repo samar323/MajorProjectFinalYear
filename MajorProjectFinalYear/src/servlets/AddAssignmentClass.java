@@ -31,7 +31,7 @@ public class AddAssignmentClass extends HttpServlet {
 		String randomCode=code.getClassCode();
 		
 		HashMap teacherDetails=(HashMap)session.getAttribute("teacherDetails");
-		int teacherId=Integer.parseInt((String)teacherDetails.get("tid"));
+		int teacherId=(int)teacherDetails.get("tid");
 		
 		HashMap assignmentclass=new HashMap();
 		assignmentclass.put("teacherId", teacherId);
