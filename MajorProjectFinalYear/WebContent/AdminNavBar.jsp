@@ -74,6 +74,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="AdminHome">Home</a>
                     </li>
+                     <li class="nav-item">
+                        <a class="nav-link" href="AddTeacher.jsp">Add Teacher</a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="Branch">Branch</a>
                     </li>

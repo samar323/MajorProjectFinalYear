@@ -6,6 +6,7 @@
     }
 
     .box {
+    min-height: 100vh;
         margin:auto;
         background: linear-gradient(-135deg, #e2a5de, #a7b3e7);
         border-radius: 7px;
@@ -53,7 +54,6 @@
     }
     
     button {
-        height: 5vh;
         margin: 5px 0
     }
     .btnallans{

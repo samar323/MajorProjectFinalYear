@@ -840,6 +840,7 @@ public byte[] getId(String email) throws Exception{
 		ArrayList<HashMap> teachers=new ArrayList();
 		while(rs.next()) {
 			HashMap teacher=new HashMap();
+			teacher.put("name", rs.getInt("tid"));
 			teacher.put("name", rs.getString("name"));
 			teacher.put("email", rs.getString("email"));
 			teacher.put("phone", rs.getString("phone"));
@@ -944,11 +945,14 @@ public byte[] getId(String email) throws Exception{
 	}
 	
 	public HashMap getAssignmentClass(int aid) throws Exception {
-		PreparedStatement p = con.prepareStatement("select * from assignment_class where aid=?");
+		PreparedStatement p = con.prepareStatement("select * from assignment_class c join teachers t on c.teacher_id=t.tid where aid=?");
 		p.setInt(1, aid);
 		ResultSet rs = p.executeQuery();
 		if (rs.next()) {
 			HashMap assignment = new HashMap();
+			assignment.put("name", rs.getString("name"));
+			assignment.put("email", rs.getString("email"));
+			assignment.put("phone", rs.getString("phone"));
 			assignment.put("className", rs.getString("class_name"));
 			assignment.put("subject", rs.getString("subject"));
 			assignment.put("classCode", rs.getString("class_code"));
@@ -980,6 +984,7 @@ public byte[] getId(String email) throws Exception{
 		ArrayList<HashMap> studentClasses=new ArrayList();
 		while (rs.next()) {
 			HashMap studentClass = new HashMap();
+			studentClass.put("aid", rs.getInt("aid"));
 			studentClass.put("classCode", rs.getString("classCode"));
 			studentClass.put("class_name", rs.getString("class_name"));
 			studentClass.put("subject", rs.getString("subject"));
@@ -1002,6 +1007,46 @@ public byte[] getId(String email) throws Exception{
 			p.executeUpdate();
 			return true;
 		} catch (java.sql.SQLIntegrityConstraintViolationException ex) {
+			return false;
+		}
+	}
+	
+	public ArrayList<HashMap> getAllStudentByClassCode(String classCode) throws Exception {
+		PreparedStatement p = con.prepareStatement("SELECT name, email FROM student_assignment a join students s on a.studentId=s.roll where classCode=?");
+		p.setString(1, classCode);
+		ResultSet rs = p.executeQuery();
+		ArrayList<HashMap> students=new ArrayList();
+		while (rs.next()) {
+			HashMap student = new HashMap();
+			student.put("name", rs.getString("name"));
+			student.put("email", rs.getString("email"));
+			
+			students.add(student);
+		} 
+		return students;
+	}
+	
+	public boolean checkClassCode(String classCode,String studentId) throws Exception{
+		PreparedStatement p=con.prepareStatement("select * from student_assignment where studentId=? and classCode=?");
+		p.setString(1, studentId);
+		p.setString(2, classCode);
+		ResultSet rs=p.executeQuery();
+		if(rs.next()) {
+			return false;
+		}else {
+			
+			return true;
+		}
+	}
+	
+	public boolean checkClassCodeExist(String classCode) throws Exception{
+		PreparedStatement p=con.prepareStatement("select * from assignment_class where class_code=?");
+		p.setString(1, classCode);
+		ResultSet rs=p.executeQuery();
+		if(rs.next()) {
+			return true;
+		}else {
+			
 			return false;
 		}
 	}

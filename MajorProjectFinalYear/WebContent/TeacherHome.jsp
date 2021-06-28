@@ -32,6 +32,9 @@
 .tox.tox-silver-sink.tox-tinymce-aux {
     display: none;
 }
+.container-box {
+    min-height: 70vh;
+}
 </style>
 </head>
 <body>
@@ -71,6 +74,7 @@
         </nav>
     </div>
 </header>
+<div class="container-box">
 <div class="row">
         <div class="col-md-4 mt-1">
             <div class="card text-center sidebar">
@@ -122,7 +126,7 @@
 
         </div>
     </div>
-
+</div>
 <jsp:include page="Footer.jsp" /> 
 <script>
     tinymce.init({

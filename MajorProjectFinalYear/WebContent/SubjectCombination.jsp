@@ -1,4 +1,5 @@
- <%@page import="java.util.HashMap"%>
+ <%@page import="dao.DAO"%>
+<%@page import="java.util.HashMap"%>
 <%
 	HashMap adminDetails=(HashMap)session.getAttribute("adminDetails");
 	if(adminDetails!=null){
@@ -8,7 +9,10 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Dependent Select Option</title>
+        
+<meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Subject Combination</title>
+         <link rel="stylesheet" href="css/addresult.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
         <style type="text/css">
             body{
@@ -23,49 +27,92 @@
         </style>
     </head>
     <body class="cyan">
-    <jsp:include page="AdminNavBar.jsp" /> 
-        <div class="container">
-            <div class="drop-down-list card">
-                <div class="center">
-                    <h5>Add Subject Combinations</h5>
-                </div>
-                <div class="divider"></div>
-                <%
+    <jsp:include page="AdminNavBar.jsp" />
+    
+    <section id="mid">
+    <div class="mid-container">
+    <div class="title">Add Results</div>
+    <div class="content">
+      <form action="SubjectCombination" method="post">
+      <%
 		String m=(String)session.getAttribute("message");
 		if(m!=null){
 	%>
-			<p style="background-color: yellow;width:max-content;"><%=m %></p>
+			<div class="incorrect"><%=m %></div>
 	<%		
 			session.setAttribute("message",null);
 		}
 	%>
-                <form action="SubjectCombination">
-                    <div class="input-field">
-                        <select id="school" name="school" required>
+        
+        <div class="user-details">
+          <div class="input-box">
+            <span for="school" class="details">School Name</span>
+            <select id="school" name="school" class="options" required>
                             <option disabled selected>Select School</option>
-                        </select>
-                    </div>
-                    <div class="input-field">
-                        <select id="branch" name="branch" required>
+                 </select>
+          </div>
+          <div class="input-box">
+            <span for="branch" class="details">Branch</span>
+             <select id="branch" name="branch" class="options" required>
                             <option disabled selected>Select Branch</option>
                         </select>
-                    </div>
-                    <div class="input-field">
-                        <select id="subject" name="subject" multiple required>
-                            <option disabled selected>Select Subject</option>
-                        </select>
-                    </div>
-                    <div class="input-field">
-                        <select id="semester" name="semester" required>
+          </div>
+          <div class="input-box">
+            <span for="semester" class="details">Semester</span>
+            <select id="semester" name="semester" class="options" required>
                             <option disabled selected>Select Semester</option>
                         </select>
-                    </div>
-                    <div class="center">
-                        <button class="btn" type="submit">Submit</button>
-                    </div>
-                </form>
+          </div>
+          <div class="input-box">
+           <span for="semester" class="details">Subject</span>
+            <select id="subject" name="subject" class="options"  multiple required>
+                            <option disabled selected>Select Subject</option>
+                        </select></div>
+                        
+          <div class="input-box">
+          <div id="subjectName">
             </div>
-        </div>
+          </div>
+          <div class="button">
+            <input type="submit" value="Submit">
+          </div>
+
+      </form>
+    </div>
+  </div>
+  <div class="banner">
+  <p class="all">Recent Subject Combination</p>
+  
+  </div>
+<div class="container-scroll">
+  <table>
+    <tr>
+      <th>School</th>
+      <th>Branch</th>
+      <th>Semester</th>
+      <th>Subjects</th>
+      <th>Action</th>
+    </tr>
+    <%
+    DAO dao=new DAO();
+   
+    %>
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td><form action="DeleteResult" method="post">
+      <input type="hidden" name="studentId" value=""/>
+      <input type="hidden" name="classId" value=""/>
+      <button class="btn btn-danger" type="submit">Delete</button>
+      </form></td>
+    </tr>
+  </table>
+  </div>
+   </section>
+	   <jsp:include page="Footer.jsp" /> 
+    
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
         <script type="text/javascript">

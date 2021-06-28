@@ -5,8 +5,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     <%
-    HashMap teacherDetails=(HashMap)session.getAttribute("teacherDetails");
-    if(teacherDetails!=null){
+    HashMap studentDetails=(HashMap)session.getAttribute("studentDetails");
+    if(studentDetails!=null){
     	
     
     %>
@@ -51,7 +51,6 @@
         }
 
         button {
-            height: 5vh;
             margin: 5px 0;
         }
 
@@ -113,6 +112,13 @@
     .text{
         margin:10px;
     }
+    h3 p{
+        padding-left: 20px;
+        padding-bottom: 10px;        
+        border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+        
+
+    }
 
     .details {
         background-color: #f6f6f6;
@@ -138,6 +144,7 @@
 <body>
 <%
 String people=request.getParameter("people");
+
 String aid=request.getParameter("aid");
     if(aid!=null){
     DAO dao=new DAO();
@@ -147,8 +154,9 @@ String aid=request.getParameter("aid");
     	String email=(String)assignmentClass.get("email");
     	String phone=(String)assignmentClass.get("phone");
     	String classCode=(String)assignmentClass.get("classCode");
+    	
 	%>
-<jsp:include page="TeacherNavBar.jsp" /> 
+<jsp:include page="NavBar.jsp" /> 
 <header>
         <div class="first">
             <h1><%=assignmentClass.get("className") %></h1>
@@ -168,10 +176,9 @@ String aid=request.getParameter("aid");
 	%>
     <div class="btnsection">
         
-        <h2 style="text-align: center;"><a href="AddAssignment.jsp?aid=<%=aid %>" class="btnallans"><button type="button" class="btn btn-primary" >Stream</button></a>   |  
-        <a href="AddAssignment.jsp?people=check&aid=<%=aid %>" class="btnallans"><button type="button" class="btn btn-primary" >People</button></a></h2>
+        <h2 style="text-align: center;"><a href="ViewAssignment.jsp?aid=<%=aid %>" class="btnallans"><button type="button" class="btn btn-primary" >Stream</button></a>   |  
+        <a href="ViewAssignment.jsp?people=check&aid=<%=aid %>" class="btnallans"><button type="button" class="btn btn-primary" >People</button></a></h2>
     </div>
-    
     <% if(people!=null && people.equalsIgnoreCase("check") && aid!=null){
     	ArrayList<HashMap> students=dao.getAllStudentByClassCode(classCode);
 	%>
@@ -184,8 +191,15 @@ String aid=request.getParameter("aid");
         	<p class="heading" style="text-align: left;">Classmates | <%=students.size() %> Students</p>
         	<%
         	for(HashMap student:students){
+        		String name=(String)student.get("name");
+        		String email1=(String)studentDetails.get("email");
+        		String email2=(String)student.get("email");
+        		
+        		if(email1.equalsIgnoreCase(email2)){
+        			name="You";
+        		}
         		%>
-                <h3><p><img src="images/bg1.jpg" style="width: 20px; height: 20px;border-radius:50%;display:center;justify-content:center;align-items:center;"><%=student.get("name") %></p></h3>
+                <h3><p><img src="images/bg1.jpg" style="width: 20px; height: 20px;border-radius:50%;display:center;justify-content:center;align-items:center;"><%=name %></p></h3>
      
             	<%
         	}
@@ -196,26 +210,10 @@ String aid=request.getParameter("aid");
 	<%
 }else{
 	%>
-    
-    <div class="box">
+	<div class="box">
         <p class="heading"><%=assignmentClass.get("className") %> | <%=assignmentClass.get("subject") %><br>-Assignments-</p>
 
         <div class="faqs">
-            <div class="post">
-                <a class="btn btn-success" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample" style=" color: rgb(0, 0, 0); width: 100%; border:#fff; border-radius:3px" >
-                    Announce something 
-                </a>
-                <div class="collapse" id="collapseExample">
-                  <div class="card card-body">
-                            <form action="AddAssignment" method="post">
-                                <input type="hidden" name="aid" value="<%=aid%>"/>
-                                <textarea name="assignment" width="80px" required> </textarea>
-                                Due Date: <input type="date" name="dueDate" required/><br>
-                                <button type="submit" class="btn btn-danger">ADD</button>
-                            </form>
-                        </div>
-                </div>
-            </div>
             <%
             TimeConversion tc=new TimeConversion();
 ArrayList<HashMap> assignments=dao.getAllAssignments(Integer.parseInt(aid));
@@ -227,9 +225,8 @@ if(assignments.size()!=0){
 	%>
             <div class="details">
                 <div class="book"><i class="fa fa-book" aria-hidden="true"></i></div>
-                <div class="content">You posted an assignment on <%=timeShow %>, due: <%=assignment.get("dueDate") %><br>
-                <%=assignment.get("assignment") %>
-                </div>
+                <div class="content"><%=tName %> posted an assignment on <%=timeShow %>, due: <%=assignment.get("dueDate") %><br>
+                <%=assignment.get("assignment") %></div>
             </div>
             <%
 	}
@@ -241,35 +238,25 @@ if(assignments.size()!=0){
 %>
         </div>
     </div>
-    <%
+	
+	<%
 	
 }%>
-    <jsp:include page="Footer.jsp" /> 
-<script>
-    tinymce.init({
-      selector: 'textarea',
-      plugins: 'a11ychecker advcode casechange formatpainter linkchecker autolink lists checklist media mediaembed pageembed permanentpen powerpaste table advtable tinycomments tinymcespellchecker',
-      toolbar: 'a11ycheck addcomment showcomments casechange checklist code formatpainter pageembed permanentpen table',
-      toolbar_mode: 'floating',
-      tinycomments_mode: 'embedded',
-      tinycomments_author: 'Author name'
-    });
-  </script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+        <jsp:include page="Footer.jsp" /> 
 
 </body>
 </html>
 <%}else{
 	session.setAttribute("message","Class Does not Exist!!");
-	response.sendRedirect("TeacherClassroom.jsp");
+	response.sendRedirect("AssignmentClass.jsp");
 }
     }else{
     	session.setAttribute("message","Class Does not Exist!!");
-		response.sendRedirect("TeacherClassroom.jsp");
+		response.sendRedirect("AssignmentClass.jsp");
     }
     }
     else{
     	session.setAttribute("message","Plz LOGIN First!");
-		response.sendRedirect("TeacherLogin.jsp");
+		response.sendRedirect("Login");
     }
 %>

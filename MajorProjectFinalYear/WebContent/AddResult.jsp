@@ -55,7 +55,7 @@
           </div>
           <div class="input-box">
             <span class="details">Roll No.</span>
-            <input type="text" name="roll" placeholder="Enter the Rooll No." required>
+            <input type="text" name="roll" placeholder="Enter the Roll No." required>
           </div>
           <div class="input-box">
           <div id="subjectName">

@@ -14,7 +14,7 @@
 		AES aes=new AES();
 		%>
 		<p>Encrypt: <%=aes.encrypt(s) %></p>
-		<p>Decrypt: <%=aes.decrypt(aes.encrypt(s)) %></p>
+		<p>Decrypt: <%=aes.decrypt(s) %></p>
 		<%
 	}
 %>

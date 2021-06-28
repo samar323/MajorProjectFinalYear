@@ -29,9 +29,14 @@ public class JoinClass extends HttpServlet {
 				String studentId = (String) studentDetails.get("roll");
 				String classCode = request.getParameter("classCode");
 				
+				DAO dao=new DAO();
+				boolean checkClassCode=dao.checkClassCode(classCode, studentId);
+				if(checkClassCode==true) {
+					boolean classCodeExist=dao.checkClassCodeExist(classCode);
+					if(classCodeExist==true) {
+				
 				if(studentId!=null && classCode!=null) {
 					
-					DAO dao=new DAO();
 					HashMap classDetails=new HashMap();
 					classDetails.put("studentId", studentId);
 					classDetails.put("classCode", classCode);
@@ -47,6 +52,14 @@ public class JoinClass extends HttpServlet {
 					
 				}else {
 					session.setAttribute("message","Plz Enter Class Code");
+					response.sendRedirect("AssignmentClass.jsp");
+				}
+					}else {
+						session.setAttribute("message","Plz Enter Valid Class Code");
+						response.sendRedirect("AssignmentClass.jsp");
+					}
+				}else {
+					session.setAttribute("message","Already Joined");
 					response.sendRedirect("AssignmentClass.jsp");
 				}
 

@@ -4,10 +4,7 @@
 <%@page import="dao.DAO"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-     <%
-	HashMap studentDetails=(HashMap)session.getAttribute("studentDetails");
-	if(studentDetails!=null){
-%> 
+ 
 <!DOCTYPE html>
 <html>
 <head>
@@ -106,7 +103,6 @@
     }
     
     button {
-        height: 5vh;
         margin: 5px 0
     }
     .btn-danger{
@@ -151,7 +147,7 @@
 </head>
 <body>
 <jsp:include page="NavBar.jsp" />
-<%
+<%HashMap studentDetails=(HashMap)session.getAttribute("studentDetails");
 		String m=(String)session.getAttribute("message");
 		if(m!=null){
 	%>
@@ -246,9 +242,3 @@
 	}
 %>
 </html>
-<%
-	}else{
-		session.setAttribute("message","Plz LOGIN First!");
-		response.sendRedirect("StudentLogin.jsp");
-	}
-%>

@@ -164,7 +164,7 @@ response.setDateHeader("Expires",-1);
 
         </div>
     </div>
-    
+    <jsp:include page="Footer.jsp" />
 	<!--  <a href='index.jsp'>Search Questions</a>,
 	<a href='StudentQuestions.jsp'>Your Questions</a>
 		<a href='StudentAnswers.jsp'>Your Answers</a>-->

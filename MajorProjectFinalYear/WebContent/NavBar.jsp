@@ -57,6 +57,7 @@
                         </button>
                         <div class="dropdown-content">
                           <a href="StudentHome">Profile</a>
+                          <a href="AssignmentClass.jsp">Classroom</a>
                           <a href="Logout">Logout</a>
                         </div>
                         <%}else{
@@ -68,6 +69,7 @@
                           <a href="Register">Registration for Student</a>
                           <a href="Login">Login for Student</a>
                           <a href="TeacherLogin.jsp">Login for Teacher</a>
+                          <a href="LoginAdmin">Login for Admin</a>
                         </div>
                        
                         	<%
