@@ -29,7 +29,6 @@
 , #71b7e6, #9b59b6);
         display: flex;
     align-items: center;
-    justify-content: center;
     flex-direction: column;
     height: 100vh;
     }
