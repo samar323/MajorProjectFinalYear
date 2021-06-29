@@ -23,7 +23,7 @@ public class DeleteStudentClass extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			HttpSession session=request.getSession();
-		int classId=Integer.parseInt(request.getParameter("id"));
+		String classId=request.getParameter("id");
 	
 		DAO dao=new DAO();
 			boolean DeleteStatus=dao.deleteStudentClass(classId);
