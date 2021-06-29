@@ -938,7 +938,7 @@ public byte[] getId(String email) throws Exception{
 			assignment.put("date", rs.getDate("date"));
 			assignment.put("time", rs.getTime("date"));
 			assignment.put("dueDate", rs.getDate("dueDate"));
-			assignment.put("aid", rs.getInt("id"));
+			assignment.put("id", rs.getInt("id"));
 			assignments.add(assignment);
 		} 
 		return assignments;

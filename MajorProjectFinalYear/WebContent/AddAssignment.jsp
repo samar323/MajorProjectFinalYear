@@ -104,6 +104,9 @@
     .faqs {
         padding: 0px 20px 20px;
     }
+    .faqs form {
+    margin-top: 1rem;
+}
 
     ::-webkit-details-marker {
         float: right;
@@ -233,7 +236,8 @@ if(assignments.size()!=0){
                 </div>
             </div>
             <form action="DeleteAssignment" method="post">
-			<input type="hidden" name="id" value="<%=assignment.get("aid")%>"/>
+			<input type="hidden" name="id" value="<%=assignment.get("id")%>"/>
+			<input type="hidden" name="aid" value="<%=aid%>"/>
  <button class="btn btn-danger" type="submit">Delete Assignment</button>
 			</form>
             <%

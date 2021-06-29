@@ -4,7 +4,9 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>About Us</title>
     <link rel="stylesheet" href="css/aboutus.css">
 </head>
@@ -20,6 +22,85 @@ dents and they can also help other students who are in dilemma. What's better th
         
         </div>
     </div>
+       <section>
+        <h1>Our Team</h1>
+        <div class="container-box">
+            
+            <div class="card">
+                <div class="content">
+                    <div class="imgbx"><img src="images/aditi.jpeg"></div>
+                    <div class="contentbx"><h2>Aditi Malhotra</h2>
+                        <span><h3>UI Designer</h3></span></div>
+                </div>
+                <ul class="sci">
+                    <li style="--i:1">
+                        <a href="#"><li><i class="fa fa-facebook"></i></li></a>
+                    </li>
+                    <li style="--i:1">
+                        <a href="#"><li><i class="fa fa-twitter"></i></li></a>
+                    </li>
+                    <li style="--i:1">
+                        <a href="#"><li><i class="fa fa-linkedin"></i></li></a>
+                    </li>
+                </ul>
+            </div>
+            <div class="card">
+                <div class="content">
+                    <div class="imgbx"><img src="images/amarjeet.jpeg"></div>
+                    <div class="contentbx"><h2>Amarjeet</h2>
+                        <span><h3>Backend Developer</h3></span></div>
+                </div>
+                <ul class="sci">
+                    <li style="--i:1">
+                        <a href="#"><li><i class="fa fa-facebook"></i></li></a>
+                    </li>
+                    <li style="--i:1">
+                        <a href="#"><li><i class="fa fa-twitter"></i></li></a>
+                    </li>
+                    <li style="--i:1">
+                        <a href="#"><li><i class="fa fa-linkedin"></i></li></a>
+                    </li>
+                </ul>
+            </div>
+            <div class="card">
+                <div class="content">
+                    <div class="imgbx"><img src="images/aniket.jpeg"></div>
+                    <div class="contentbx"><h2>Aniket Choudhary</h2>
+                        <span><h3>Backend Developer</h3></span></div>
+                </div>
+                <ul class="sci">
+                    <li style="--i:1">
+                        <a href="#"><li><i class="fa fa-facebook"></i></li></a>
+                    </li>
+                    <li style="--i:1">
+                        <a href="#"><li><i class="fa fa-twitter"></i></li></a>
+                    </li>
+                    <li style="--i:1">
+                        <a href="#"><li><i class="fa fa-linkedin"></i></li></a>
+                    </li>
+                </ul>
+            </div>
+            <div class="card">
+                <div class="content">
+                    <div class="imgbx"><img src="images/ravi.jpeg"></div>
+                    <div class="contentbx"><h2>Ravi Kumar</h2>
+                        <span><h3>UI Designer</h3></span></div>
+                </div>
+                <ul class="sci">
+                    <li style="--i:1">
+                        <a href="#"><li><i class="fa fa-facebook"></i></li></a>
+                    </li>
+                    <li style="--i:1">
+                        <a href="#"><li><i class="fa fa-twitter"></i></li></a>
+                    </li>
+                    <li style="--i:1">
+                        <a href="#"><li><i class="fa fa-linkedin"></i></li></a>
+                    </li>
+                </ul>
+            </div>
+            
+        </div>
+    </section>
     <jsp:include page="Footer.jsp" /> 
 </body>
 </html>

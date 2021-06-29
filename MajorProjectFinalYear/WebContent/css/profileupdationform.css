@@ -12,9 +12,11 @@ body{
   align-items: center;
   background: linear-gradient(135deg, #71b7e6, #9b59b6);
       flex-direction: column;
+      justify-content: space-between;
 }
 main {
     padding: 15px;
+    width: -webkit-fill-available;
 }
 .container{
   max-width: 700px;
@@ -44,6 +46,7 @@ main {
   flex-wrap: wrap;
   justify-content: space-between;
   margin: 20px 0 5px 0;
+  overflow-x: hidden;
 }
 form .user-details .input-box{
   margin-bottom: 15px;
