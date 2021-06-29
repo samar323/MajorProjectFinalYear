@@ -1060,5 +1060,15 @@ public byte[] getId(String email) throws Exception{
 			return true;
 		
 	}
-
+	public boolean deleteStudentClass(int classId)throws Exception {
+		try {
+			PreparedStatement p = con.prepareStatement(
+					"delete from student_assignment where classCode=?");
+			p.setInt(1, classId);
+			p.executeUpdate();
+			return true;
+		} catch (java.sql.SQLIntegrityConstraintViolationException ex) {
+			return false;
+		}
+	}
 }

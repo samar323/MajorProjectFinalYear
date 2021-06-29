@@ -395,7 +395,7 @@ if(classDetails.size()!=0){
                     </div>
                     <div class="down">
                         <div class="delete">
-                            <a href="DeleteClass?id=<%=classDetail.get("classCode") %>" class="delete-btn">
+                            <a href="DeleteStudentClass?id=<%=classDetail.get("classCode") %>" class="delete-btn">
                                 <span>
                                 <img src="images/delete.svg">
                             </span>
