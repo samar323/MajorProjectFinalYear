@@ -229,8 +229,13 @@ if(assignments.size()!=0){
                 <div class="book"><i class="fa fa-book" aria-hidden="true"></i></div>
                 <div class="content">You posted an assignment on <%=timeShow %>, due: <%=assignment.get("dueDate") %><br>
                 <%=assignment.get("assignment") %>
+                  
                 </div>
             </div>
+            <form action="DeleteAssignment" method="post">
+			<input type="hidden" name="id" value="<%=assignment.get("aid")%>"/>
+ <button class="btn btn-danger" type="submit">Delete Assignment</button>
+			</form>
             <%
 	}
 }else{
@@ -264,7 +269,7 @@ if(assignments.size()!=0){
 	response.sendRedirect("TeacherClassroom.jsp");
 }
     }else{
-    	session.setAttribute("message","Class Does not Exist!!");
+    	session.setAttribute("message","Assignment Deleted Successfully !!");
 		response.sendRedirect("TeacherClassroom.jsp");
     }
     }

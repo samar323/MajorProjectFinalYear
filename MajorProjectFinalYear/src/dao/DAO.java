@@ -938,7 +938,7 @@ public byte[] getId(String email) throws Exception{
 			assignment.put("date", rs.getDate("date"));
 			assignment.put("time", rs.getTime("date"));
 			assignment.put("dueDate", rs.getDate("dueDate"));
-			
+			assignment.put("aid", rs.getInt("id"));
 			assignments.add(assignment);
 		} 
 		return assignments;
@@ -1049,6 +1049,16 @@ public byte[] getId(String email) throws Exception{
 			
 			return false;
 		}
+	}
+
+	public boolean deleteAssignment(int aid) throws Exception {
+		
+			PreparedStatement p = con.prepareStatement(
+					"delete from assignment where id=?");
+			p.setInt(1, aid);
+			p.executeUpdate();
+			return true;
+		
 	}
 
 }
