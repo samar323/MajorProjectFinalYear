@@ -17,7 +17,7 @@
             <h1>About Us</h1>
             <p class="text">
                 Our only Goal is to help the Students of Gautam Buddha University. Using our website, Students will be able to see the current and previous semsester results which earlier was available offline only and not only this, but if Students are in dilemma then they can now search their queries or ask their queries from the residents of GBU i.e GBU 
-dents and they can also help other students who are in dilemma. What's better than helping a person in need? So what are you waiting for? Login to your profiles and start helping!!!    
+dents and they can also help other students who are in dilemma. We have added one more feature for teachers so that they can create class and post assignments & students can join class to see the assignments. What's better than helping a person in need? So what are you waiting for? Login to your profiles and start helping!!!    
             </p>
         
         </div>
