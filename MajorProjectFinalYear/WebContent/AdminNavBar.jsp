@@ -22,6 +22,7 @@
 
         .navbar-brand img {
             height: 40px;
+            width: 40px;
         }
         ::-webkit-scrollbar{
 	width:7px;
@@ -72,7 +73,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="AdminHome">Home</a>
+                        <a class="nav-link" href="AdminHome?status=pending">Home</a>
                     </li>
                      <li class="nav-item">
                         <a class="nav-link" href="AddTeacher.jsp">Add Teacher</a>
@@ -91,6 +92,9 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="AddFaq.jsp">Add FAQ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Feedback.jsp">Feedback</a>
                     </li>
 
                 </ul>

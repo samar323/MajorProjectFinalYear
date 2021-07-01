@@ -10,12 +10,11 @@
         <div class="footer-content">
             <h3>GBUVerse</h3>
             <ul class="socials">
-                <li><a href="#">Home</a></li>
-                <li><a href="#">User</a></li>
-                <li><a href="#">Result</a></li>
-                <li><a href="#">About Us</a></li>
-                <li><a href="#">Contact Us</a></li>
-                <li><a href="#">FAQ</a></li>
+                <li><a href="home">Home</a></li>
+                <li><a href="ViewResult.jsp">Result</a></li>
+                <li><a href="About">About Us</a></li>
+                <li><a href="Contact">Contact Us</a></li>
+                <li><a href="Faq">FAQ</a></li>
             </ul>
             
         </div>

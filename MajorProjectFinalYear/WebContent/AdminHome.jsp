@@ -31,9 +31,9 @@
     </header>
 	
 	<div class="btnsection">
-        <button type="button" class="btn btn-primary"><a href="AdminHome.jsp?status=pending" class="btnallans">Pending Students</a></button>
-        <button type="button" class="btn btn-primary"><a href="AdminHome.jsp?status=accept" class="btnallans">Accepted Students</a></button>
-        <button type="button" class="btn btn-primary"><a href="AdminHome.jsp?status=reject" class="btnallans">Rejected Students</a></button>
+        <button type="button" class="btn btn-primary"><a href="AdminHome?status=pending" class="btnallans">Pending Students</a></button>
+        <button type="button" class="btn btn-primary"><a href="AdminHome?status=accept" class="btnallans">Accepted Students</a></button>
+        <button type="button" class="btn btn-primary"><a href="AdminHome?status=reject" class="btnallans">Rejected Students</a></button>
     </div>
 	<%
 		String m=(String)session.getAttribute("message");

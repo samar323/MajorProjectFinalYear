@@ -5,17 +5,6 @@
 <%@page import="dao.DAO"%>
 <html lang="en">
 
-<head>
-    <link rel="stylesheet" href="css/Marksheet.css" >
-    <link rel="shortcut icon" type="image" href="logo.png">
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script>
-    <title>Document</title>
-</head>
-
-<body>
 <%
 String school=request.getParameter("school");
 String branch=request.getParameter("branch");
@@ -24,8 +13,22 @@ String roll=request.getParameter("roll");
 if(school!=null && branch!=null && semester!=null && roll!=null){
 	DAO dao=new DAO();
 	ArrayList<HashMap> result=dao.getResultByRoll(school, branch, Integer.parseInt(semester), roll);
+	HashMap student=dao.getStudentByRoll(roll);
 	if(result.size()!=0){
 %>
+<head>
+    <link rel="stylesheet" href="css/Marksheet.css" >
+    <link rel="shortcut icon" type="image" href="logo.png">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script>
+    <title><%=roll %><%if(student!=null){ %> | <%=student.get("name") %>
+         <%} %></title>
+</head>
+
+<body>
+
     <div class="container-image" >
         <img src="images/logo.png" alt="">
     </div>
@@ -39,10 +42,13 @@ if(school!=null && branch!=null && semester!=null && roll!=null){
 
         <h2>Gautam Buddha Nagar, Uttar Pradesh - 201312(INDIA)</h2>
         <h2>STATEMENT OF GRADES</h2>
-        <h3>(2019-2020)</h3>
+        <h3>(2020-2021)</h3>
     </div>
     <div class="skills">
         <span>Enrollment Number: <%=roll %></span>
+        <%if(student!=null){ %>
+         <span>Name: <%=student.get("name") %></span>
+         <%} %>
     </div>
     <div class="skills">
         <span>Name of the Programme: <%=branch %></span>

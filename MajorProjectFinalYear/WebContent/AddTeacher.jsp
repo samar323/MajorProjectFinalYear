@@ -67,7 +67,7 @@
 		}
 	%>
 	
-	<h2 style="@media (max-width: 411px){font-size: 1rem;}">Recent Branches</h2>
+	<h2 style="@media (max-width: 411px){font-size: 1rem;}">Faculty Members</h2>
 	<div class="container-scroll">
   <table>
     <tr>

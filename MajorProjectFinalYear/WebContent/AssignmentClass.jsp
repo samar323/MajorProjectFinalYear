@@ -428,6 +428,7 @@ if(classDetails.size()!=0){
                             <div class="button">
                                 <input type="submit" value="Join">
                             </div>
+                            </div>
                     </form>
                 </div>
         </div>

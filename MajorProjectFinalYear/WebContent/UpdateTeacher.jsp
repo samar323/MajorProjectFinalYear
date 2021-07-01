@@ -52,7 +52,7 @@
                         </div>
                        <div class="photo-box">
 							<span class="details">Photograph:</span> <input
-								type="file" name="photo"   class="custom-files-input"  >
+								type="file" name="photo"   class="custom-files-input"  required>
 						</div>
 
                         <div class="button">

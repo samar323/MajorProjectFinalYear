@@ -48,7 +48,7 @@ public class ContactUs extends HttpServlet {
 			}else {
 				
 				session.setAttribute("message","This email does not exist");
-				response.sendRedirect("StudentLogin.jsp");
+				response.sendRedirect("ContactUs.jsp");
 			}
 		}catch(Exception ex) {
 			ex.printStackTrace();

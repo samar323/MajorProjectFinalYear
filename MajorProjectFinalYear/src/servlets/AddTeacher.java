@@ -43,7 +43,7 @@ public class AddTeacher extends HttpServlet {
 				session.setAttribute("message","Teacher Added Successfully");
 				response.sendRedirect("AddTeacher.jsp");
 			}else {
-				session.setAttribute("message","Teacher Added Successfully But Mail Not sent!");
+				session.setAttribute("message","Teacher Added Successfully");
 				response.sendRedirect("AddTeacher.jsp");
 			}
 			

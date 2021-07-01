@@ -1,4 +1,6 @@
- <%@page import="dao.DAO"%>
+ <%@page import="javaFiles.SuffixSem"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="dao.DAO"%>
 <%@page import="java.util.HashMap"%>
 <%
 	HashMap adminDetails=(HashMap)session.getAttribute("adminDetails");
@@ -31,7 +33,7 @@
     
     <section id="mid">
     <div class="mid-container">
-    <div class="title">Add Results</div>
+    <div class="title">Subject Combination</div>
     <div class="content">
       <form action="SubjectCombination" method="post">
       <%
@@ -95,19 +97,31 @@
     </tr>
     <%
     DAO dao=new DAO();
-   
+    SuffixSem suf=new SuffixSem();
+   ArrayList<HashMap> subjectCombos=dao.getAllSubjectCombo();
+    if(subjectCombos.size()!=0){
+    	for(HashMap subjectCombo:subjectCombos){
+    		int classId=(int)subjectCombo.get("classId");
     %>
     <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td><form action="DeleteResult" method="post">
-      <input type="hidden" name="studentId" value=""/>
-      <input type="hidden" name="classId" value=""/>
-      <button class="btn btn-danger" type="submit">Delete</button>
+      <td><%=subjectCombo.get("school") %></td>
+      <td><%=subjectCombo.get("branchName") %></td>
+      <td><%=subjectCombo.get("semester") %><%=suf.suffix((int)subjectCombo.get("semester")) %></td>
+      <td><%
+      ArrayList<HashMap> subjects=dao.getAllSubjectByClass(classId);
+      int c=0;
+      for(HashMap subject:subjects){
+    	  c++;
+      %>
+      <%=subject.get("subjectCode") %><%if(subjects.size()!=c) %>,
+      <%} %></td>
+      <td><form action="DeleteSubjectCombo" method="post">
+      <input type="hidden" name="classId" value="<%=classId %>"/>
+      <button class="btn btn-danger"  type="submit">Delete</button>
       </form></td>
     </tr>
+    <%}
+    	}%>
   </table>
   </div>
    </section>

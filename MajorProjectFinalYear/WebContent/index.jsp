@@ -71,7 +71,7 @@
         font-family: 'Baloo Bhaina 2';
         font-size: 20px;
         letter-spacing: 1px;
-        width: 60vw;
+        width: 90vw;
     }
     .time{
         font-size: 14px;
@@ -163,10 +163,10 @@
           </h1>
           <p>Everything that you want to Ask....</p>
           <form action="PostQuestion" method="post">
-            <a class="post-user" href="pofile.html"><i class="fas fa-user"></i></a>
+            <a class="post-user" href="StudentHome"><i class="fa fa-user"></i></a>
             <input type="text" class="post-input" name="question" placeholder="Hey, What's in your mind?" required>
             <button type="submit" class="post-btn">
-              <i class="fas fa-plus"></i>
+              <i class="fa fa-plus"></i>
             </button>
           </form>
         </div>
@@ -231,7 +231,9 @@
             <p class="heading">Recent Question and Answers</p>
             
 		<%
+		int count=0;
 		for(HashMap question:allQuestions){
+			count++;
 			
 	%>
 	<%
@@ -239,7 +241,7 @@
 		String date = question.get("date").toString();
 		String timeShow=tc.getTime(time, date);
 		%>
-	 <div class="faqs">
+	 <div class="faqs" <% if(limit>10 && limit-10==count){%>id="<%=limit-10%>"<%}%>>
                 <div class="details">
                     <summary style="font-weight:bold;"><a href="Answer?quesId=<%=question.get("quesId") %>"><%=question.get("question") %></a></summary>
                     <summary><div class="time" style="font-weight:bold;">asked by <a href="#"><%=question.get("name") %></a> <%=timeShow %></div></summary>
@@ -254,7 +256,7 @@
 		if(dao.countAllQues()>limit || dao.countAllQues()/(limit-10)>0){
 		%>
 		<div class="faqs">
-		<form action="index.jsp" method="post">
+		<form action="index.jsp#<%=limit-10 %>" method="post">
 		<input type="hidden" name="quesLimit" value="<%=limit%>"/>
 		<button class="btn btn-danger"type="Submit">More Questions</button>
 		</form>

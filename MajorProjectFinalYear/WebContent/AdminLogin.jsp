@@ -55,6 +55,6 @@ if(m!=null){
 </html>
 <%
 	}else{
-		response.sendRedirect("AdminHome.jsp");
+		response.sendRedirect("AdminHome?status=pending");
 	}
 %>

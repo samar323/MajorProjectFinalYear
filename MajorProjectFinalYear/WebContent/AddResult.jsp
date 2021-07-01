@@ -1,4 +1,5 @@
- <%@page import="javaFiles.SuffixSem"%>
+ <%@page import="java.text.DecimalFormat"%>
+<%@page import="javaFiles.SuffixSem"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="dao.DAO"%>
 <%@page import="java.util.HashMap"%>
@@ -80,6 +81,7 @@
       <th>Branch</th>
       <th>Semester</th>
       <th>Roll No.</th>
+      <th>SGPA</th>
       <th>Action</th>
     </tr>
     <%
@@ -88,12 +90,26 @@
     ArrayList<HashMap> allResults=dao.getResult();
     if(allResults!=null){
     for(HashMap result:allResults){
+    	String school=(String)result.get("school");
+    	String branch=(String)result.get("branchName");
+    	int semester=(int)result.get("semester");
+    	String roll=(String)result.get("studentId");
+    	ArrayList<HashMap> marks=dao.getResultByRoll(school, branch, semester, roll);
+    	
+         double total_marks=0;
+         for(HashMap mark:marks){
+         	total_marks+=(int)mark.get("marks");
+         }
+         double sgpa=total_marks/(marks.size()*10);
+         DecimalFormat df = new DecimalFormat();
+         df.setMaximumFractionDigits(2);
     %>
     <tr>
       <td><%=result.get("school") %></td>
       <td><%=result.get("branchName") %></td>
       <td><%=result.get("semester") %><%=suf.suffix((int)result.get("semester")) %></td>
       <td><%=result.get("studentId") %></td>
+      <td><%=df.format(sgpa) %></td>
       <td><form action="DeleteResult" method="post">
       <input type="hidden" name="studentId" value="<%=result.get("studentId") %>"/>
       <input type="hidden" name="classId" value="<%=result.get("classId") %>"/>

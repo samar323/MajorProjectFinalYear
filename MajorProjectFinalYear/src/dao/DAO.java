@@ -78,6 +78,19 @@ public class DAO {
 		}	
 	}
 	
+	public HashMap getStudentByRoll(String studentId) throws Exception {
+		PreparedStatement p = con.prepareStatement("select name from students where roll=?");
+		p.setString(1, studentId);
+		ResultSet rs = p.executeQuery();
+		if (rs.next()) {
+			HashMap student = new HashMap();
+			student.put("name", rs.getString("name"));
+			return student;
+		} else {
+			return null;
+		}
+	}
+	
 	public byte[] getPhoto(String email,String type) throws Exception{
 		
 		PreparedStatement pr = null;
@@ -205,7 +218,7 @@ public byte[] getId(String email) throws Exception{
 	}
 	
 	public ArrayList<HashMap> getAllQuestion(int start) throws Exception {
-		PreparedStatement p = con.prepareStatement("SELECT * FROM questions q join students s on q.studentId=s.roll order by dateTime desc limit ? ");
+		PreparedStatement p = con.prepareStatement("SELECT distinct quesId,question,dateTime,studentId,name,branch FROM questions q join students s on q.studentId=s.roll order by dateTime desc limit ? ");
 		p.setInt(1, start);
 		ResultSet rs = p.executeQuery();
 		ArrayList<HashMap> questions = new ArrayList();
@@ -224,7 +237,7 @@ public byte[] getId(String email) throws Exception{
 	}
 	
 	public ArrayList<HashMap> getAnswer(int quesId) throws Exception {
-		PreparedStatement p = con.prepareStatement("SELECT qid, studentId, answers, name, a.dateTime FROM answers a join students s on a.studentId=s.roll where a.qid= ? order by a.dateTime desc;");
+		PreparedStatement p = con.prepareStatement("SELECT distinct qid, studentId, answers, name, a.dateTime FROM answers a join students s on a.studentId=s.roll where a.qid= ? order by a.dateTime desc");
 		p.setInt(1, quesId);
 		ResultSet rs = p.executeQuery();
 		ArrayList<HashMap> answers = new ArrayList();
@@ -562,6 +575,37 @@ public byte[] getId(String email) throws Exception{
 			subject.setId(Integer.parseInt(rs.getString("subjectId")));
 			subject.setSubjectName(rs.getString("subjectName"));
 			subject.setSubjectCode(rs.getString("subjectCode"));
+			subjects.add(subject);
+		}
+		return subjects;
+	}
+	
+	public ArrayList<HashMap> getAllSubjectCombo() throws Exception {
+		PreparedStatement p = con.prepareStatement("SELECT distinct classId, branchName, school, semester FROM subjectcombination s join branch b on s.classId=b.branchId");
+		
+		ResultSet rs = p.executeQuery();
+		ArrayList<HashMap> subjectCombos = new ArrayList();
+		while (rs.next()) {
+			HashMap subjectCombo = new HashMap();
+			subjectCombo.put("classId", rs.getInt("classId"));
+			subjectCombo.put("branchName", rs.getString("branchName"));
+			subjectCombo.put("school", rs.getString("school"));
+			subjectCombo.put("semester", rs.getInt("semester"));
+			subjectCombos.add(subjectCombo);
+		}
+		return subjectCombos;
+	}
+	
+	public ArrayList<HashMap> getAllSubjectByClass(int classId) throws Exception {
+		PreparedStatement p = con.prepareStatement("SELECT classId, subjectName, subjectCode FROM subjectcombination s join subjects b on s.subjectId=b.subjectId where classId=?");
+		p.setInt(1, classId);
+		ResultSet rs = p.executeQuery();
+		ArrayList<HashMap> subjects = new ArrayList();
+		while (rs.next()) {
+			HashMap subject = new HashMap();
+			subject.put("classId", rs.getInt("classId"));
+			subject.put("subjectName", rs.getString("subjectName"));
+			subject.put("subjectCode", rs.getString("subjectCode"));
 			subjects.add(subject);
 		}
 		return subjects;
@@ -1068,7 +1112,53 @@ public byte[] getId(String email) throws Exception{
 			p.executeUpdate();
 			return true;
 		} catch (java.sql.SQLIntegrityConstraintViolationException ex) {
+			ex.printStackTrace();
 			return false;
 		}
 	}
+	
+	public boolean deleteSubjectCombo(int classId)throws Exception {
+		try {
+			PreparedStatement p = con.prepareStatement(
+					"delete from subjectcombination where classId=?");
+			p.setInt(1, classId);
+			p.executeUpdate();
+			return true;
+		} catch (java.sql.SQLIntegrityConstraintViolationException ex) {
+			ex.printStackTrace();
+			return false;
+		}
+	}
+	
+	public ArrayList<HashMap> getAllMessages() throws Exception {
+		PreparedStatement p = con.prepareStatement("SELECT * FROM message order by dateTime desc");
+		ResultSet rs = p.executeQuery();
+		ArrayList<HashMap> messages=new ArrayList();
+		while (rs.next()) {
+			HashMap message = new HashMap();
+			message.put("mid", rs.getInt("mid"));
+			message.put("name", rs.getString("name"));
+			message.put("email", rs.getString("email"));
+			message.put("message", rs.getString("message"));
+			message.put("date", rs.getDate("dateTime"));
+			message.put("time", rs.getTime("dateTime"));
+			
+			messages.add(message);
+		} 
+		return messages;
+	}
+	
+	public boolean deleteMessage(int mid)throws Exception {
+		try {
+			PreparedStatement p = con.prepareStatement(
+					"delete from message where mid=?");
+			p.setInt(1, mid);
+			p.executeUpdate();
+			return true;
+		} catch (java.sql.SQLIntegrityConstraintViolationException ex) {
+			ex.printStackTrace();
+			return false;
+		}
+	}
+	
 }
