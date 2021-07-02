@@ -416,7 +416,7 @@ if(classDetails.size()!=0){
     <div class="bg-modal">
         <div class="containerpop">
             <div class="close">+</div>
-            <div class="titlepop">Create Class</div>
+            <div class="titlepop">Join Class</div>
                 <div class="contentpop">
                     <form action="JoinClass" method="post">
                         <div class="user-detailspop">

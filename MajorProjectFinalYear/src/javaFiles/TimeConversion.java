@@ -42,7 +42,7 @@ public class TimeConversion {
 			}else if(diffDate>0 && diffDate<=7){
 				if(diffDate==1 && diffTime<0){
 					diffTime+=86400;
-					if(diffTime>0 && diffTime<59){
+					if(diffTime>=0 && diffTime<60){
 						timeShow="Now";
 					}else if((diffTime/60)>0 && (diffTime/60)<59){
 						timeShow=(diffTime/60)+" minutes ago";
@@ -55,7 +55,7 @@ public class TimeConversion {
 			}
 			
 		}else{
-			if(diffTime>0 && diffTime<59){
+			if(diffTime>=0 && diffTime<=59){
 				timeShow="Now";
 			}else if((diffTime/60)>0 && (diffTime/60)<59 || diffTime==60){
 				timeShow=(diffTime/60)+" minutes ago";

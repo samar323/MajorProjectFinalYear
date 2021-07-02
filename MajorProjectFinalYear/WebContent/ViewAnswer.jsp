@@ -4,13 +4,22 @@
 <%@page import="dao.DAO"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
- 
+ <%HashMap studentDetails=(HashMap)session.getAttribute("studentDetails");
+ int quesId=Integer.parseInt(request.getParameter("quesId"));
+	DAO dao=new DAO();
+	TimeConversion tc=new TimeConversion();
+	ArrayList<HashMap> answers=dao.getAnswer(quesId);
+	HashMap question=dao.getQuestionById(quesId);
+	String time=question.get("time").toString();
+	String date = question.get("date").toString();
+	String timeShow=tc.getTime(time, date);
+ %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Insert title here</title>
+<title><%=question.get("question") %></title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -146,24 +155,15 @@
 </head>
 <body>
 <jsp:include page="NavBar.jsp" />
-<%HashMap studentDetails=(HashMap)session.getAttribute("studentDetails");
+<%
 		String m=(String)session.getAttribute("message");
 		if(m!=null){
 	%>
 			<p style="background-color: yellow;width:max-content;"><%=m %></p>
 	<%		
 			session.setAttribute("message",null);
-		}
-	%>
-<% 
-	int quesId=Integer.parseInt(request.getParameter("quesId"));
-	DAO dao=new DAO();
-	TimeConversion tc=new TimeConversion();
-	ArrayList<HashMap> answers=dao.getAnswer(quesId);
-	HashMap question=dao.getQuestionById(quesId);
-	String time=question.get("time").toString();
-	String date = question.get("date").toString();
-	String timeShow=tc.getTime(time, date);
+		} 
+	
 	try{
 	%>
 	<%

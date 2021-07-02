@@ -10,7 +10,7 @@
 <meta charset="ISO-8859-1">
 
 <link rel="stylesheet" href="css/studentlogin.css">
-<title>Insert title here</title>
+<title>Change Password</title>
 </head>
 <body>
 <%	

@@ -10,7 +10,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="css/faq.css">
-<title>Insert title here</title>
+<title>FAQ</title>
 </head>
 <body>
 <jsp:include page="NavBar.jsp" /> 
