@@ -4,6 +4,11 @@
 <%@page import="dao.DAO"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%
+	HashMap adminDetails=(HashMap)session.getAttribute("adminDetails");
+	if(adminDetails!=null){
+		
+%> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -209,3 +214,9 @@
         </script>
 </body>
 </html>
+<%
+	}else{
+		session.setAttribute("message","Plz LOGIN First!");
+		response.sendRedirect("AdminLogin.jsp");
+	}
+%>
