@@ -12,8 +12,8 @@ import javax.mail.internet.MimeMessage;
 public class SendMail {
 	public boolean emailSend(String email, String Sub, String Body) {
 		try {
-			final String SEmail="fiverphoto123@gmail.com";
-			final String SPass="Samar323@";
+			final String SEmail="Email-Address";
+			final String SPass="Password";
 			final String REmail=email;
 			//Mail send
 			Properties prop=new Properties();
