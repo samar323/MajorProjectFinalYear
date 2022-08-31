@@ -14,7 +14,7 @@ import javax.crypto.spec.SecretKeySpec;
 public class AES {
 	// Class private variables
 	private static final String SECRET_KEY
-		= "GBUVerseAES";
+		= "Add secret-key";
 	
 	private static final String SALT = "ssshhhhhhhhhhh!!!!";
 
